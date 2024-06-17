@@ -359,12 +359,13 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
         std::string tag = event.getData()->getString("tag", "");
         if (tag.find("stream_nlp_tts") == 0)
         {
-            LOG_DEBUG("流式语义应答的合成");
+            LOG_INFO("流式语义应答的合成");
             // 流式语义应答的合成
             aiui_wrapper_.listener_->tts_helper_ptr_->onOriginTtsData(tag, bizParamJson, buffer, len);
         }
         else
         {
+            LOG_INFO("FEI流式语义应答的合成");
             // 只有碰到开始块和(特殊情况:合成字符比较少时只有一包tts，dts = 2)，开启播放器
             if (dts == AIUIConstant::DTS_BLOCK_FIRST || dts == AIUIConstant::DTS_ONE_BLOCK || (dts == AIUIConstant::DTS_BLOCK_LAST && 0 == tts_len_))
             {

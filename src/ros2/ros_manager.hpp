@@ -28,6 +28,9 @@ public:
 
     // 发布聊天历史(非流式文本)
     void publishChatHistoryNoStream(const std::string& chat_msg);
+
+    // 发布带角度的唤醒消息给PC2做转向动作
+    void publishWakeupDetail(const std::string& chat_msg);
     
     // 订阅话题
     void subscribeTopic(const std::string& topic_name, 
@@ -49,6 +52,7 @@ private:
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr chat_history_publisher_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr status_publisher_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr chat_history_nostream_publisher_;
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr wakeup_detail_publisher_;
     
     bool initialized_ = false;
     std::thread ros_spin_thread_;
