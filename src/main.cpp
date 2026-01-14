@@ -1,0 +1,112 @@
+#include <condition_variable>
+#include <csignal>
+#include <iostream>
+#include <mutex>
+#include "utils/Logger.hpp"
+#include "ros2/ros_manager.hpp"
+#include "avvtn_capture/avvtn_capture.h"
+
+static std::mutex mutex_;
+static std::condition_variable cv_;
+
+void signalHandle(int num)
+{
+    std::cout << "Caught signal " << num << std::endl;
+    cv_.notify_one();
+}
+
+void TestLogger() {
+    // 记录不同级别的日志
+    LOG_TRACE("这是一个TRACE日志: {}", 42);
+    LOG_DEBUG("调试信息: {}", "value");
+    LOG_INFO("程序启动");
+    LOG_WARN("警告信息");
+    LOG_ERROR("错误发生");
+    LOG_FATAL("致命错误!");
+}
+
+void InitLogger() {
+    // 初始化日志系统
+    auto& logger = Logger::Logger::GetInstance();
+
+    // 设置日志级别
+    logger.SetLevel(Logger::LogLevel::LOG_INFO);
+
+    // 添加控制台输出（带颜色）
+    logger.AddSink(std::unique_ptr<Logger::ConsoleSink>(new Logger::ConsoleSink(true)));
+
+    // 添加文件输出（10MB大小限制，保留5个备份文件）
+    logger.AddSink(std::unique_ptr<Logger::FileSink>(new Logger::FileSink("app.log", 10 * 1024 * 1024, 5, false)));
+
+    // 设置异步模式（提高性能）
+    logger.SetAsyncMode(true);
+
+    // 时间格式
+    //logger.SetTimeFormat("%Y-%m-%d %H:%M:%S.%f");
+
+    // 是否显示毫秒
+    //logger.SetShowMilliseconds(true);
+
+    // 是否显示微秒
+    //logger.SetShowMicroseconds(false);
+
+    // 是否显示文件名和行号
+    //logger.SetShowSourceLocation(true);
+
+    // 是否显示线程ID
+    //logger.SetShowThreadId(true);
+
+    // 日志对齐格式
+    //logger.SetPaddingWidth(20); // 消息对齐宽度
+
+    LOG_INFO("日志系统初始化成功");
+
+    logger.Flush();
+}
+
+int main(int argc, char const *argv[])
+{
+    signal(SIGINT, signalHandle);
+
+    // 1. 初始化日志系统
+    InitLogger();
+    //TestLogger();
+
+    // 2. 初始化ROS管理器
+    ROSManager::getInstance().init(argc, argv);
+
+    // 3. 可以在这里订阅话题
+    ROSManager::getInstance().subscribeTopic("robot_avvtn_log", 
+        [](const std_msgs::msg::String::SharedPtr msg) {
+            std::cout << "收到消息: " << msg->data << std::endl;
+            LOG_INFO("收到ROS2消息: {}", msg->data);
+        });
+
+    // 4. 测试发布消息
+    ROSManager::getInstance().publishLog("语音交互系统启动");
+    ROSManager::getInstance().publishStatus("语音交互系统初始化中");
+
+    // 5. 初始化AvvtnCapture
+    AvvtnCapture capture;
+
+    //std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    int ret = capture.Init("/home/cat/robot_avvtn/avvtn.cfg", "/home/cat/robot_avvtn/resource/aiui/aiui.cfg");
+    if (ret != 0)
+    {
+        LOG_FATAL("Avvtn capture init Error");
+        capture.Destory();
+        ROSManager::getInstance().shutdown();
+        return -1;
+    }
+
+    // 6. 等待信号
+    std::unique_lock<std::mutex> lk(mutex_);
+    cv_.wait(lk);
+
+    // 7. 清理
+    capture.Destory();
+    ROSManager::getInstance().shutdown();
+    LOG_INFO("结束程序");
+    return 0;
+}
