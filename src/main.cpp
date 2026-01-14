@@ -88,7 +88,6 @@ int main(int argc, char const *argv[])
 
     // 5. 初始化AvvtnCapture
     AvvtnCapture capture;
-
     //std::this_thread::sleep_for(std::chrono::seconds(2));
 
     int ret = capture.Init("/home/cat/robot_avvtn/avvtn.cfg", "/home/cat/robot_avvtn/resource/aiui/aiui.cfg");
