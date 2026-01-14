@@ -136,6 +136,37 @@ private:
     void handleAiuiStreamNlp(Json::Reader &reader, const char *buffer, int len);
 
     /**
+     * @brief 处理 AIUI 返回的语义规整结果 (cbm_tidy)
+     * @param resultStr JSON 字符串格式的语义规整结果
+     */
+    void handleCbmTidy(const std::string& resultStr);
+
+    /**
+     * @brief 处理 AIUI 返回的传统语义技能结果 (cbm_semantic)
+     * @param resultStr JSON 字符串格式的传统语义技能结果
+     * @return bool 是否命中技能 (true: 命中技能, false: 未命中技能或解析失败)
+     */
+    bool handleCbmSemantic(const std::string& resultStr);
+
+    /**
+     * @brief 处理 AIUI 返回的意图落域结果 (cbm_tool_pk)，无返回值版本
+     * @param resultStr JSON 字符串格式的意图落域结果
+     */
+    void handleCbmToolPk(const std::string& resultStr);
+
+    /**
+     * @brief 处理 AIUI 返回的知识分类结果 (cbm_retrieval_classify)
+     * @param resultStr JSON 字符串格式的知识分类结果
+     */
+    void handleCbmRetrievalClassify(const std::string& resultStr);
+
+    /**
+     * @brief 处理 AIUI 返回的知识溯源结果 (cbm_knowledge)
+     * @param resultStr JSON 字符串格式的知识溯源结果
+     */
+    void handleCbmKnowledge(const std::string& resultStr);
+
+    /**
      * @brief 测试评估关键词
      * @param keyword 关键词
      * @return 0表示成功，非0表示失败

@@ -1,6 +1,7 @@
 #include "avvtn_capture.h"
 #include "utils/Logger.hpp"
 #include "ros2/ros_manager.hpp"
+#include "utils/json.hpp"
 
 void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
 {
@@ -167,156 +168,19 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                 }
                 else if (sub == "cbm_tidy")
                 {
-                    //语义规整
-                    LOG_INFO("接收到AIUI返回的【语义规整cbm_tidy】");
-                    Json::Value root;
-                    Json::Reader reader;
-                    if (!reader.parse(resultStr, root)) {
-                        LOG_ERROR("解析失败: %s",reader.getFormattedErrorMessages().c_str());
-                        break;
-                    }
-                    Json::Value cbm_tidy = root["cbm_tidy"];
-                    if (cbm_tidy.isMember("text") && cbm_tidy["text"].isString())
-                    {
-                        std::string text_str = cbm_tidy["text"].asString();
-                        Json::Value text_root;
-                        Json::Reader text_reader;
-                        if (!text_reader.parse(text_str, text_root))
-                        {
-                            LOG_ERROR("解析失败: %s",reader.getFormattedErrorMessages().c_str());
-                            break;
-                        }
-                        // 解析intent数组
-                        if (text_root.isMember("intent") && text_root["intent"].isArray()) {
-                            Json::Value& intentArray = text_root["intent"];
-                            for (Json::ArrayIndex i = 0; i < intentArray.size(); i++)
-                            {
-                                LOG_INFO("语义规整结果%d: %s", intentArray[i]["index"].asInt(), intentArray[i]["value"].asString().c_str());
-                            }
-                        }
-                    }
+                    self->handleCbmTidy(resultStr);
                 }
                 else if (sub == "cbm_semantic")
                 {
-                    //传统语义技能
-                    LOG_INFO("接收到AIUI返回的【传统语义技能cbm_semantic】");
-                    Json::Value root;
-                    Json::Reader reader;
-                    if (!reader.parse(resultStr, root)) {
-                        LOG_ERROR("解析失败: %s",reader.getFormattedErrorMessages().c_str());
-                        break;
-                    }
-                    Json::Value cbm_semantic = root["cbm_semantic"];
-                    if (cbm_semantic.isMember("text") && cbm_semantic["text"].isString())
-                    {
-                        std::string text_str = cbm_semantic["text"].asString();
-                        Json::Value text_root;
-                        Json::Reader text_reader;
-                        if (text_reader.parse(text_str, text_root))
-                        {
-                            if (text_root.isMember("rc") && text_root["rc"].isInt()) {
-                                int rc = text_root["rc"].asInt();
-                                if (rc != 0)
-                                {
-                                    LOG_INFO("技能结果：未命中技能");
-                                    break;
-                                }
-                                else
-                                {
-                                    LOG_INFO("技能结果：命中技能");
-                                }
-                            }
-
-                            if (text_root.isMember("text") && text_root["text"].isString()) {
-                                std::string text = text_root["text"].asString();
-                                LOG_INFO("技能返回内容: %s", text.c_str());
-                            }
-
-                            if (text_root.isMember("version") && text_root["version"].isString()) {
-                                std::string version = text_root["version"].asString();
-                                LOG_INFO("技能版本: %s", version.c_str());
-                            }
-
-                            if (text_root.isMember("service") && text_root["service"].isString()) {
-                                std::string service = text_root["service"].asString();
-                                LOG_INFO("技能名称: %s", service.c_str());
-                            }
-                        }
-                    }
+                    self->handleCbmSemantic(resultStr);
                 }
                 else if (sub == "cbm_tool_pk")
                 {
-                    //意图落域
-                    LOG_INFO("接收到AIUI返回的【意图落域cbm_tool_pk】");
-                    Json::Value root;
-                    Json::Reader reader;
-                    bool success = reader.parse(resultStr, root);
-                    if (!success) {
-                        LOG_ERROR("解析失败: %s",reader.getFormattedErrorMessages().c_str());
-                        break;
-                    }
-                    Json::Value cbm_tool_pk = root["cbm_tool_pk"];
-                    if (cbm_tool_pk.isMember("text") && cbm_tool_pk["text"].isString())
-                    {
-                        std::string text_str = cbm_tool_pk["text"].asString();
-                        Json::Value text_root;
-                        Json::Reader text_reader;
-                        if (text_reader.parse(text_str, text_root))
-                        {
-                            if (text_root.isMember("pk_type") && text_root["pk_type"].isString()) {
-                                std::string pk_type = text_root["pk_type"].asString();
-                                LOG_INFO("落域结果判定来源模块: %s", pk_type.c_str());
-                            }
-                            
-                            if (text_root.isMember("pk_source") && text_root["pk_source"].isString())
-                            {
-                                std::string pk_source_text_str = text_root["pk_source"].asString();
-                                Json::Value pk_source_root;
-                                Json::Reader pk_source_reader;
-                                if (pk_source_reader.parse(pk_source_text_str, pk_source_root))
-                                {
-                                    if (pk_source_root.isMember("domain") && pk_source_root["domain"].isString())
-                                    {
-                                        std::string domain = pk_source_root["domain"].asString();
-                                        LOG_INFO("落域结果: %s", domain.c_str());
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    self->handleCbmToolPk(resultStr);
                 }
                 else if (sub == "cbm_retrieval_classify")
                 {
-                    LOG_INFO("JSON原始数据: %s", resultStr.c_str());
-                    //知识分类
-                    LOG_INFO("接收到AIUI返回的【知识分类cbm_retrieval_classify】");
-                    Json::Value root;
-                    Json::Reader reader;
-                    if (!reader.parse(resultStr, root)) {
-                        LOG_ERROR("解析失败: %s",reader.getFormattedErrorMessages().c_str());
-                        break;
-                    }
-                    Json::Value cbm_retrieval_classify = root["cbm_retrieval_classify"];
-                    if (cbm_retrieval_classify.isMember("text") && cbm_retrieval_classify["text"].isString())
-                    {
-                        std::string text_str = cbm_retrieval_classify["text"].asString();
-                        Json::Value text_root;
-                        Json::Reader text_reader;
-                        if (text_reader.parse(text_str, text_root))
-                        {
-                            if (text_root.isMember("type") && text_root["type"].isInt()) {
-                                int type = text_root["type"].asInt();
-                                if (type == 0)
-                                {
-                                    LOG_INFO("不走知识查询或联网搜索");
-                                }
-                                else
-                                {
-                                    LOG_INFO("走知识查询或联网搜索");
-                                }
-                            }
-                        }
-                    }
+                    self->handleCbmRetrievalClassify(resultStr);
                 }
                 else if (sub == "cbm_plugin")
                 {
@@ -325,66 +189,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                 }
                 else if (sub == "cbm_knowledge")
                 {
-                    LOG_INFO("JSON原始数据: %s", resultStr.c_str());
-                    //知识溯源
-                    LOG_INFO("接收到AIUI返回的【知识溯源cbm_knowledge】");
-                    Json::Value root;
-                    Json::Reader reader;
-                    bool success = reader.parse(resultStr, root);
-                    if (!success) {
-                        LOG_ERROR("解析失败: %s",reader.getFormattedErrorMessages().c_str());
-                        break;
-                    }
-                    Json::Value cbm_knowledge = root["cbm_knowledge"];
-
-                    if (cbm_knowledge.isMember("text") && cbm_knowledge["text"].isString())
-                    {
-                        std::string text_str = cbm_knowledge["text"].asString();
-                        Json::Value text_array;
-                        Json::Reader text_reader;
-                        if (text_reader.parse(text_str, text_array))
-                        {
-                            if (text_array.size() == 0)
-                            {
-                                LOG_INFO("未命中知识库");
-                            }
-                            for (int i = 0; i < text_array.size(); i++)
-                            {
-                                Json::Value item = text_array[i];
-                                
-                                std::cout << std::endl;
-                                if (item.isMember("score") && item["score"].isDouble())
-                                {
-                                    std::double_t score = item["score"].asDouble();
-                                    LOG_INFO("score: %lf", score);
-                                }
-                                if (item.isMember("repoId") && item["repoId"].isString())
-                                {
-                                    std::string repoId = item["repoId"].asString();
-                                    LOG_INFO("知识库Id: %s", repoId.c_str());
-                                }
-                                if (item.isMember("docName") && item["docName"].isString())
-                                {
-                                    std::string docName = item["docName"].asString();
-                                    LOG_INFO("来源文档: %s", docName.c_str());
-                                }
-                                if (item.isMember("repoName") && item["repoName"].isString())
-                                {
-                                    std::string repoName = item["repoName"].asString();
-                                    LOG_INFO("repo名字: %s", repoName.c_str());
-                                }
-                                if (item.isMember("content") && item["content"].isString())
-                                {
-                                    std::string content = item["content"].asString();
-                                    LOG_INFO("内容: %s", content.c_str());
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        LOG_INFO("未命中知识库");
-                    }
+                    self->handleCbmKnowledge(resultStr);
                 }
                 else
                 {
@@ -662,5 +467,381 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
             std::cout << "----------------------------------" << std::endl;
             std::cout << "nlp: " << resultStr << std::endl;
         }
+    }
+}
+
+void AvvtnCapture::handleCbmTidy(const std::string& resultStr)
+{
+    // 语义规整
+    LOG_INFO("接收到AIUI返回的【语义规整cbm_tidy】");
+    
+    try {
+        // 解析外层JSON
+        auto root = nlohmann::json::parse(resultStr);
+        
+        // 检查cbm_tidy字段是否存在
+        if (root.contains("cbm_tidy") && root["cbm_tidy"].is_object()) {
+            auto& cbm_tidy = root["cbm_tidy"];
+            
+            // 检查text字段是否存在且为字符串
+            if (cbm_tidy.contains("text") && cbm_tidy["text"].is_string()) {
+                std::string text_str = cbm_tidy["text"].get<std::string>();
+                
+                try {
+                    // 解析text字段中的JSON
+                    auto text_root = nlohmann::json::parse(text_str);
+                    
+                    // 检查intent字段是否存在且为数组
+                    if (text_root.contains("intent") && text_root["intent"].is_array()) {
+                        auto& intentArray = text_root["intent"];
+                        
+                        // 遍历intent数组
+                        for (const auto& intent : intentArray) {
+                            // 使用value()方法提供默认值，避免键不存在时抛出异常
+                            int index = intent.value("index", 0);
+                            std::string value = intent.value("value", "");
+                            
+                            LOG_INFO("语义规整结果%d: %s", index, value.c_str());
+                        }
+                    } else {
+                        LOG_WARN("text字段中缺少intent数组或intent不是数组类型");
+                    }
+                } catch (const nlohmann::json::parse_error& e) {
+                    LOG_ERROR("解析text字段失败: %s, text_str: %s", e.what(), text_str.c_str());
+                } catch (const nlohmann::json::type_error& e) {
+                    LOG_ERROR("类型错误: %s", e.what());
+                }
+            } else {
+                LOG_WARN("cbm_tidy中缺少text字段或text不是字符串类型");
+            }
+        } else {
+            LOG_WARN("JSON中缺少cbm_tidy字段或cbm_tidy不是对象类型");
+        }
+    } catch (const nlohmann::json::parse_error& e) {
+        LOG_ERROR("解析JSON字符串失败: %s, resultStr: %s", e.what(), resultStr.c_str());
+    } catch (const std::exception& e) {
+        LOG_ERROR("处理cbm_tidy时发生异常: %s", e.what());
+    }
+}
+
+/**
+ * @brief 处理 AIUI 返回的传统语义技能结果 (cbm_semantic)
+ * @param resultStr JSON 字符串格式的传统语义技能结果
+ * @return bool 是否命中技能 (true: 命中技能, false: 未命中技能或解析失败)
+ */
+bool AvvtnCapture::handleCbmSemantic(const std::string& resultStr) {
+    LOG_INFO("接收到AIUI返回的【传统语义技能cbm_semantic】");
+    
+    try {
+        // 解析外层JSON
+        auto root = nlohmann::json::parse(resultStr);
+        
+        // 检查cbm_semantic字段是否存在
+        if (!root.contains("cbm_semantic") || !root["cbm_semantic"].is_object()) {
+            LOG_WARN("JSON中缺少cbm_semantic字段或cbm_semantic不是对象类型");
+            return false;
+        }
+        
+        auto& cbm_semantic = root["cbm_semantic"];
+        
+        // 检查text字段是否存在且为字符串
+        if (!cbm_semantic.contains("text") || !cbm_semantic["text"].is_string()) {
+            LOG_WARN("cbm_semantic中缺少text字段或text不是字符串类型");
+            return false;
+        }
+        
+        std::string text_str = cbm_semantic["text"].get<std::string>();
+        
+        try {
+            // 解析text字段中的JSON
+            auto text_root = nlohmann::json::parse(text_str);
+            
+            // 检查rc字段是否存在
+            if (text_root.contains("rc") && text_root["rc"].is_number_integer()) {
+                int rc = text_root["rc"].get<int>();
+                
+                if (rc != 0) {
+                    LOG_INFO("技能结果：未命中技能");
+                    return false;
+                } else {
+                    LOG_INFO("技能结果：命中技能");
+                    
+                    // 打印其他字段信息
+                    if (text_root.contains("text") && text_root["text"].is_string()) {
+                        std::string text = text_root["text"].get<std::string>();
+                        LOG_INFO("技能返回内容: %s", text.c_str());
+                    }
+                    
+                    if (text_root.contains("version") && text_root["version"].is_string()) {
+                        std::string version = text_root["version"].get<std::string>();
+                        LOG_INFO("技能版本: %s", version.c_str());
+                    }
+                    
+                    if (text_root.contains("service") && text_root["service"].is_string()) {
+                        std::string service = text_root["service"].get<std::string>();
+                        LOG_INFO("技能名称: %s", service.c_str());
+                    }
+                    
+                    return true;
+                }
+            } else {
+                LOG_WARN("text字段中缺少rc字段或rc不是整数类型");
+                return false;
+            }
+            
+        } catch (const nlohmann::json::parse_error& e) {
+            LOG_ERROR("解析text字段失败: %s, text_str: %s", e.what(), text_str.c_str());
+            return false;
+        } catch (const nlohmann::json::type_error& e) {
+            LOG_ERROR("类型错误: %s", e.what());
+            return false;
+        }
+        
+    } catch (const nlohmann::json::parse_error& e) {
+        LOG_ERROR("解析JSON字符串失败: %s, resultStr: %s", e.what(), resultStr.c_str());
+        return false;
+    } catch (const std::exception& e) {
+        LOG_ERROR("处理cbm_semantic时发生异常: %s", e.what());
+        return false;
+    }
+}
+
+void AvvtnCapture::handleCbmToolPk(const std::string& resultStr)
+{
+    LOG_INFO("接收到AIUI返回的【意图落域cbm_tool_pk】");
+    
+    try {
+        // 解析外层JSON
+        auto root = nlohmann::json::parse(resultStr);
+        
+        // 检查cbm_tool_pk字段是否存在
+        if (!root.contains("cbm_tool_pk") || !root["cbm_tool_pk"].is_object()) {
+            LOG_WARN("JSON中缺少cbm_tool_pk字段或cbm_tool_pk不是对象类型");
+            return;
+        }
+        
+        auto& cbm_tool_pk = root["cbm_tool_pk"];
+        
+        // 检查text字段是否存在且为字符串
+        if (!cbm_tool_pk.contains("text") || !cbm_tool_pk["text"].is_string()) {
+            LOG_WARN("cbm_tool_pk中缺少text字段或text不是字符串类型");
+            return;
+        }
+        
+        std::string text_str = cbm_tool_pk["text"].get<std::string>();
+        
+        try {
+            // 解析text字段中的JSON
+            auto text_root = nlohmann::json::parse(text_str);
+            
+            // 检查pk_type字段
+            if (text_root.contains("pk_type") && text_root["pk_type"].is_string()) {
+                std::string pk_type = text_root["pk_type"].get<std::string>();
+                LOG_INFO("落域结果判定来源模块: %s", pk_type.c_str());
+            }
+            
+            // 检查pk_source字段
+            if (text_root.contains("pk_source") && text_root["pk_source"].is_string()) {
+                std::string pk_source_text_str = text_root["pk_source"].get<std::string>();
+                
+                try {
+                    // 解析pk_source字段中的JSON
+                    auto pk_source_root = nlohmann::json::parse(pk_source_text_str);
+                    
+                    // 检查domain字段
+                    if (pk_source_root.contains("domain") && pk_source_root["domain"].is_string()) {
+                        std::string domain = pk_source_root["domain"].get<std::string>();
+                        LOG_INFO("落域结果: %s", domain.c_str());
+                    } else {
+                        LOG_WARN("pk_source字段中缺少domain字段或domain不是字符串类型");
+                    }
+                } catch (const nlohmann::json::parse_error& e) {
+                    LOG_ERROR("解析pk_source字段失败: %s", e.what());
+                } catch (const nlohmann::json::type_error& e) {
+                    LOG_ERROR("pk_source字段类型错误: %s", e.what());
+                }
+            } else {
+                LOG_WARN("text字段中缺少pk_source字段或pk_source不是字符串类型");
+            }
+            
+        } catch (const nlohmann::json::parse_error& e) {
+            LOG_ERROR("解析text字段失败: %s", e.what());
+        } catch (const nlohmann::json::type_error& e) {
+            LOG_ERROR("text字段类型错误: %s", e.what());
+        }
+        
+    } catch (const nlohmann::json::parse_error& e) {
+        LOG_ERROR("解析JSON字符串失败: %s", e.what());
+    } catch (const std::exception& e) {
+        LOG_ERROR("处理cbm_tool_pk时发生异常: %s", e.what());
+    }
+}
+
+void AvvtnCapture::handleCbmRetrievalClassify(const std::string& resultStr)
+{
+    LOG_INFO("JSON原始数据: %s", resultStr.c_str());
+    LOG_INFO("接收到AIUI返回的【知识分类cbm_retrieval_classify】");
+    
+    try {
+        // 解析外层JSON
+        auto root = nlohmann::json::parse(resultStr);
+        
+        // 检查cbm_retrieval_classify字段是否存在
+        if (!root.contains("cbm_retrieval_classify") || !root["cbm_retrieval_classify"].is_object()) {
+            LOG_WARN("JSON中缺少cbm_retrieval_classify字段或cbm_retrieval_classify不是对象类型");
+            return;
+        }
+        
+        auto& cbm_retrieval_classify = root["cbm_retrieval_classify"];
+        
+        // 检查text字段是否存在且为字符串
+        if (!cbm_retrieval_classify.contains("text") || !cbm_retrieval_classify["text"].is_string()) {
+            LOG_WARN("cbm_retrieval_classify中缺少text字段或text不是字符串类型");
+            return;
+        }
+        
+        std::string text_str = cbm_retrieval_classify["text"].get<std::string>();
+        
+        try {
+            // 解析text字段中的JSON
+            auto text_root = nlohmann::json::parse(text_str);
+            
+            // 检查type字段是否存在且为整数
+            if (text_root.contains("type") && text_root["type"].is_number_integer()) {
+                int type = text_root["type"].get<int>();
+                
+                if (type == 0) {
+                    LOG_INFO("不走知识查询或联网搜索");
+                } else {
+                    LOG_INFO("走知识查询或联网搜索");
+                }
+            } else {
+                LOG_WARN("text字段中缺少type字段或type不是整数类型");
+            }
+            
+        } catch (const nlohmann::json::parse_error& e) {
+            LOG_ERROR("解析text字段失败: %s, text_str: %s", e.what(), text_str.c_str());
+        } catch (const nlohmann::json::type_error& e) {
+            LOG_ERROR("类型错误: %s", e.what());
+        }
+        
+    } catch (const nlohmann::json::parse_error& e) {
+        LOG_ERROR("解析JSON字符串失败: %s", e.what());
+    } catch (const std::exception& e) {
+        LOG_ERROR("处理cbm_retrieval_classify时发生异常: %s", e.what());
+    }
+}
+
+void AvvtnCapture::handleCbmKnowledge(const std::string& resultStr)
+{
+    LOG_INFO("JSON原始数据: %s", resultStr.c_str());
+    LOG_INFO("接收到AIUI返回的【知识溯源cbm_knowledge】");
+    
+    try {
+        // 解析外层JSON
+        auto root = nlohmann::json::parse(resultStr);
+        
+        // 检查cbm_knowledge字段是否存在
+        if (!root.contains("cbm_knowledge") || !root["cbm_knowledge"].is_object()) {
+            LOG_WARN("JSON中缺少cbm_knowledge字段或cbm_knowledge不是对象类型");
+            LOG_INFO("未命中知识库");
+            return;
+        }
+        
+        auto& cbm_knowledge = root["cbm_knowledge"];
+        
+        // 检查text字段是否存在且为字符串
+        if (!cbm_knowledge.contains("text") || !cbm_knowledge["text"].is_string()) {
+            LOG_WARN("cbm_knowledge中缺少text字段或text不是字符串类型");
+            LOG_INFO("未命中知识库");
+            return;
+        }
+        
+        std::string text_str = cbm_knowledge["text"].get<std::string>();
+        
+        try {
+            // 解析text字段中的JSON数组
+            auto text_array = nlohmann::json::parse(text_str);
+            
+            // 检查是否是数组
+            if (!text_array.is_array()) {
+                LOG_WARN("text字段不是有效的JSON数组");
+                LOG_INFO("未命中知识库");
+                return;
+            }
+            
+            if (text_array.empty()) {
+                LOG_INFO("未命中知识库");
+                return;
+            }
+            
+            // 遍历知识条目
+            for (const auto& item : text_array) {
+                if (!item.is_object()) {
+                    continue; // 跳过非对象元素
+                }
+                
+                LOG_INFO("知识条目开始 ----------");
+                
+                // 输出score
+                if (item.contains("score") && item["score"].is_number_float()) {
+                    double score = item["score"].get<double>();
+                    LOG_INFO("score: %lf", score);
+                } else if (item.contains("score") && item["score"].is_number_integer()) {
+                    double score = item["score"].get<int>();
+                    LOG_INFO("score: %lf", score);
+                }
+                
+                // 输出repoId
+                if (item.contains("repoId") && item["repoId"].is_string()) {
+                    std::string repoId = item["repoId"].get<std::string>();
+                    LOG_INFO("知识库Id: %s", repoId.c_str());
+                }
+                
+                // 输出docName
+                if (item.contains("docName") && item["docName"].is_string()) {
+                    std::string docName = item["docName"].get<std::string>();
+                    LOG_INFO("来源文档: %s", docName.c_str());
+                }
+                
+                // 输出repoName
+                if (item.contains("repoName") && item["repoName"].is_string()) {
+                    std::string repoName = item["repoName"].get<std::string>();
+                    LOG_INFO("repo名字: %s", repoName.c_str());
+                }
+                
+                // 输出content
+                if (item.contains("content") && item["content"].is_string()) {
+                    std::string content = item["content"].get<std::string>();
+                    LOG_INFO("内容: %s", content.c_str());
+                }
+                
+                // 输出其他可能存在的字段
+                std::vector<std::string> other_fields = {"title", "url", "author", "time"};
+                for (const auto& field : other_fields) {
+                    if (item.contains(field) && item[field].is_string()) {
+                        LOG_INFO("%s: %s", field.c_str(), item[field].get<std::string>().c_str());
+                    }
+                }
+                
+                LOG_INFO("知识条目结束 ----------");
+            }
+            
+            LOG_INFO("总共找到 %zu 个知识条目", text_array.size());
+            
+        } catch (const nlohmann::json::parse_error& e) {
+            LOG_ERROR("解析text字段失败: %s, text_str: %s", e.what(), text_str.c_str());
+            LOG_INFO("未命中知识库");
+        } catch (const nlohmann::json::type_error& e) {
+            LOG_ERROR("类型错误: %s", e.what());
+            LOG_INFO("未命中知识库");
+        }
+        
+    } catch (const nlohmann::json::parse_error& e) {
+        LOG_ERROR("解析JSON字符串失败: %s", e.what());
+        LOG_INFO("未命中知识库");
+    } catch (const std::exception& e) {
+        LOG_ERROR("处理cbm_knowledge时发生异常: %s", e.what());
+        LOG_INFO("未命中知识库");
     }
 }
