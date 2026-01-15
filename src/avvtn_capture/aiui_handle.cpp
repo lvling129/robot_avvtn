@@ -329,7 +329,6 @@ void AvvtnCapture::handleAiuiIat(Json::Reader &reader, const char *buffer, int l
 
             LOG_INFO("IAT语音识别结果: %s", iat_text_buffer_.c_str());
             std::cout << "iat: " << iat_text_buffer_ << std::endl;
-            aiui_wrapper_.StartTTS(iat_text_buffer_);
             iat_text_buffer_.clear();
         }
     }
