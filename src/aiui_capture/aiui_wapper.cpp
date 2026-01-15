@@ -25,12 +25,11 @@ void TtsHelperListener::onFinish(const std::string &fullText)
 {
     /*发送ROS2话题robot_avvtn_chat_history  答*/
     std::ostringstream oss;
-    oss << "A: " << fullText; 
+    oss << "Answer: " << fullText; 
     std::string answer_msg = oss.str();
     ROSManager::getInstance().publishChatHistory(answer_msg);
 
     LOG_INFO("tts, fullText = %s", fullText.c_str());
-    std::cout << "tts, fullText=" << fullText << std::endl;
     return;
 }
 

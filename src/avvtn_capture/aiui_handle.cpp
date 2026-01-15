@@ -43,6 +43,9 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                 LOG_INFO("pcm播放器停止播放");
                 std::cout << "EVENT_WAKEUP: " << event.getInfo() << std::endl;
                 aiui_pcm_player_stop();
+
+                /*播放相应唤醒词*/
+                self->aiui_wrapper_.StartTTS("你好");
             }
             break;
 
@@ -323,7 +326,7 @@ void AvvtnCapture::handleAiuiIat(Json::Reader &reader, const char *buffer, int l
         {
             /*发送ROS2话题robot_avvtn_chat_history  问*/
             std::ostringstream oss;
-            oss << "Q: " << iat_text_buffer_; 
+            oss << "Question: " << iat_text_buffer_; 
             std::string ask_msg = oss.str();
             ROSManager::getInstance().publishChatHistory(ask_msg);
 
@@ -445,6 +448,7 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
             }
 
 #ifndef USE_POST_SEMANTIC_TTS
+            LOG_INFO("发送大模型返回的NLP答复文本给大模型做TTS");
             // 如果使用应用的语义后合成不需要在调用下面的函数否则tts的播报会重复
             aiui_wrapper_.listener_->tts_helper_ptr_->addText(text, stream_nlp_index_++, status);
 #endif

@@ -1,6 +1,6 @@
 #include "avvtn_capture/avvtn_capture.h"
 #include "utils/Logger.hpp"
-
+#include "utils/json.hpp"
 #include "ros2/ros_manager.hpp"
 
 int AvvtnCapture::test_evaluate_keyword(const char *keyword)
@@ -340,9 +340,31 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
 {
     std::string wake_str = std::string((char *)data_p->data, data_p->data_size);
     LOG_INFO("AVVTN接收到唤醒语音: %s", wake_str.c_str());
+    /* 两次唤醒只发送一次wakeup给AIUI */
+    std::string msg_type;
+    try {
+        // 解析 JSON
+        auto root = nlohmann::json::parse(wake_str);
+        // 提取 msg_type 字段
+        msg_type = root["msg_type"];
+        // 输出结果
+        std::cout << "msg_type: " << msg_type << std::endl;
+    } catch (nlohmann::json::exception& e) {
+        std::cerr << "JSON解析错误: " << e.what() << std::endl;
+        LOG_ERROR("JSON解析错误");
+    }
+    if(msg_type == "wakeup_detail")
+    {
+        LOG_INFO("带角度的语音唤醒不发送wakeup给AIUI");
+        return;
+    }
+
     // 可以设置多种唤醒方式 比如 需要语音唤醒 或者 只需要人脸唤醒 当前默认使用语音唤醒
     if (wake_mode_ == "ivw")
     {
+        /*发送ROS2话题robot_avvtn_chat_history  问*/
+        ROSManager::getInstance().publishChatHistory("Question: 小飞小飞");
+
         aiui_wrapper_.Wakeup();
     }
     std::cout << "接收到唤醒事件: " << wake_str << std::endl;
