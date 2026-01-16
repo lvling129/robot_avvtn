@@ -250,6 +250,8 @@ private:
     int tts_len_          = 0;                // 当前收到了tts音频的长度
     int intent_cnt_       = 0;                // 意图的数量
     int stream_nlp_index_ = 0;                // 流式nlp的索引
+
+    std::string ignore_tts_sid_;              // 当前tts不播放，播放技能返回tts
 };
 
 #endif

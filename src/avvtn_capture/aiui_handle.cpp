@@ -154,6 +154,11 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                 else if (sub == "tts")
                 {
                     LOG_DEBUG("接收到AIUI返回的语音合成结果tts");
+                    if (sid == self->ignore_tts_sid_)
+                    {
+                        LOG_INFO("ignore current tts");
+                        break;
+                    }
                     self->handleAiuiTts(reader, content, event, bizParamJson, buffer, dataLen);
                 }
                 else if (sub == "nlp")
