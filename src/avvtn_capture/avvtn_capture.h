@@ -167,6 +167,12 @@ private:
     void handleCbmKnowledge(const std::string& resultStr);
 
     /**
+     * @brief 处理 命中的技能
+     * @param text_str JSON 字符串格式的技能text
+     */
+    void handleSkill(const std::string& text_str);
+
+    /**
      * @brief 测试评估关键词
      * @param keyword 关键词
      * @return 0表示成功，非0表示失败

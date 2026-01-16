@@ -375,7 +375,8 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
             }
 
             tts_len_ += len;
-            LOG_DEBUG("播放TTS音频");
+            LOG_INFO("播放TTS音频");
+            LOG_INFO("tag: %s, len: %d, dts: %d, progress: %d", tag.c_str(), len, dts, progress);
             aiui_pcm_player_write(0, buffer, len, dts, progress);
         }
         // 若要保存合成音频，请打开以下开关
@@ -527,11 +528,6 @@ void AvvtnCapture::handleCbmTidy(const std::string& resultStr)
     }
 }
 
-/**
- * @brief 处理 AIUI 返回的传统语义技能结果 (cbm_semantic)
- * @param resultStr JSON 字符串格式的传统语义技能结果
- * @return bool 是否命中技能 (true: 命中技能, false: 未命中技能或解析失败)
- */
 bool AvvtnCapture::handleCbmSemantic(const std::string& resultStr) {
     LOG_INFO("接收到AIUI返回的【传统语义技能cbm_semantic】");
     
@@ -584,6 +580,9 @@ bool AvvtnCapture::handleCbmSemantic(const std::string& resultStr) {
                         std::string service = text_root["service"].get<std::string>();
                         LOG_INFO("技能名称: %s", service.c_str());
                     }
+
+                    /*技能处理*/
+                    handleSkill(text_str);
                     
                     return true;
                 }
