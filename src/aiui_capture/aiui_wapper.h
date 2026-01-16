@@ -51,7 +51,7 @@
 #endif
 
 // 是否使用语义后合成。当在AIUI平台应用配置页面打开"语音合成"开关时，需要打开该宏
-// #define USE_POST_SEMANTIC_TTS
+#define USE_POST_SEMANTIC_TTS
 
 // 使用AIUI命名空间
 using namespace aiui_va;

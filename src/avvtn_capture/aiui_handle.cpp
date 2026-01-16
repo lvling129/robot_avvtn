@@ -24,12 +24,12 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                     case AIUIConstant::STATE_READY:
                         std::cout << "EVENT_STATE: STATE_READY" << std::endl;
                         LOG_INFO("AIUI当前状态: READY");
-                        ROSManager::getInstance().publishStatus("当前状态: READY");
+                        ROSManager::getInstance().publishStatus("当前状态: READY (等待唤醒)");
                         break;
                     case AIUIConstant::STATE_WORKING:
                         std::cout << "EVENT_STATE: STATE_WORKING" << std::endl;
                         LOG_INFO("AIUI当前状态: WORKING");
-                        ROSManager::getInstance().publishStatus("当前状态: WORKING");
+                        ROSManager::getInstance().publishStatus("当前状态: WORKING (已唤醒)");
                         break;
                 }
             }
@@ -108,7 +108,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                     {
                         LOG_DEBUG("iat**********************************");
                         LOG_DEBUG("sid = %s", sid.c_str());
-                        std::cout << "**********************************" << std::endl;
+                        std::cout << "iat**********************************" << std::endl;
                         std::cout << "sid=" << sid << std::endl;
                         self->current_iat_sid_ = sid;
 
@@ -126,7 +126,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                     {
                         LOG_DEBUG("tts**********************************");
                         LOG_DEBUG("sid = %s", sid.c_str());
-                        std::cout << "**********************************" << std::endl;
+                        std::cout << "tts**********************************" << std::endl;
                         std::cout << "sid=" << sid << std::endl;
                         self->tts_len_         = 0;
                         self->current_tts_sid_ = sid;
@@ -375,8 +375,8 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
             }
 
             tts_len_ += len;
-            LOG_INFO("播放TTS音频");
-            LOG_INFO("tag: %s, len: %d, dts: %d, progress: %d", tag.c_str(), len, dts, progress);
+            //LOG_INFO("播放TTS音频");
+            //LOG_INFO("tag: %s, len: %d, dts: %d, progress: %d", tag.c_str(), len, dts, progress);
             aiui_pcm_player_write(0, buffer, len, dts, progress);
         }
         // 若要保存合成音频，请打开以下开关
@@ -419,7 +419,13 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
             if (status == 0)
             {
                 stream_nlp_index_ = 0;
+                // 开始新的流式响应
+                stream_nlp_answer_buffer_.clear();
+                stream_nlp_answer_buffer_ = text;
             }
+            else if (status == 1) {
+                stream_nlp_answer_buffer_ += text;
+            } 
             if (status == 2 && seq == 0)
             {
                 stream_nlp_index_ = 0;
@@ -449,7 +455,7 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
             }
 
 #ifndef USE_POST_SEMANTIC_TTS
-            LOG_INFO("发送大模型返回的NLP答复文本给大模型做TTS");
+            LOG_INFO("未使用应用的语义合成");
             // 如果使用应用的语义后合成不需要在调用下面的函数否则tts的播报会重复
             aiui_wrapper_.listener_->tts_helper_ptr_->addText(text, stream_nlp_index_++, status);
 #endif
@@ -459,6 +465,15 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
 
             if (status == 2)
             {
+                stream_nlp_answer_buffer_ += text;
+                LOG_INFO("大模型nlp流式返回fullText = %s", stream_nlp_answer_buffer_.c_str());
+                /*发送ROS2话题robot_avvtn_chat_history  答*/
+                std::ostringstream oss;
+                oss << "Answer: " << stream_nlp_answer_buffer_; 
+                std::string answer_msg = oss.str();
+                ROSManager::getInstance().publishChatHistory(answer_msg);
+                // 调用语音合成TTS 如自动返回TTS则下面不需要合成
+                //aiui_wrapper_.StartTTS(stream_nlp_answer_buffer_);
                 stream_nlp_answer_buffer_.clear();
             }
         }
@@ -528,9 +543,12 @@ void AvvtnCapture::handleCbmTidy(const std::string& resultStr)
     }
 }
 
-bool AvvtnCapture::handleCbmSemantic(const std::string& resultStr) {
+bool AvvtnCapture::handleCbmSemantic(const std::string& resultStr)
+{
+    LOG_INFO("JSON原始数据: %s", resultStr.c_str());
+
     LOG_INFO("接收到AIUI返回的【传统语义技能cbm_semantic】");
-    
+
     try {
         // 解析外层JSON
         auto root = nlohmann::json::parse(resultStr);
@@ -681,7 +699,8 @@ void AvvtnCapture::handleCbmToolPk(const std::string& resultStr)
 
 void AvvtnCapture::handleCbmRetrievalClassify(const std::string& resultStr)
 {
-    LOG_INFO("JSON原始数据: %s", resultStr.c_str());
+    //LOG_INFO("JSON原始数据: %s", resultStr.c_str());
+
     LOG_INFO("接收到AIUI返回的【知识分类cbm_retrieval_classify】");
     
     try {

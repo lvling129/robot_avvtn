@@ -17,18 +17,13 @@ void TtsHelperListener::onText(const StreamNlpTtsHelper::OutTextSeg &textSeg)
         }
     }
     // 调用合成 - 参考demo中TtsHelperListener::onText的实现
+    LOG_INFO("调用合成:");
     aiui_wrapper_ptr_->StartTTS(textSeg.mText, textSeg.mTag);
     return;
 }
 
 void TtsHelperListener::onFinish(const std::string &fullText)
 {
-    /*发送ROS2话题robot_avvtn_chat_history  答*/
-    std::ostringstream oss;
-    oss << "Answer: " << fullText; 
-    std::string answer_msg = oss.str();
-    ROSManager::getInstance().publishChatHistory(answer_msg);
-
     LOG_INFO("tts, fullText = %s", fullText.c_str());
     return;
 }
