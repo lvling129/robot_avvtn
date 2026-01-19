@@ -28,6 +28,13 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
+# 查找libcurl
+find_package(CURL REQUIRED)
+
+
+# 链接库到目标
+target_link_libraries(${PROJECT_NAME} CURL::libcurl)
+
 # 添加ROS2依赖
 ament_target_dependencies(${PROJECT_NAME} 
   rclcpp 
