@@ -3191,3 +3191,87 @@
 2025-12-31 14:48:08.554 Tx1218B5 INFO  finit                            73 ability:efc6114c2 finit ret:0
 2025-12-31 14:48:08.554 Tx1218B5 INFO  unInit                          221 engine:e05e559a9 uncontext ret:0
 2025-12-31 14:48:08.560 Tx1218B5 INFO  AEE_UnInit                     1221 AEE_UnInit finish
+2026-01-21 11:43:30.598 Tx0E46BB INFO  AEE_SetLogPath                 1171 logfile path set to /home/cat/robot_avvtn/log/aikit.log
+2026-01-21 11:43:30.599 Tx0E46BB INFO  AEE_Init                        201 workDir is /home/cat/robot_avvtn/license
+2026-01-21 11:43:30.599 Tx0E46BB INFO  AEE_Init                        206 licenseFile path is /home/cat/robot_avvtn/license/aee.license
+2026-01-21 11:43:30.599 Tx0E46BB INFO  AEE_Init                        207 authBatch is (null)
+2026-01-21 11:43:30.599 Tx0E46BB INFO  AEE_Init                        208 userdefined device id is aikit_faceDCECJXA4
+2026-01-21 11:43:30.599 Tx0E46BB INFO  AEE_Init                        209 sdk mode: net mode
+2026-01-21 11:43:30.599 Tx0E46BB INFO  AEE_Init                        235 resDir is /home/cat/robot_avvtn/resource/face_detect
+2026-01-21 11:43:30.600 Tx0E46BB INFO  init                           1029 framework version is 2.2.17_rc3
+2026-01-21 11:43:30.600 Tx0E46BB INFO  init                           1031 appid is b3af098a
+2026-01-21 11:43:30.600 Tx0E46BB INFO  init                           1037 auth type is 0, platform is 4(Linux), arch is 2(arm64)
+2026-01-21 11:43:30.600 Tx0E46BB INFO  setCustomDeviceIDPartWeight     953 use default device id part weight
+2026-01-21 11:43:30.601 Tx0E46BB INFO  getDeviceLevel                 1851 cached device level 0
+2026-01-21 11:43:30.601 Tx0E46BB INFO  init                           1088 device security level is 0
+2026-01-21 11:43:30.601 Tx0E46BB INFO  init                           1091 auth mode: compete auth, registed abilities: efc6114c2;efd51700d;
+2026-01-21 11:43:30.601 Tx0E46BB INFO  getDeviceAndLicense            1092 local auth file:/home/cat/robot_avvtn/license/aee.license open failed
+2026-01-21 11:43:30.601 Tx0E46BB INFO  localAuthFileCheck             1295 local auth file check ret:18402
+2026-01-21 11:43:30.601 Tx0E46BB INFO  getDeviceId                     892 PARTA:36,PARTD:0
+2026-01-21 11:43:30.601 Tx0E46BB INFO  getDeviceId                     910 PARTB:1 is 00:0d:f0:c5:91:c1
+2026-01-21 11:43:30.601 Tx0E46BB INFO  getCPUInfo                      684 use Serial as cpu_id: f43d807b98c66e9d
+2026-01-21 11:43:30.601 Tx0E46BB INFO  getDeviceId                     916 PARTC:1 
+2026-01-21 11:43:30.601 Tx0E46BB INFO  checkDeviceChanged              768 cached device is 426fe364febc6af658860d438f3230f07d646e66f178ec4bef62ea9a0394bbcff6c7d35b7dadeb1af3d765508fe39b21bd6afc27ee992fd303ee86bbb6e1d3cc4cb917e46333d06258140c7a869b4be8
+2026-01-21 11:43:30.601 Tx0E46BB INFO  storeDevice                    1831 start store device 426fe364febc6af658860d438f3230f07d646e66f178ec4bef62ea9a0394bbcff6c7d35b7dadeb1af3d765508fe39b21bd6afc27ee992fd303ee86bbb6e1d3cc4cb917e46333d06258140c7a869b4be8
+2026-01-21 11:43:30.602 Tx0E46BB INFO  setKey                          131 store 12381,12381 device success
+2026-01-21 11:43:30.602 Tx0E46BB INFO  localAuthStorageCheck          1300 start cached license check
+2026-01-21 11:43:30.603 Tx0E46BB INFO  formatV2                        441 ValidLen:5972,PayLen:5416,SigLen:512,SchemaLen:4598,RelationLen:38,LicenseLen:774,ConfigLen:0
+2026-01-21 11:43:30.630 Tx0E46BB INFO  init                            633 parser init ret:0
+2026-01-21 11:43:30.630 Tx0E46BB INFO  generalCheck                    869 protocol general check ret:0
+2026-01-21 11:43:30.631 Tx0E46BB INFO  localAuthStorageCheck          1319 start update local timestamp
+2026-01-21 11:43:30.632 Tx0E46BB INFO  setKey                          131 store 12381,12381 license success
+2026-01-21 11:43:30.632 Tx0E46BB INFO  localAuthStorageCheck          1327 local cached license check ret:0
+2026-01-21 11:43:30.632 Tx0E46BB INFO  softAuthActivate                895 local cached license parse succeed
+2026-01-21 11:43:30.632 Tx0E46BB INFO  AEE_Init                        292 AEE_Init ret 0, cost 33.886242 ms
+2026-01-21 11:43:30.633 Tx0E46EB INFO  authFileUpdateMain              483 async check thread start
+2026-01-21 11:43:30.633 Tx0E46BB INFO  AEE_Start                       777 start a new session , type is 4
+2026-01-21 11:43:30.633 Tx0E46BB INFO  loadEngine                      242 loading engine:e05e559a9, versionIdx:0, libname:e05e559a9_v201010_aee.so, full path:e05e559a9_v201010_aee.so
+2026-01-21 11:43:30.637 Tx0E46BB ERROR toBizParam                      412 can not find cfg file form workdir:e05e559a9_v201010_iFPDTL.cfg
+2026-01-21 11:43:30.638 Tx0E46BB INFO  formatV2                        441 ValidLen:5972,PayLen:5416,SigLen:512,SchemaLen:4598,RelationLen:38,LicenseLen:774,ConfigLen:0
+2026-01-21 11:43:30.656 Tx0E46BB INFO  init                            633 parser init ret:0
+2026-01-21 11:43:30.661 Tx0E46BB INFO  init                             65 ability:efd51700d init success
+2026-01-21 11:43:30.661 Tx0E46BB INFO  loadCommonResource               94 load resource:jd_model.res.cpu.float, id:0, version:2.0.0.1, path:/home/cat/robot_avvtn/resource/face_detect/ee3c974c4_2.0.0.1_jd_model.res.cpu.float
+2026-01-21 11:43:30.663 Tx0E46EB INFO  startOnlineAuthRequest         1336 start async online license activate
+2026-01-21 11:43:30.676 Tx0E46EB INFO  resolveHostInner                477 dns mode:0
+2026-01-21 11:43:30.676 Tx0E46EB WARN  getNameServerResult             311 cannot find "xns.xf-yun.com"'s IP, ipList is empty
+2026-01-21 11:43:30.683 Tx0E46BB INFO  formatV2                        441 ValidLen:5972,PayLen:5416,SigLen:512,SchemaLen:4598,RelationLen:38,LicenseLen:774,ConfigLen:0
+2026-01-21 11:43:30.723 Tx0E46BB INFO  init                            633 parser init ret:0
+2026-01-21 11:43:30.723 Tx0E46EB INFO  getNameServerResult             312 dns resolve xns.xf-yun.com as [101.200.180.128]
+2026-01-21 11:43:30.724 Tx0E46EB INFO  addConnection                   603 add connection to map: 0 0x7f70001750 size:1
+2026-01-21 11:43:30.737 Tx0E46BB INFO  create                          271 engine create. ability:efd51700d handle:0x55cb5d8c80
+2026-01-21 11:43:30.737 Tx0E46BB INFO  start                           229 Session start:0 efd51700d this:0x55cb5d8a80 engine:0x55cb709740
+2026-01-21 11:43:30.737 Tx0E46BB INFO  AEE_Start                       777 start a new session , type is 4
+2026-01-21 11:43:30.737 Tx0E46BB INFO  init                             65 ability:efc6114c2 init success
+2026-01-21 11:43:30.738 Tx0E46BB INFO  loadCommonResource               94 load resource:fa_model.res.cpu.float, id:1, version:2.0.0.5, path:/home/cat/robot_avvtn/resource/face_detect/e1e461fb6_2.0.0.5_fa_model.res.cpu.float
+2026-01-21 11:43:30.767 Tx0E46BB INFO  formatV2                        441 ValidLen:5972,PayLen:5416,SigLen:512,SchemaLen:4598,RelationLen:38,LicenseLen:774,ConfigLen:0
+2026-01-21 11:43:30.786 Tx0E46BB INFO  init                            633 parser init ret:0
+2026-01-21 11:43:30.802 Tx0E46BB INFO  create                          271 engine create. ability:efc6114c2 handle:0x55cb64f790
+2026-01-21 11:43:30.802 Tx0E46BB INFO  start                           229 Session start:0 efc6114c2 this:0x55cb64f590 engine:0x55cb98af20
+2026-01-21 11:43:30.960 Tx0E46EB WARN  parseResultToAddressList        766 [cn-huabei-1-lg.xf-yun.com] IP list is empty!
+2026-01-21 11:43:30.983 Tx0E46EB INFO  resolveLocalDnsList             815 dns resolve cn-huabei-1-lg.xf-yun.com as [114.118.75.150]
+2026-01-21 11:43:30.983 Tx0E46EB INFO  genLicenseField                 212 timestamp is 1768967010
+2026-01-21 11:43:30.984 Tx0E46EB INFO  addConnection                   603 add connection to map: 1 0x7f70084f50 size:2
+2026-01-21 11:43:30.984 Tx0E46EB WARN  genCurrentTime                  150 setlocale fail!
+2026-01-21 11:43:31.303 Tx0E46EB INFO  onSignResponse                  325 auth request succeed
+2026-01-21 11:43:31.305 Tx0E46EB INFO  formatV2                        441 ValidLen:5968,PayLen:5416,SigLen:512,SchemaLen:4598,RelationLen:38,LicenseLen:774,ConfigLen:0
+2026-01-21 11:43:31.351 Tx0E46EB WARN  reload                          765 same version and checksum, no update required
+2026-01-21 11:43:31.351 Tx0E46EB WARN  onSignSuccess                   610 reload Parser ret: 0
+2026-01-21 11:43:31.380 Tx0E46EB INFO  addConnection                   603 add connection to map: 2 0x7f700f98d0 size:3
+2026-01-21 11:43:31.381 Tx0E46EB WARN  genCurrentTime                  150 setlocale fail!
+2026-01-21 11:43:31.569 Tx0E46EB INFO  uploadMetricTask                646 metrics sid is lat000e11e2@dx19bdea67ce2a4bc812
+2026-01-21 11:45:04.880 Tx0E46BB INFO  end                             378 AEESession end:0 ability:efd51700d this:0x55cb5d8a80
+2026-01-21 11:45:04.880 Tx0E46BB INFO  AEE_End                        1014 AEE_End handle:0x55cb604c10 ability:efd51700d ret:0
+2026-01-21 11:45:04.880 Tx0E46E8 INFO  offlineSave                      95 tag:efd51700d, success times:1, failed times:0, cost:94247.2 ms
+2026-01-21 11:45:04.881 Tx0E46BB INFO  end                             378 AEESession end:0 ability:efc6114c2 this:0x55cb64f590
+2026-01-21 11:45:04.881 Tx0E46BB INFO  AEE_End                        1014 AEE_End handle:0x55cb62a100 ability:efc6114c2 ret:0
+2026-01-21 11:45:04.881 Tx0E46E8 INFO  offlineSave                      95 tag:efc6114c2, success times:1, failed times:0, cost:94143.3 ms
+2026-01-21 11:45:04.881 Tx0E46BB INFO  AEE_UnInit                     1177 AEE_UnInit begin
+2026-01-21 11:45:04.902 Tx0E46EB INFO  authFileUpdateMain              507 async check thread exit
+2026-01-21 11:45:04.907 Tx0E46BB INFO  destroy                         284 ability:efd51700d handle:0x55cb709740 destroy ret:0
+2026-01-21 11:45:04.907 Tx0E46BB INFO  unloadCommonResource            119 unload resource:0
+2026-01-21 11:45:04.910 Tx0E46BB INFO  finit                            73 ability:efd51700d finit ret:0
+2026-01-21 11:45:04.911 Tx0E46BB INFO  destroy                         284 ability:efc6114c2 handle:0x55cb98af20 destroy ret:0
+2026-01-21 11:45:04.911 Tx0E46BB INFO  unloadCommonResource            119 unload resource:1
+2026-01-21 11:45:04.916 Tx0E46BB INFO  finit                            73 ability:efc6114c2 finit ret:0
+2026-01-21 11:45:04.916 Tx0E46BB INFO  unInit                          221 engine:e05e559a9 uncontext ret:0
+2026-01-21 11:45:04.921 Tx0E46BB INFO  AEE_UnInit                     1221 AEE_UnInit finish

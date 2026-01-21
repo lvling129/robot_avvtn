@@ -4440,3 +4440,94 @@
 [2025/12/31 14:48:08.818][info ][Px1185973][Tx1185973] TURBO-LOG 2025/12/31 14:48:08.818521521
 [2025/12/31 14:48:08.818][info ][Px1185973][Tx1185973] main log stop
 [2025/12/31 14:48:08.818][info ][Px1185973][Tx1185973] ==============================================
+[2026/01/21 11:43:30.566][info ][Px935611][Tx935611] ==============================================
+[2026/01/21 11:43:30.566][info ][Px935611][Tx935611] TURBO-LOG 2026/01/21 11:43:30.566755010
+[2026/01/21 11:43:30.566][info ][Px935611][Tx935611] main log start
+[2026/01/21 11:43:30.566][info ][Px935611][Tx935611] ==============================================
+[2026/01/21 11:43:30.566][info ][Px935611][Tx935611][pipeline.cpp:Init:28] Configuration loaded: {
+    "login": {
+        "appid": "18fdf2cc",
+        "sn": "0123456789118",
+        "work_dir": "/home/cat/robot_avvtn/resource",
+        "license_path": "/home/cat/robot_avvtn/license"
+    },
+    "mmsp": {
+        "video_delay": 40,
+        "min_face_w": 60,
+        "min_face_h": 90,
+        "head_angle_yaw": 45,
+        "face_out_ms": 800,
+        "face_area_ms": 800,
+        "switch_face_ratio": 1.5,
+        "instance_count": 3,
+        "cae_mode": "ivw",
+        "auto_lower_rank": 0,
+        "judge_with_time": false,
+        "cpu_core_list": [4, 5, 6, 7]
+    },
+    "vad": {
+        "vad_eos": 500,
+        "threshold": 0.3
+    },
+    "recorder": {
+        "image_width": 1920,
+        "image_height": 1080,
+        "cam_clip_left": 0,
+        "cam_clip_right": 0,
+        "cam_clip_top": 0,
+        "cam_clip_bottom": 0
+    },
+    "log": {
+        "log_level": 4,
+        "log_max_file": 5,
+        "log_size": 10,
+        "log_save": "0",
+        "log_path": "/home/cat/robot_avvtn/log"
+    }
+}
+
+[2026/01/21 11:43:31.079][error][Px935611][Tx935611][pipeline.cpp:Init:53] cae engine version: se_circle_mmsp_1.0.3.3420( Feb 19 2025 17:20:36 )
+[2026/01/21 11:43:32.274][info ][Px935611][Tx935611][auth_api.cpp:auth_api_init:65]   use AUTH_TYPE_NET, appid=18fdf2cc, sn=0123456789118
+[2026/01/21 11:43:32.274][info ][Px935611][Tx935611][auth_api.cpp:auth_api_init:122] succeed init auth_api. 0x55cb5d4738 0x55dd7625e0
+[2026/01/21 11:43:32.274][info ][Px935611][Tx935611][auth_api.cpp:auth_api_do_check:146] started net_auth_worker...
+[2026/01/21 11:43:32.274][info ][Px935611][Tx935611][pipeline_init.cpp:initThread:353] cpu core is 4
+[2026/01/21 11:43:32.274][info ][Px935611][Tx935611][pipeline_init.cpp:initThread:353] cpu core is 5
+[2026/01/21 11:43:32.274][info ][Px935611][Tx935611][pipeline_init.cpp:initThread:353] cpu core is 6
+[2026/01/21 11:43:32.274][info ][Px935611][Tx935611][pipeline_init.cpp:initThread:353] cpu core is 7
+[2026/01/21 11:43:32.275][info ][Px935611][Tx935793][pipeline_thread.cpp:runAlignThread:25] ==>Align thread started
+[2026/01/21 11:43:32.275][info ][Px935611][Tx935794][pipeline_thread.cpp:runFaceDetectionThread:92] ==>Face detection thread started
+[2026/01/21 11:43:32.276][info ][Px935611][Tx935795][pipeline_thread.cpp:runMouthDetectionThread:136] ==>Mouth detection thread started
+[2026/01/21 11:43:32.276][info ][Px935611][Tx935796][pipeline_thread.cpp:runCaeThread:208] ==>CAE thread started. Channel: 0
+[2026/01/21 11:43:32.279][info ][Px935611][Tx935797][pipeline_thread.cpp:runCaeThread:208] ==>CAE thread started. Channel: 1
+[2026/01/21 11:43:32.279][error][Px935611][Tx935611][pipeline.cpp:Init:72] avvtn initialized successfully - Version: 1.1.9.6bb3aa19@refactoring, Image: 1920x1080, MIC TYPE: 6
+[2026/01/21 11:43:32.279][info ][Px935611][Tx935798][pipeline_thread.cpp:runCaeThread:208] ==>CAE thread started. Channel: 2
+[2026/01/21 11:43:32.302][info ][Px935611][Tx935792][auth_api.cpp:pri_net_auth_worker:247] succeed get net_auth result: 0
+[2026/01/21 11:43:32.302][info ][Px935611][Tx935792][pipeline_callback.cpp:authCallback:160] auth result: 0
+[2026/01/21 11:43:32.307][info ][Px935611][Tx935792][auth_api.cpp:pri_net_auth_worker:287] net_auth_worker final exit point... exec_status=0, result.code=0
+[2026/01/21 11:43:34.891][info ][Px935611][Tx935741][pipeline_callback.cpp:vtnCallback:264] vtn wakeup  { "msg_type":"wakeup",  "params":{"keyword":"ling2 xi1 ling2 xi1","keyword_type":"main", "start_ms":950,"end_ms":1920,"endpoint_ms":0, "score":1513,"threshold":900,"boundary":"0x00000000", "beam":1,"physical":1,"angle":0,"power":0.00, "snr":0.00,"power_td":0.00   } } 
+[2026/01/21 11:43:34.920][info ][Px935611][Tx935741][pipeline_callback.cpp:vtnCallback:264] vtn wakeup  { "msg_type":"wakeup_detail",  "params":{"keyword":"ling2 xi1 ling2 xi1","keyword_type":"main", "start_ms":930,"end_ms":1920,"endpoint_ms":0, "score":1599,"threshold":900,"boundary":"0x00000000", "beam":2,"physical":0,"angle":21,"power":36701560.00, "snr":0.00,"power_td":0.00   } } 
+[2026/01/21 11:43:37.248][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:216] ivw vad status start current channel is -1
+[2026/01/21 11:43:38.144][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:220] ivw vad status end current channel is -1
+[2026/01/21 11:43:41.187][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:216] ivw vad status start current channel is -1
+[2026/01/21 11:43:42.624][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:220] ivw vad status end current channel is -1
+[2026/01/21 11:44:10.163][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:216] ivw vad status start current channel is -1
+[2026/01/21 11:44:11.289][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:220] ivw vad status end current channel is -1
+[2026/01/21 11:44:15.636][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:216] ivw vad status start current channel is -1
+[2026/01/21 11:44:16.221][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:220] ivw vad status end current channel is -1
+[2026/01/21 11:44:22.489][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:216] ivw vad status start current channel is -1
+[2026/01/21 11:44:23.281][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:220] ivw vad status end current channel is -1
+[2026/01/21 11:44:25.369][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:216] ivw vad status start current channel is -1
+[2026/01/21 11:44:25.836][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:220] ivw vad status end current channel is -1
+[2026/01/21 11:44:26.337][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:216] ivw vad status start current channel is -1
+[2026/01/21 11:44:27.198][info ][Px935611][Tx935741][pipeline_callback.cpp:vadCallback:220] ivw vad status end current channel is -1
+[2026/01/21 11:45:04.877][info ][Px935611][Tx935793][pipeline_thread.cpp:runAlignThread:87] <==Align thread stopped
+[2026/01/21 11:45:04.877][info ][Px935611][Tx935796][pipeline_thread.cpp:runCaeThread:279] <==CAE thread stopped. Channel: 0
+[2026/01/21 11:45:04.877][info ][Px935611][Tx935794][pipeline_thread.cpp:runFaceDetectionThread:131] <==Face detection thread stopped
+[2026/01/21 11:45:04.877][info ][Px935611][Tx935795][pipeline_thread.cpp:runMouthDetectionThread:203] <==Mouth detection thread stopped
+[2026/01/21 11:45:04.877][info ][Px935611][Tx935798][pipeline_thread.cpp:runCaeThread:279] <==CAE thread stopped. Channel: 2
+[2026/01/21 11:45:04.879][info ][Px935611][Tx935797][pipeline_thread.cpp:runCaeThread:279] <==CAE thread stopped. Channel: 1
+[2026/01/21 11:45:05.058][info ][Px935611][Tx935649][callback.cpp:callbackThread:297] CallbackModule thread stopped
+[2026/01/21 11:45:05.226][info ][Px935611][Tx935611] ==============================================
+[2026/01/21 11:45:05.226][info ][Px935611][Tx935611] TURBO-LOG 2026/01/21 11:45:05.226217820
+[2026/01/21 11:45:05.226][info ][Px935611][Tx935611] main log stop
+[2026/01/21 11:45:05.226][info ][Px935611][Tx935611] ==============================================
