@@ -82,10 +82,6 @@ int main(int argc, char const *argv[])
             LOG_INFO("收到ROS2消息: {}", msg->data);
         });
 
-    // 4. 测试发布消息
-    ROSManager::getInstance().publishLog("语音交互系统启动");
-    ROSManager::getInstance().publishStatus("语音交互系统初始化中");
-
     // 5. 初始化AvvtnCapture
     AvvtnCapture capture;
     //std::this_thread::sleep_for(std::chrono::seconds(2));

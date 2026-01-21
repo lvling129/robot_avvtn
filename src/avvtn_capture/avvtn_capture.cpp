@@ -59,7 +59,7 @@ int AvvtnCapture::Init(std::string avvtn_cfg_path, std::string aiui_cfg_path)
     {
         LOG_INFO("初始化音频采集成功");
         LOG_INFO("开始音频采集...");
-        ROSManager::getInstance().publishStatus("等待唤醒");
+        ROSManager::getInstance().publishStatus("wait_wakeup");
     }
 
     // test_avvtn();

@@ -19,17 +19,14 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                     case AIUIConstant::STATE_IDLE: 
                         std::cout << "EVENT_STATE: STATE_IDLE" << std::endl;
                         LOG_INFO("AIUI当前状态: IDLE");
-                        ROSManager::getInstance().publishStatus("当前状态: IDLE");
                         break;
                     case AIUIConstant::STATE_READY:
                         std::cout << "EVENT_STATE: STATE_READY" << std::endl;
                         LOG_INFO("AIUI当前状态: READY");
-                        ROSManager::getInstance().publishStatus("当前状态: READY (等待唤醒)");
                         break;
                     case AIUIConstant::STATE_WORKING:
                         std::cout << "EVENT_STATE: STATE_WORKING" << std::endl;
                         LOG_INFO("AIUI当前状态: WORKING");
-                        ROSManager::getInstance().publishStatus("当前状态: WORKING (已唤醒)");
                         break;
                 }
             }
@@ -38,7 +35,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 唤醒事件
             case AIUIConstant::EVENT_WAKEUP:
             {
-                ROSManager::getInstance().publishStatus("已唤醒");
+                ROSManager::getInstance().publishStatus("wait_talk");
                 LOG_INFO("接收到AIUI唤醒事件EVENT_WAKEUP: %s", event.getInfo());
                 LOG_INFO("pcm播放器停止播放");
                 std::cout << "EVENT_WAKEUP: " << event.getInfo() << std::endl;
@@ -52,7 +49,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 休眠事件
             case AIUIConstant::EVENT_SLEEP:
             {
-                ROSManager::getInstance().publishStatus("休眠中，等待唤醒");
+                ROSManager::getInstance().publishStatus("wait_wakeup");
                 LOG_INFO("接收到AIUI休眠事件EVENT_SLEEP: arg1 = %d", event.getArg1());
                 std::cout << "EVENT_SLEEP: arg1=" << event.getArg1() << std::endl;
             }
@@ -261,10 +258,6 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             case AIUIConstant::EVENT_ERROR:
             {
                 std::ostringstream oss;
-                oss << "AIUI出错EVENT_ERROR: error = " << event.getArg1() 
-                    << ", des = " << event.getInfo();
-                std::string error_msg = oss.str();
-                ROSManager::getInstance().publishStatus(error_msg);
                 LOG_ERROR("AIUI出错EVENT_ERROR: error = %d, des = %s", event.getArg1(), event.getInfo());
                 std::cout << "EVENT_ERROR: error=" << event.getArg1() << ", des=" << event.getInfo() << std::endl;
             }
@@ -273,7 +266,6 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 连接到服务器
             case AIUIConstant::EVENT_CONNECTED_TO_SERVER:
             {
-                ROSManager::getInstance().publishStatus("已连接到服务器");
                 std::string uid = event.getData()->getString("uid", "");
                 std::cout << "EVENT_CONNECTED_TO_SERVER, uid=" << uid << std::endl;
                 LOG_INFO("已连接到服务器, uid = %s", uid.c_str());
@@ -283,7 +275,6 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 与服务器断开连接
             case AIUIConstant::EVENT_SERVER_DISCONNECTED:
             {
-                ROSManager::getInstance().publishStatus("与服务器断开");
                 LOG_INFO("与AIUI服务器断开");
                 std::cout << "EVENT_SERVER_DISCONNECTED" << std::endl;
             }
@@ -488,9 +479,6 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
                 std::ostringstream oss;
                 oss << "Answer: " << stream_nlp_answer_buffer_; 
                 std::string answer_msg = oss.str();
-                // ROSManager::getInstance().publishChatHistory(answer_msg);
-                // 调用语音合成TTS 如自动返回TTS则下面不需要合成
-                //aiui_wrapper_.StartTTS(stream_nlp_answer_buffer_);
                 stream_nlp_answer_buffer_.clear();
             }
         }

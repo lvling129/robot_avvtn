@@ -365,7 +365,7 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
         /*发送ROS2话题robot_avvtn_chat_history  问*/
         nlohmann::json wake_up = {
                 {"speaker", "person"},
-                {"text", "小飞小飞"}
+                {"text", "灵犀灵犀"}
         };
         ROSManager::getInstance().publishChatHistory(wake_up.dump());
 
