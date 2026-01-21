@@ -314,7 +314,7 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
 
                 LOG_INFO("动作参数: intent_name=%s, id=%d", intent_name.c_str(), id);
                 
-                // TODO: 发送移动请求
+                // 发送动作请求
                 sendActionRequest(intent_name, std::to_string(id));
             }
             else if (type == "stop")
@@ -344,7 +344,18 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
             }
             else if (type == "new_year")
             {
-                LOG_INFO("执行通用祝福意图!!!");
+                LOG_INFO("执行新年动作意图!!!");
+                // 提取动作参数
+                auto& result = text_root["data"]["result"][0];
+                std::string intent_name = result["intentName"].get<std::string>();
+                //int id = result["id"].get<std::int32_t>();
+                int ids[6] = {2003, 2014, 2016, 3052, 3053, 3012};
+                int id = ids[rand() % 6];
+
+                LOG_INFO("动作参数: intent_name=%s, id=%d", intent_name.c_str(), id);
+
+                // 发送动作请求
+                sendActionRequest(intent_name, std::to_string(id));
             }
             else
             {
