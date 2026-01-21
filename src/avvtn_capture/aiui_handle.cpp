@@ -468,13 +468,17 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
 
             LOG_INFO("大模型返回nlp语义结果: seq = %d, status = %d, answer（应答语）: %s", seq, status, text.c_str());
             std::cout << "seq=" << seq << ", status=" << status << ", answer（应答语）: " << text << std::endl;
-            nlohmann::json nlp_answer = {
-                    {"seq", std::to_string(seq)},
-                    {"status", std::to_string(status)},
-                    {"speaker", "robot"},
-                    {"text", text}
-            };
-            ROSManager::getInstance().publishChatHistory(nlp_answer.dump());
+            // 技能返回语音文本时不显示大模型回复的文本
+            if (ignore_tts_sid_ != current_iat_sid_)
+            {
+                nlohmann::json nlp_answer = {
+                        {"seq", std::to_string(seq)},
+                        {"status", std::to_string(status)},
+                        {"speaker", "robot"},
+                        {"text", text}
+                };
+                ROSManager::getInstance().publishChatHistory(nlp_answer.dump());
+            }
 
             if (status == 2)
             {

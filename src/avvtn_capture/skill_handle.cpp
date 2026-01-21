@@ -185,6 +185,7 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
         }
 
         // 检查voice_answer content字段是否存在
+        // 如果存在，播放技能返回的语音
         if (text_root.contains("voice_answer") &&
             text_root["voice_answer"].is_array() &&
             text_root["voice_answer"].size() > 0 &&
@@ -196,9 +197,18 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
         {
             std::string voice_answer_content = text_root["voice_answer"][0]["content"].get<std::string>();
             LOG_INFO("技能返回TTS内容文本: %s", voice_answer_content.c_str());
+            // 设置ignore本次大模型返回的NLP TTS语音
             ignore_tts_sid_ = current_iat_sid_;
-            // 调用语音合成TTS
+            // 调用语音合成TTS，播放技能返回的语音文本
             aiui_wrapper_.StartTTS(voice_answer_content);
+            // 技能答复的文本发送ROS话题
+            nlohmann::json nlp_answer = {
+                    {"seq", std::to_string(0)},
+                    {"status", std::to_string(2)},
+                    {"speaker", "robot"},
+                    {"text", voice_answer_content}
+            };
+            ROSManager::getInstance().publishChatHistory(nlp_answer.dump());
         }
 
         // 检查type字段是否存在
@@ -318,7 +328,8 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
             {
                 LOG_INFO("执行停止语音交互意图!!!");
 
-                // TODO: 阻塞 AIUI  发送SLEEP
+                // 发送SLEEP给AIUI，重置状态到等待唤醒
+                aiui_wrapper_.ResetWakeup();
 
             }
             else if (type == "vip")
