@@ -363,7 +363,11 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
     if (wake_mode_ == "ivw")
     {
         /*发送ROS2话题robot_avvtn_chat_history  问*/
-        ROSManager::getInstance().publishChatHistory("Question: 小飞小飞");
+        nlohmann::json wake_up = {
+                {"speaker", "person"},
+                {"text", "小飞小飞"}
+        };
+        ROSManager::getInstance().publishChatHistory(wake_up.dump());
 
         aiui_wrapper_.Wakeup();
     }

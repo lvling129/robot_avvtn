@@ -103,7 +103,7 @@ void sendMoveRequest(const std::string& intent_name, const std::string& id,
             {"move_unit", move_unit}
         }}
     };
-    
+
     // 发送请求
     bool success = postRequest("/webrtc/move", request_body);
     
@@ -124,7 +124,7 @@ void sendTurnRequest(const std::string& intent_name, const std::string& id,
             {"turn_unit", turn_unit}
         }}
     };
-    
+
     // 发送请求
     bool success = postRequest("/webrtc/turn", request_body);
     
@@ -143,7 +143,7 @@ void sendActionRequest(const std::string& intent_name, const std::string& id)
             {"id", id}
         }}
     };
-    
+
     // 发送请求
     bool success = postRequest("/webrtc/action", request_body);
     
@@ -159,10 +159,10 @@ void sendStopRequest()
     nlohmann::json request_body = {
         {"data", {}}
     };
-    
+
     // 发送请求
     bool success = postRequest("/webrtc/stop", request_body);
-    
+
     if (!success) {
         std::cerr << "发送停止请求失败" << std::endl;
     }
@@ -319,6 +319,7 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
                 LOG_INFO("执行停止语音交互意图!!!");
 
                 // TODO: 阻塞 AIUI  发送SLEEP
+
             }
             else if (type == "vip")
             {
