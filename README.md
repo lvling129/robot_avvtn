@@ -16,3 +16,4 @@ robot_avvtn_chat_history
 
 # AIUI状态切换
 robot_avvtn_status
+
