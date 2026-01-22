@@ -1,0 +1,492 @@
+[32m2026-01-21 18:09:31.664 [INFO ] [thread:547974385680] [main.cpp:62] 日志系统初始化成功[0m
+[32m2026-01-21 18:09:31.799 [INFO ] [thread:547974385680] [ros_manager.cpp:24] ROS管理器初始化成功[0m
+[32m2026-01-21 18:09:31.800 [INFO ] [thread:547675426832] [ros_manager.cpp:29] ROS2回调线程启动[0m
+[32m2026-01-21 18:09:31.801 [INFO ] [thread:547974385680] [ros_manager.cpp:78] 已订阅话题: {}[0m
+[32m2026-01-21 18:09:31.802 [INFO ] [thread:547974385680] [avvtn_capture.cpp:9] 初始化多模态降噪引擎AVVTN[0m
+[2026/01/21 18:09:31.803][info ][Px2239636][Tx2239636] ==============================================
+[2026/01/21 18:09:31.803][info ][Px2239636][Tx2239636] TURBO-LOG 2026/01/21 18:09:31.803557869
+[2026/01/21 18:09:31.803][info ][Px2239636][Tx2239636] main log start
+[2026/01/21 18:09:31.803][info ][Px2239636][Tx2239636] ==============================================
+[2026/01/21 18:09:31.803][info ][Px2239636][Tx2239636][pipeline.cpp:Init:28] Configuration loaded: {
+    "login": {
+        "appid": "18fdf2cc",
+        "sn": "0123456789118",
+        "work_dir": "/home/cat/robot_avvtn/resource",
+        "license_path": "/home/cat/robot_avvtn/license"
+    },
+    "mmsp": {
+        "video_delay": 40,
+        "min_face_w": 60,
+        "min_face_h": 90,
+        "head_angle_yaw": 45,
+        "face_out_ms": 800,
+        "face_area_ms": 800,
+        "switch_face_ratio": 1.5,
+        "instance_count": 3,
+        "cae_mode": "ivw",
+        "auto_lower_rank": 0,
+        "judge_with_time": false,
+        "cpu_core_list": [4, 5, 6, 7]
+    },
+    "vad": {
+        "vad_eos": 500,
+        "threshold": 0.3
+    },
+    "recorder": {
+        "image_width": 1920,
+        "image_height": 1080,
+        "cam_clip_left": 0,
+        "cam_clip_right": 0,
+        "cam_clip_top": 0,
+        "cam_clip_bottom": 0
+    },
+    "log": {
+        "log_level": 4,
+        "log_max_file": 5,
+        "log_size": 10,
+        "log_save": "0",
+        "log_path": "/home/cat/robot_avvtn/log"
+    }
+}
+
+Failed to load config file ../../cfu/iFPL.cfu, get default cfg value!
+engine version : iflyFPDTLRuntime2.0.101.0
+../../cfg/iFPL.cfg | Couldn't find cfg_file use the default config IF ANDORID , PLEASE IGNORE ...
+EASY_PROFILER_DISABLE
+easy profiler versionName : v0.0.0_disabled
+iFPDTLInitialize successful ...
+../../cfg/iFPL.cfg | Couldn't find cfg_file use the default config IF ANDORID , PLEASE IGNORE ...
+../../cfg/iFPL.cfg | Couldn't find cfg_file use the default config IF ANDORID , PLEASE IGNORE ...
+[2026/01/21 18:09:32.393][error][Px2239636][Tx2239636][pipeline.cpp:Init:53] cae engine version: se_circle_mmsp_1.0.3.3420( Feb 19 2025 17:20:36 )
+01-21 18:09:32.962 I/V3_COMMON: hello: build on (Oct 15 2025 14:03:45), lcu_ver="1.8.0.60db4df@develop"
+01-21 18:09:32.962 I/V3_COMMON: your env: PLATFORM="linaro7.5.0", PLATFORM_ABI="x64"
+01-21 18:09:32.962 I/V3_COMMON: getenv(OMP_NUM_THREADS) = (null) 
+01-21 18:09:32.963 I/V3_COMMON: getenv(KMP_DUPLICATE_LIB_OK) = (null) 
+01-21 18:09:32.963 I/V3_API  : VTN_PARAM_PROTOCOL_VER=0, version=3.0.9.4675184@master(cae_circle6mic_std-ivw_3.17.12)
+01-21 18:09:32.963 D/V3_API  : (pri_parse_init_params:458)  no "log" in "params", use default config
+01-21 18:09:32.963 I/V3_API  : you did not provide config_uri, assume it is:"/home/cat/robot_avvtn/resource/vtn/res/vtn/vtn.ini"
+01-21 18:09:32.963 I/V3_CFG_PARSER: config file path="/home/cat/robot_avvtn/resource/vtn/res/vtn/vtn.ini"
+01-21 18:09:32.964 D/V3_CFG_PARSER: succeed read out config content(5051)
+01-21 18:09:32.964 D/V3_API  : (pri_parse_init_params:528) detected "1 == output_wakeup_segment", set one_msg_byte_size = 64000
+01-21 18:09:32.964 I/V3_API  : event_distributor_cfg:one_msg_byte_size=64000, max_msg_count=6
+01-21 18:09:32.964 D/V3_EVENT_DISTRIBUTOR: (event_distributor_init:108) expected_msg_q_total_mem_size=524320, capacity_mem_size=524288, threshold_mem_size_for_alloc_obj=262144
+[D/MSG_Q_HDL] create msg_queue_handler. queue_buf_size=524320
+[W/RING_BUF] ring_buffer_create_with_mem buf_size=524320 is not power of 2
+[W/RING_BUF] ring_buffer_create_with_mem changed buf_size to 524288 
+[I/MSG_Q_HDL]  (thread_worker_handle_msg:47) thread(2239823) started...
+01-21 18:09:32.964 I/V3_EVENT_DISTRIBUTOR: (pri_on_msg_handler_status_changed:363) hey, detected event_distributor new status: 0, tid: 2239823
+01-21 18:09:32.964 I/V3_API  :  --> throw thread("event_distributor") status changed event:  { "params":{"thread_name":"event_distributor", "status":0, "description":"ready_to_go"} } 
+01-21 18:09:32.964 I/V3_API  :  <-- user handle thread("event_distributor") status(0) changed event done. ret=0
+01-21 18:09:32.965 I/V3_EVENT_DISTRIBUTOR: succeed init event_distributor. 0x55d36264d0 0x55d361a570
+01-21 18:09:32.965 D/V3_API  : --> now try call work_flow_api_init
+01-21 18:09:32.965 D/V3_WORK_FLOW:  --> now parse config:/home/cat/robot_avvtn/resource/vtn/res/vtn/vtn.ini
+01-21 18:09:32.965 I/V3_CFG_PARSER: config file path="/home/cat/robot_avvtn/resource/vtn/res/vtn/vtn.ini"
+01-21 18:09:32.965 D/V3_CFG_PARSER: succeed read out config content(5051)
+01-21 18:09:32.965 I/V3_CFG_PARSER: override vtn.work_dir:"/home/cat/robot_avvtn/resource/vtn/"
+01-21 18:09:32.965 D/V3_CFG_PARSER: formatted vtn.work_dir="/home/cat/robot_avvtn/resource/vtn/"
+01-21 18:09:32.965 D/V3_CFG_PARSER: vtn.log.dir=/home/cat/robot_avvtn/resource/vtn/bin/output/
+01-21 18:09:32.965 I/V3_CFG_PARSER: vtn.input: sample_rate=16000, type=short, unit=2
+01-21 18:09:32.965 I/V3_CFG_PARSER: parse config finished.
+01-21 18:09:32.965 I/V3_CFG_PARSER: override auth.appid:"18fdf2cc"
+01-21 18:09:32.965 I/V3_CFG_PARSER: validate config done!
+01-21 18:09:32.965 D/V3_WORK_FLOW:  <-- parse config finished => 0
+01-21 18:09:32.965 D/V3_FLOW_JOURNAL: no need log to file, current log_target=4
+01-21 18:09:32.965 I/V3_WORK_FLOW:  current work_dir = "/home/cat/robot_avvtn/bin"
+01-21 18:09:32.965 I/V3_WORK_FLOW: setup new output_audio_group=1
+01-21 18:09:32.965 I/V3_WORK_FLOW: update output_audio_group(noise_reduction) flag to "true"
+01-21 18:09:32.965 I/V3_WORK_FLOW: update output_audio_group(ivw) flag to "false"
+01-21 18:09:32.965 I/V3_AUDIO_LOGGER:  log_origin flag is "false"
+01-21 18:09:32.965 I/V3_AUDIO_LOGGER:  log_frontend_output flag is "false"
+01-21 18:09:32.965 I/V3_WORK_FLOW: word_evaluator.model is not set, assume it is:"/home/cat/robot_avvtn/resource/vtn/res/wake_word_evaluate/wakeup_word_score.bin"
+01-21 18:09:32.982 D/V3_WORD_EVALUATOR: --> now call Wakeup_Word_Init
+01-21 18:09:33.121 D/V3_WORD_EVALUATOR: <-- Wakeup_Word_Init = 0
+01-21 18:09:33.121 D/V3_WORK_FLOW: succeed initialized word_evaluator
+01-21 18:09:33.121 I/V3_WORK_FLOW: now try init frontend api
+01-21 18:09:33.121 D/V3_FRONTEND_API:  --> try init frontend_api. FRONTEND_DIR_NAME=cae_circle6mic_std
+01-21 18:09:33.121 I/V3_FRONT_CFG_GEN_CAE3: use default frontend.cfg: "/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/cae_init_param.ini"
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: you did not config frontned.inst_num, we assume it is "1"
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:219) frontend.base " [cae] nOneshotEnable " not exists
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: oneshot_enable=-1 --> oneshot_type=0
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:230) frontend.base " [cae] bVCallEnable " not exists
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: notice: engine not support vcall, default we set aes_vcall.on to 0
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:237) frontend.base " [cae] nWorkMode " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:238) frontend.base " [cae] nArrayType " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:250) frontend.base " [mab] gevd_on " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:255) frontend.base " [gsc] gsc_rec " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:256) frontend.base " [gsc] gsc_rec_der " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:261) frontend.base " [mlp] aes_vcall_model " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:264) frontend.base " [mlp] partition_on " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:267) frontend.base " [mlp] partition8mic_model " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:269) frontend.base " [mlp] select_on " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:270) frontend.base " [mlp] select_model " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:287) frontend.base " [mlp] yq_on " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:289) frontend.base " [mlp] yq_model " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:302) frontend.base " [doa] doa_on " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:302) frontend.base " [doa] doa_nn " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:302) frontend.base " [mlp] doa_model " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:304) frontend.base " [mlp] pf_model " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:305) frontend.base " [mlp] bff_model " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:306) frontend.base " [cae] ffw_on " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:307) frontend.base " [mlp] ffw_model " not exists
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: it is file => "/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_pt6_pudu_20220126.bin", size=2288433
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: it is file => "/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_nr_com_20210414.bin", size=593039
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: it is file => "/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_mctd_1024_common_d5d0_20250603_v2_fc.bin", size=521609
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: it is file => "/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_aes_1024_tv.bin", size=594090
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: it is file => "/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_mctd_1024_xfxf_xkxk_chxb_xbxb_sxxb_arm.bin", size=521663
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: it is file => "/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/cae_init_param.ini", size=1338
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: it is file => "/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_sp_cldnn_dynamic_view_1024_20240905_reshape_fc.bin", size=521608
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: (pri_search_the_most_suitable_td_res:586) frontend(cae_circle6mic_std) not support fsmn, so use frontend.ini default td.model("/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_mctd_1024_common_d5d0_20250603_v2_fc.bin")
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:324) frontend.base " [doa] doa_on " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:324) frontend.base " [doa] doa_nn " not exists
+01-21 18:09:33.123 I/V3_FRONT_CFG_GEN_CAE3: (frontend_cfg_generator_generate:324) frontend.base " [mlp] doa_model " not exists
+01-21 18:09:33.123 D/V3_FRONT_CFG_GEN_CAE3: finished(0) of generate frontend ini.
+01-21 18:09:33.123 I/V3_FRONTEND_API: frontend cfg: 
+[cae]
+nMicNum = 6
+nRefNum = 2
+nChiefBeam = -1
+nMicDist = 0.035
+nOutNum = 3
+cae_debug = false
+bSPVadOn = false
+nOutSampleRate = 16000
+
+[delay]
+delay_on = false
+
+[aec]
+aec_on = true
+aec_debug = false
+aec_level = 5
+aec_fft_size = 512
+aec_coef = 
+
+[der]
+der_on = true
+der_debug = false
+nOrder = 20
+
+[post]
+post_on = true
+post_debug = false
+
+[agc]
+agc_on = true
+agc_debug = false
+
+[mlp]
+aes_on = true
+aes_debug = false
+nr_on = true
+ivw_nr_on = true
+nr_model = /home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_nr_com_20210414.bin
+partition_delay_on = false
+aes_model = /home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_aes_1024_tv.bin
+partition_model = /home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_pt6_pudu_20220126.bin
+partition_model_rec = /home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_sp_cldnn_dynamic_view_1024_20240905_reshape_fc.bin
+td_on = true
+td_model_type = cldnn_mc
+td_dynamic = false
+td_delay = 5
+td_model = /home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_mctd_1024_common_d5d0_20250603_v2_fc.bin
+td_mvdr_on = true
+partition_debug = false
+
+[mae]
+mae_debug = false
+
+[mab]
+mab_debug = false
+
+[gsc]
+gsc_debug = false
+
+[doa]
+doa_debug = false
+
+
+01-21 18:09:33.124 D/V3_FRONTEND_API: file("/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_aes_1024_tv.bin") size=594090
+01-21 18:09:33.124 D/V3_FRONTEND_API: file("/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_pt6_pudu_20220126.bin") size=2288433
+01-21 18:09:33.124 D/V3_FRONTEND_API: file("/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_mctd_1024_common_d5d0_20250603_v2_fc.bin") size=521609
+01-21 18:09:33.124 D/V3_FRONTEND_API: file("/home/cat/robot_avvtn/resource/vtn/res/cae_circle6mic_std/mlp_nr_com_20210414.bin") size=593039
+01-21 18:09:33.124 D/V3_FRONTEND_API: frontend.sample_rate=16000, step_frame=512, expect_input_audio_channels=8, expected_mem_size=376
+01-21 18:09:33.124 D/V3_FRONTEND_API: now try create frontend engine. inst_num=1, mic=6, ref=2, unit=2, input_size=8192, vcall=0, swap_ch2-3=0
+01-21 18:09:33.219 I/V3_FRONTEND_PROXY_CAE3: succeed create frontend.obj=0x55d3626670
+01-21 18:09:33.219 D/V3_FRONTEND_PROXY_CAE3:  --> call CAEStart
+01-21 18:09:33.219 D/V3_FRONTEND_PROXY_CAE3:  <-- CAEStart succeed
+01-21 18:09:33.219 I/V3_FRONTEND_PROXY_CAE3: CAE_PARAM_MLP_RESET ret=0
+01-21 18:09:33.219 I/V3_FRONTEND_API: succeed get frontend_input_info:step_audio_use_short=0, sample_rate=16000, frame=512; high_rate=16000, high_frame=512
+01-21 18:09:33.219 W/V3_FRONTEND_PROXY_CAE3: (frontend_proxy_set_resample_status:228) engine not support CAE_PARAM_RESAMPLE, ignore.
+01-21 18:09:33.219 D/V3_FRONTEND_API: CAE_PARAM_RESAMPLE(0) ret=0
+01-21 18:09:33.219 I/V3_FRONTEND_API: succeed create instance[0]=0x55d3ac36a0
+01-21 18:09:33.219 I/V3_FRONTEND_API:  <-- succeed init frontend_api. 0x55d3627b58 0x55d411a620
+01-21 18:09:33.219 D/V3_WORK_FLOW: succeed get engine info. frame=512, audio_channels=8, step_audio_size=8192, ver="se_6mic_circle_2000.0.13.3846( Sep 26 2025 02:49:55 )"
+01-21 18:09:33.219 I/V3_WORK_FLOW: init frontend_api finished with code=0
+01-21 18:09:33.219 I/V3_WORK_FLOW: frontend_api init succeed.
+01-21 18:09:33.219 D/V3_WORK_FLOW: handle->chief.inqueue_msg.msg_obj_capacity=8208
+01-21 18:09:33.219 I/V3_WORK_FLOW: chief_queue_max_count=2
+[D/MSG_Q_HDL] create msg_queue_handler. queue_buf_size=32800
+[W/RING_BUF] ring_buffer_create_with_mem buf_size=32800 is not power of 2
+[W/RING_BUF] ring_buffer_create_with_mem changed buf_size to 32768 
+01-21 18:09:33.219 I/V3_WORK_FLOW: chief queue created. chief_msg_q_expected_buf_size=32800
+01-21 18:09:33.219 I/V3_WORK_FLOW: you did not config backend.inst_num, we try use frontend.ivw_audio_channels(3) instead
+01-21 18:09:33.219 I/V3_BACKEND_IVW:   MAX_SUPPORT_CHANNELS=6
+01-21 18:09:33.219 I/V3_BACKEND_IVW: you did not config backend.pk_strategy, set default 0 for you
+[I/MSG_Q_HDL]  (thread_worker_handle_msg:47) thread(2239845) started...
+01-21 18:09:33.219 I/V3_WORK_FLOW: (pri_on_chief_msg_handler_status_changed:524) hey, detected chief msg_queue_handler new status: 0, tid=2239845
+01-21 18:09:33.219 I/V3_API  :  --> throw thread("flow_chief") status changed event:  { "params":{"thread_name":"flow_chief", "status":0, "description":"ready_to_go"} } 
+01-21 18:09:33.219 I/V3_API  :  <-- user handle thread("flow_chief") status(0) changed event done. ret=0
+01-21 18:09:33.219 I/V3_BACKEND_IVW: res: mlp=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/lxlx/mlp.bin, filler=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/lxlx/filler.bin, keyword=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/lxlx/keyword.bin, command=, grammar=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/grammar.bin
+01-21 18:09:33.219 I/V3_WAKE_PARSER: succeed init wake_info_parser. 0x7ffd821ab8 0x55da778a70
+01-21 18:09:33.219 W/V3_BACKEND_IVW: (pri_init_wake_info_comparator:758) engine NOT support endpoint, but parent caller NEED it, and nothing we can do here, just giving us a notice.
+01-21 18:09:33.219 I/V3_WAKE_COMPARATOR: channels=3, frame_ms=80, timeout_ms=0, pk_strategy=0
+01-21 18:09:33.219 I/V3_WAKE_COMPARATOR: succeed init wake_info_comparator. 0x7ffd821ab8 0x55da778ab0
+[W/RING_BUF] ring_buffer_create buf_size=256000 is not power of 2
+[W/RING_BUF] ring_buffer_create changed buf_size to 262144 
+[W/RING_BUF] ring_buffer_create buf_size=256000 is not power of 2
+[W/RING_BUF] ring_buffer_create changed buf_size to 262144 
+[W/RING_BUF] ring_buffer_create buf_size=256000 is not power of 2
+[W/RING_BUF] ring_buffer_create changed buf_size to 262144 
+01-21 18:09:33.220 I/V3_WAKE_DISTRIBUTOR: succeed init wake_info_distributor. 0x7ffd821ab8 0x55da778be0
+01-21 18:09:33.220 D/V3_BACKEND_IVW: backend.closed_loop_mode=0
+01-21 18:09:33.220 D/V3_BACKEND_IVW: (pri_init_engine:800)   --> init engine and load resource
+01-21 18:09:33.220 I/V3_IVW3_WRAPPER: BACKEND_VERSION_CODE=3171201
+01-21 18:09:33.220 I/V3_IVW3_WRAPPER: work_dir = "/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/ivw_g.cfg"
+01-21 18:09:33.220 I/V3_IVW3_WRAPPER: cfg=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/ivw_g.cfg, size=2723
+01-21 18:09:33.220 I/V3_IVW3_WRAPPER: check ivw_cfg passed, cfg_size=2723
+01-21 18:09:33.224 D/V3_BACKEND_IVW:     now load resource: mlp=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/lxlx/mlp.bin, filler=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/lxlx/filler.bin, keyword=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/lxlx/keyword.bin, grammar=/home/cat/robot_avvtn/resource/vtn/res/ivw_3.17.12/grammar.bin
+01-21 18:09:33.351 I/V3_IVW3_WRAPPER: grammar load succeed.
+01-21 18:09:33.351 I/V3_IVW3_WRAPPER: all keyword_ncm:
+ling2 xi1 ling2 xi1, id: 0, nCm: 900
+
+01-21 18:09:33.353 D/V3_IVW3_WRAPPER:   wIvw_RegCallbacks[0x55da8fbb40]
+01-21 18:09:33.353 D/V3_IVW3_WRAPPER: wIvw_StartInst(0x55da8fbb40), resSize=4
+01-21 18:09:33.353 D/V3_IVW3_WRAPPER:   wIvw_RegCallbacks[0x55dac3b840]
+01-21 18:09:33.353 D/V3_IVW3_WRAPPER: wIvw_StartInst(0x55dac3b840), resSize=4
+01-21 18:09:33.354 D/V3_IVW3_WRAPPER:   wIvw_RegCallbacks[0x55db84b140]
+01-21 18:09:33.354 D/V3_IVW3_WRAPPER: wIvw_StartInst(0x55db84b140), resSize=4
+01-21 18:09:33.355 D/V3_BACKEND_IVW: (pri_init_engine:849)   <-- succeed init engine and instance
+01-21 18:09:33.355 I/V3_BACKEND_IVW: succeed init backend_api. 0x7ffd821b70 0x55da76c9a0
+01-21 18:09:33.355 D/V3_WORK_FLOW: backend input matches frontend output: ivw_audio_channels(3), ivw_ref_audio_channels(0)
+01-21 18:09:33.355 I/V3_WORK_FLOW: backend_api init succeed.
+01-21 18:09:33.355 D/V3_WORK_FLOW: handle->assistant.inqueue_msg.msg_obj_capacity=6144
+01-21 18:09:33.355 I/V3_WORK_FLOW: assistant_queue_max_count=2
+[D/MSG_Q_HDL] create msg_queue_handler. queue_buf_size=16416
+[W/RING_BUF] ring_buffer_create_with_mem buf_size=16416 is not power of 2
+[W/RING_BUF] ring_buffer_create_with_mem changed buf_size to 16384 
+01-21 18:09:33.356 I/V3_WORK_FLOW: assistant queue created. assistant_msg_q_expected_buf_size=16416, sync_flow=false
+[I/MSG_Q_HDL]  (thread_worker_handle_msg:47) thread(2239855) started...
+01-21 18:09:33.356 I/V3_WORK_FLOW: (pri_on_assistant_msg_handler_status_changed:580) hey, detected assistant msg_queue_handler new status: 0, tid:2239855
+01-21 18:09:33.356 I/V3_API  :  --> throw thread("flow_assistant") status changed event:  { "params":{"thread_name":"flow_assistant", "status":0, "description":"ready_to_go"} } 
+01-21 18:09:33.356 I/V3_API  :  <-- user handle thread("flow_assistant") status(0) changed event done. ret=0
+01-21 18:09:33.356 I/V3_WORK_FLOW: (assistant_msg_handler:596) hi: queue(2239855) init done. i'm working on "flow_assistant"...
+01-21 18:09:33.356 I/V3_WORK_FLOW: (chief_msg_handler:541) hi: queue(2239845) init done. i'm working on "flow_chief"...
+01-21 18:09:33.357 I/V3_WORK_FLOW: succeed init work_flow. 0x55d36264a0 0x55d3626e00
+01-21 18:09:33.357 D/V3_API  : <-- work_flow_api_init ret = 0
+01-21 18:09:33.357 I/V3_API  : init work_flow succeed. expected_step_audio_in_byte_size=8192
+01-21 18:09:33.357 D/V3_API  : your appid="18fdf2cc", sn="0123456789118", license="", uri="hey friend"
+01-21 18:09:33.357 I/V3_AUTH_API:   use AUTH_TYPE_NET, appid=18fdf2cc, sn=0123456789118
+01-21 18:09:33.357 D/V3_AUTH_EXEC: use your uri: "hey friend"
+01-21 18:09:33.357 I/V3_AUTH_API: succeed init auth_api. 0x55d3626460 0x55da8399a0
+01-21 18:09:33.357 I/V3_AUTH_API: started net_auth_worker...
+01-21 18:09:33.357 I/V3_API  : successfully initialized and started net auth check...
+01-21 18:09:33.357 I/V3_API  : assemble params.out={ "msg_type":"engine_status",   "params":{ "scheme":"0", "status":"created", "version":"3.0.9.4675184@master(cae_circle6mic_std-ivw_3.17.12)",   "frame_info":{ "step_frame":"512", "step_frame_ms":"32",   "expected_audio_in_channels":"8", "expected_step_audio_in_byte_size":"8192",   "ivw_audio_channels":"3", "total_beam_count":"6" },   "data_info":{ "sample_rate":"16000", "unit_type":"short", "unit":"2", "mic":"6", "ref":"2" },   "res_info":{ "res_identifier":"lxlx" },   "auth_info":{ "chip_hint":"" }} }
+01-21 18:09:33.357 I/V3_API  : succeed init vtn_api. 0x55c923dc70 0x55d36262f0
+01-21 18:09:33.357 D/V3_AUTH_API: got last net_auth result=0
+01-21 18:09:33.357 I/V3_AUTH_API: succeed get net_auth result: 0
+01-21 18:09:33.357 I/V3_API  : succeed got auth_result:0
+01-21 18:09:33.357 I/V3_AUTH_API: net_auth_worker final exit point... exec_status=0, result.code=0
+[2026/01/21 18:09:33.357][info ][Px2239636][Tx2239636][auth_api.cpp:auth_api_init:65]   use AUTH_TYPE_NET, appid=18fdf2cc, sn=0123456789118
+[2026/01/21 18:09:33.357][info ][Px2239636][Tx2239636][auth_api.cpp:auth_api_init:122] succeed init auth_api. 0x55c923daf8 0x55db3cba70
+01-21 18:09:33.357 V/V3_FRONTEND_API:  try set instance[0].beam(1)
+01-21 18:09:33.357 I/V3_WORK_FLOW: succeed set beam(logical=-1, physical=1)
+[2026/01/21 18:09:33.357][info ][Px2239636][Tx2239636][auth_api.cpp:auth_api_do_check:146] started net_auth_worker...
+01-21 18:09:33.357 D/V3_WORK_FLOW: current_beam.logical=-1, so use physical(1) instead
+[2026/01/21 18:09:33.357][info ][Px2239636][Tx2239636][pipeline_init.cpp:initThread:353] cpu core is 4
+[2026/01/21 18:09:33.357][info ][Px2239636][Tx2239636][pipeline_init.cpp:initThread:353] cpu core is 5
+[2026/01/21 18:09:33.357][info ][Px2239636][Tx2239636][pipeline_init.cpp:initThread:353] cpu core is 6
+[2026/01/21 18:09:33.357][info ][Px2239636][Tx2239636][pipeline_init.cpp:initThread:353] cpu core is 7
+[2026/01/21 18:09:33.357][info ][Px2239636][Tx2239858][pipeline_thread.cpp:runAlignThread:25] ==>Align thread started
+[2026/01/21 18:09:33.358][info ][Px2239636][Tx2239859][pipeline_thread.cpp:runFaceDetectionThread:92] ==>Face detection thread started
+[2026/01/21 18:09:33.358][info ][Px2239636][Tx2239860][pipeline_thread.cpp:runMouthDetectionThread:136] ==>Mouth detection thread started
+[INFO] congratulations: license is valid!
+[INFO] check license succeed.
+[2026/01/21 18:09:33.358][info ][Px2239636][Tx2239857][auth_api.cpp:pri_net_auth_worker:247] succeed get net_auth result: 0
+[2026/01/21 18:09:33.358][info ][Px2239636][Tx2239857][pipeline_callback.cpp:authCallback:160] auth result: 0
+[2026/01/21 18:09:33.358][info ][Px2239636][Tx2239857][auth_api.cpp:pri_net_auth_worker:287] net_auth_worker final exit point... exec_status=0, result.code=0
+[2026/01/21 18:09:33.358][info ][Px2239636][Tx2239861][pipeline_thread.cpp:runCaeThread:208] ==>CAE thread started. Channel: 0
+[2026/01/21 18:09:33.358][info ][Px2239636][Tx2239862][pipeline_thread.cpp:runCaeThread:208] ==>CAE thread started. Channel: 1
+[2026/01/21 18:09:33.358][error][Px2239636][Tx2239636][pipeline.cpp:Init:72] avvtn initialized successfully - Version: 1.1.9.6bb3aa19@refactoring, Image: 1920x1080, MIC TYPE: 6
+[2026/01/21 18:09:33.358][info ][Px2239636][Tx2239863][pipeline_thread.cpp:runCaeThread:208] ==>CAE thread started. Channel: 2
+[32m2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [avvtn_capture.cpp:18] 读取AVVTN配置文件: /home/cat/robot_avvtn/avvtn.cfg[0m
+[32m2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [avvtn_capture.cpp:25] 初始化多模态降噪引擎AVVTN成功[0m
+[32m2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [avvtn_capture.cpp:28] 初始化AIUI[0m
+[32m2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [aiui_wapper.cpp:719] 设备序列号SN = 3e:c1:78:ef:1d:f8[0m
+[32m2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [aiui_wapper.cpp:119] 创建AIUI监听器Listener[0m
+[32m2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [aiui_wapper.cpp:47] 初始化AIUIListener[0m
+[32m2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [aiui_wapper.cpp:52] 创建内置的pcm播放器, 并初始化，设置回调，启动起来[0m
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.front.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM front
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround21
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround21
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround40.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround40
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround41
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround50
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround51
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround71.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround71
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.iec958.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM iec958
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.iec958.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM spdif
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.iec958.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM spdif
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.hdmi
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.hdmi
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+ALSA lib pcm_oss.c:377:(_snd_pcm_oss_open) Unknown field port
+ALSA lib pcm_oss.c:377:(_snd_pcm_oss_open) Unknown field port
+ALSA lib pcm_usb_stream.c:486:(_snd_pcm_usb_stream_open) Invalid type for card
+ALSA lib pcm_usb_stream.c:486:(_snd_pcm_usb_stream_open) Invalid type for card
+[32m2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:62] 获取音频输出设备数量[0m
+pcm player index: 0 device name: rockchip-dp0: spdif-hifi-0 (hw:0,0)
+[32m2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 0, device name: rockchip-dp0: spdif-hifi-0 (hw:0,0)[0m
+pcm player index: 1 device name: rockchip-hdmi0: i2s-hifi-0 (hw:1,0)
+[32m2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 1, device name: rockchip-hdmi0: i2s-hifi-0 (hw:1,0)[0m
+pcm player index: 2 device name: rockchip-es8388: dailink-multicodecs ES8323.7-0011-0 (hw:2,0)
+[32m2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 2, device name: rockchip-es8388: dailink-multicodecs ES8323.7-0011-0 (hw:2,0)[0m
+pcm player index: 3 device name: AIUI-USB-MC: USB Audio (hw:3,0)
+[32m2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 3, device name: AIUI-USB-MC: USB Audio (hw:3,0)[0m
+pcm player index: 4 device name: USB Audio Device: - (hw:4,0)
+[32m2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 4, device name: USB Audio Device: - (hw:4,0)[0m
+pcm player index: 5 device name: sysdefault
+[32m2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 5, device name: sysdefault[0m
+pcm player index: 6 device name: samplerate
+[32m2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 6, device name: samplerate[0m
+pcm player index: 7 device name: speexrate
+[32m2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 7, device name: speexrate[0m
+pcm player index: 8 device name: pulse
+[32m2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 8, device name: pulse[0m
+pcm player index: 9 device name: upmix
+[32m2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 9, device name: upmix[0m
+pcm player index: 10 device name: vdownmix
+[32m2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 10, device name: vdownmix[0m
+pcm player index: 11 device name: dmix
+[32m2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 11, device name: dmix[0m
+pcm player index: 12 device name: default
+[32m2026-01-21 18:09:33.462 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 12, device name: default[0m
+[32m2026-01-21 18:09:33.462 [INFO ] [thread:547974385680] [aiui_wapper.cpp:72] 选择默认播放设备进行初始化[0m
+[32m2026-01-21 18:09:33.481 [INFO ] [thread:547974385680] [aiui_wapper.cpp:87] 初始化AIUIListener成功[0m
+[32m2026-01-21 18:09:33.481 [INFO ] [thread:547974385680] [aiui_wapper.cpp:134] 读取AIUI配置文件: /home/cat/robot_avvtn/resource/aiui/aiui.cfg[0m
+[32m2026-01-21 18:09:33.482 [INFO ] [thread:547974385680] [aiui_wapper.cpp:156] 创建AIUI代理Agent[0m
+================================================================
+Time 2026/01/21 18:09:33 483
+================================================================
+
+AiuiWrapper Init success
+[32m2026-01-21 18:09:33.556 [INFO ] [thread:546232569872] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息[0m
+EVENT_STATE: STATE_READY
+[32m2026-01-21 18:09:33.557 [INFO ] [thread:547974385680] [avvtn_capture.cpp:43] 初始化AIUI成功[0m
+[32m2026-01-21 18:09:33.557 [INFO ] [thread:546232569872] [aiui_handle.cpp:25] AIUI当前状态: READY[0m
+[32m2026-01-21 18:09:33.558 [INFO ] [thread:547974385680] [avvtn_capture.cpp:50] 初始化音频采集[0m
+[32m2026-01-21 18:09:33.559 [INFO ] [thread:547974385680] [audio_capture.cpp:99] 初始化 PortAudio[0m
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.front.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM front
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround21
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround21
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround40.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround40
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround41
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround50
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround51.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround51
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.surround71.0:CARD=0'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM surround71
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.iec958.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM iec958
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.iec958.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM spdif
+ALSA lib confmisc.c:1281:(snd_func_refer) Unable to find definition 'cards.rockchip-dp0.pcm.iec958.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
+ALSA lib conf.c:4732:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5220:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM spdif
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.hdmi
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.hdmi
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+ALSA lib pcm_oss.c:377:(_snd_pcm_oss_open) Unknown field port
+ALSA lib pcm_oss.c:377:(_snd_pcm_oss_open) Unknown field port
+ALSA lib pcm_usb_stream.c:486:(_snd_pcm_usb_stream_open) Invalid type for card
+ALSA lib pcm_usb_stream.c:486:(_snd_pcm_usb_stream_open) Invalid type for card
+[32m2026-01-21 18:09:33.700 [INFO ] [thread:547974385680] [audio_capture.cpp:109] 查找MIC设备[0m
+Found USB mic at index = 3
+[32m2026-01-21 18:09:33.700 [INFO ] [thread:547974385680] [audio_capture.cpp:120] Found USB mic at index = 3[0m
+[32m2026-01-21 18:09:33.701 [INFO ] [thread:547974385680] [audio_capture.cpp:132] 配置音频输入参数[0m
+[32m2026-01-21 18:09:33.701 [INFO ] [thread:547974385680] [audio_capture.cpp:141] 打开音频流[0m
+[32m2026-01-21 18:09:33.704 [INFO ] [thread:547974385680] [audio_capture.cpp:151] 启动音频流[0m
+AudioCapture reconnected successfully
+[32m2026-01-21 18:09:33.704 [INFO ] [thread:547974385680] [avvtn_capture.cpp:60] 初始化音频采集成功[0m
+[32m2026-01-21 18:09:33.705 [INFO ] [thread:547974385680] [avvtn_capture.cpp:61] 开始音频采集...[0m

@@ -19,6 +19,7 @@ void ROSManager::init(int argc, char const *argv[]) {
     log_publisher_ = node_->create_publisher<std_msgs::msg::String>("robot_avvtn_log", 10);
     chat_history_publisher_ = node_->create_publisher<std_msgs::msg::String>("robot_avvtn_chat_history", 10);
     status_publisher_ = node_->create_publisher<std_msgs::msg::String>("robot_avvtn_status", 10);
+    chat_history_nostream_publisher_ = node_->create_publisher<std_msgs::msg::String>("robot_avvtn_chat_history_nostream", 10);
     
     LOG_INFO("ROS管理器初始化成功");
     initialized_ = true;
@@ -57,6 +58,14 @@ void ROSManager::publishStatus(const std::string& status_msg) {
     auto message = std_msgs::msg::String();
     message.data = status_msg;
     status_publisher_->publish(message);
+}
+
+void ROSManager::publishChatHistoryNoStream(const std::string& status_msg) {
+    if (!initialized_) return;
+
+    auto message = std_msgs::msg::String();
+    message.data = status_msg;
+    chat_history_nostream_publisher_->publish(message);
 }
 
 void ROSManager::subscribeTopic(const std::string& topic_name,

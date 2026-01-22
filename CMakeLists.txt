@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10...3.20)
-project(avvtn_demo VERSION 1.0)
+project(robot_avvtn VERSION 1.1)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

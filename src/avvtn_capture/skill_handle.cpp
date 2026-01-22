@@ -209,6 +209,12 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
                     {"text", voice_answer_content}
             };
             ROSManager::getInstance().publishChatHistory(nlp_answer.dump());
+
+            /*发送ROS2话题robot_avvtn_chat_history  答*/
+            std::ostringstream oss;
+            oss << "Answer: " << voice_answer_content; 
+            std::string answer_msg = oss.str();
+            ROSManager::getInstance().publishChatHistoryNoStream(answer_msg);
         }
 
         // 检查type字段是否存在

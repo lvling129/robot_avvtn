@@ -1,0 +1,225 @@
+2026-01-21 16:29:52.144 [INFO ] [thread:547918098448] [main.cpp:62] 日志系统初始化成功
+2026-01-21 16:29:52.229 [INFO ] [thread:547918098448] [ros_manager.cpp:23] ROS管理器初始化成功
+2026-01-21 16:29:52.229 [INFO ] [thread:547822211088] [ros_manager.cpp:28] ROS2回调线程启动
+2026-01-21 16:29:52.230 [INFO ] [thread:547918098448] [ros_manager.cpp:69] 已订阅话题: {}
+2026-01-21 16:29:52.231 [INFO ] [thread:547918098448] [avvtn_capture.cpp:9] 初始化多模态降噪引擎AVVTN
+2026-01-21 16:29:52.231 [INFO ] [thread:547822211088] [main.cpp:82] 收到ROS2消息: {}
+2026-01-21 16:29:53.369 [INFO ] [thread:547918098448] [avvtn_capture.cpp:18] 读取AVVTN配置文件: /home/cat/robot_avvtn/avvtn.cfg
+2026-01-21 16:29:53.369 [INFO ] [thread:547918098448] [avvtn_capture.cpp:25] 初始化多模态降噪引擎AVVTN成功
+2026-01-21 16:29:53.369 [INFO ] [thread:547918098448] [avvtn_capture.cpp:28] 初始化AIUI
+2026-01-21 16:29:53.369 [INFO ] [thread:547918098448] [aiui_wapper.cpp:719] 设备序列号SN = 3e:c1:78:ef:1d:f8
+2026-01-21 16:29:53.369 [INFO ] [thread:547918098448] [aiui_wapper.cpp:119] 创建AIUI监听器Listener
+2026-01-21 16:29:53.369 [INFO ] [thread:547918098448] [aiui_wapper.cpp:47] 初始化AIUIListener
+2026-01-21 16:29:53.369 [INFO ] [thread:547918098448] [aiui_wapper.cpp:52] 创建内置的pcm播放器, 并初始化，设置回调，启动起来
+2026-01-21 16:29:53.491 [INFO ] [thread:547918098448] [aiui_wapper.cpp:62] 获取音频输出设备数量
+2026-01-21 16:29:53.491 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 0, device name: rockchip-dp0: spdif-hifi-0 (hw:0,0)
+2026-01-21 16:29:53.491 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 1, device name: rockchip-hdmi0: i2s-hifi-0 (hw:1,0)
+2026-01-21 16:29:53.491 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 2, device name: rockchip-es8388: dailink-multicodecs ES8323.7-0011-0 (hw:2,0)
+2026-01-21 16:29:53.491 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 3, device name: AIUI-USB-MC: USB Audio (hw:3,0)
+2026-01-21 16:29:53.492 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 4, device name: USB Audio Device: - (hw:4,0)
+2026-01-21 16:29:53.492 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 5, device name: sysdefault
+2026-01-21 16:29:53.492 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 6, device name: samplerate
+2026-01-21 16:29:53.492 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 7, device name: speexrate
+2026-01-21 16:29:53.492 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 8, device name: pulse
+2026-01-21 16:29:53.492 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 9, device name: upmix
+2026-01-21 16:29:53.493 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 10, device name: vdownmix
+2026-01-21 16:29:53.493 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 11, device name: dmix
+2026-01-21 16:29:53.493 [INFO ] [thread:547918098448] [aiui_wapper.cpp:69] pcm player index: 12, device name: default
+2026-01-21 16:29:53.493 [INFO ] [thread:547918098448] [aiui_wapper.cpp:72] 选择默认播放设备进行初始化
+2026-01-21 16:29:53.529 [INFO ] [thread:547918098448] [aiui_wapper.cpp:87] 初始化AIUIListener成功
+2026-01-21 16:29:53.530 [INFO ] [thread:547918098448] [aiui_wapper.cpp:134] 读取AIUI配置文件: /home/cat/robot_avvtn/resource/aiui/aiui.cfg
+2026-01-21 16:29:53.531 [INFO ] [thread:547918098448] [aiui_wapper.cpp:156] 创建AIUI代理Agent
+2026-01-21 16:29:53.843 [INFO ] [thread:546467467280] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息
+2026-01-21 16:29:53.843 [INFO ] [thread:547918098448] [avvtn_capture.cpp:43] 初始化AIUI成功
+2026-01-21 16:29:53.844 [INFO ] [thread:546467467280] [aiui_handle.cpp:25] AIUI当前状态: READY
+2026-01-21 16:29:53.844 [INFO ] [thread:547918098448] [avvtn_capture.cpp:50] 初始化音频采集
+2026-01-21 16:29:53.845 [INFO ] [thread:547918098448] [audio_capture.cpp:99] 初始化 PortAudio
+2026-01-21 16:29:53.988 [INFO ] [thread:547918098448] [audio_capture.cpp:109] 查找MIC设备
+2026-01-21 16:29:53.988 [INFO ] [thread:547918098448] [audio_capture.cpp:120] Found USB mic at index = 3
+2026-01-21 16:29:53.989 [INFO ] [thread:547918098448] [audio_capture.cpp:132] 配置音频输入参数
+2026-01-21 16:29:53.989 [INFO ] [thread:547918098448] [audio_capture.cpp:141] 打开音频流
+2026-01-21 16:29:53.991 [INFO ] [thread:547918098448] [audio_capture.cpp:151] 启动音频流
+2026-01-21 16:29:53.992 [INFO ] [thread:547918098448] [avvtn_capture.cpp:60] 初始化音频采集成功
+2026-01-21 16:29:53.992 [INFO ] [thread:547918098448] [avvtn_capture.cpp:61] 开始音频采集...
+2026-01-21 16:30:08.215 [INFO ] [thread:547467878416] [avvtn_handle.cpp:342] AVVTN接收到唤醒语音:  { "msg_type":"wakeup",  "params":{"keyword":"ling2 xi1 ling2 xi1","keyword_type":"main", "start_ms":13050,"end_ms":13890,"endpoint_ms":0, "score":1401,"threshold":900,"boundary":"0x00000000", "beam":1,"physical":1,"angle":0,"power":0.00, "snr":0.00,"power_td":0.00   } } 
+2026-01-21 16:30:08.216 [INFO ] [thread:547467878416] [aiui_wapper.cpp:189] 发送唤醒命令给AIUI, 默认清除唤醒之前的数据
+2026-01-21 16:30:08.217 [INFO ] [thread:546467467280] [aiui_handle.cpp:39] 接收到AIUI唤醒事件EVENT_WAKEUP: clear_data=true
+2026-01-21 16:30:08.218 [INFO ] [thread:546467467280] [aiui_handle.cpp:40] pcm播放器停止播放
+2026-01-21 16:30:08.218 [INFO ] [thread:546467467280] [aiui_wapper.cpp:336] 发送开始TTS命令给AIUI
+2026-01-21 16:30:08.218 [INFO ] [thread:546467467280] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息
+2026-01-21 16:30:08.218 [INFO ] [thread:546467467280] [aiui_handle.cpp:29] AIUI当前状态: WORKING
+2026-01-21 16:30:08.230 [INFO ] [thread:547467878416] [avvtn_handle.cpp:342] AVVTN接收到唤醒语音:  { "msg_type":"wakeup_detail",  "params":{"keyword":"ling2 xi1 ling2 xi1","keyword_type":"main", "start_ms":13050,"end_ms":13890,"endpoint_ms":0, "score":1401,"threshold":900,"boundary":"0x00000000", "beam":1,"physical":0,"angle":28,"power":11149882.00, "snr":0.00,"power_td":0.00   } } 
+2026-01-21 16:30:08.230 [INFO ] [thread:547467878416] [avvtn_handle.cpp:358] 带角度的语音唤醒不发送wakeup给AIUI
+2026-01-21 16:30:09.543 [INFO ] [thread:546467467280] [aiui_handle.cpp:271] 已连接到服务器, uid = 3e:c1:78:ef:1d:f8
+2026-01-21 16:30:12.258 [INFO ] [thread:546467467280] [aiui_handle.cpp:330] IAT语音识别结果: 闭嘴
+2026-01-21 16:30:12.442 [INFO ] [thread:546467467280] [aiui_handle.cpp:500] 接收到AIUI返回的【语义规整cbm_tidy】
+2026-01-21 16:30:12.443 [INFO ] [thread:546467467280] [aiui_handle.cpp:528] 语义规整结果0: 闭嘴
+2026-01-21 16:30:12.486 [INFO ] [thread:546467467280] [aiui_handle.cpp:553] JSON原始数据: {"cbm_semantic":{"compress":"raw","encoding":"utf8","format":"json","parameter":{"loc":{"ability":"workflow_sos_interaction_lite","intent":0,"unique_id":"workflow_sos_interaction_lite"},"unique_id":"cbm_semantic"},"seq":0,"status":3,"text":"{\"answer\":{\"text\":\"好的，我闭嘴了\",\"type\":\"T\"},\"category\":\"OS16590245279.fwt_skill\",\"data\":{\"result\":[{\"intentName\":\"shut_up\",\"type\":\"shut_up\"}]},\"intentType\":\"custom\",\"rc\":0,\"semantic\":[{\"entrypoint\":\"ent\",\"hazard\":false,\"intent\":\"shut_up\",\"score\":1,\"slots\":[],\"template\":\"闭嘴\"}],\"semanticType\":0,\"service\":\"OS16590245279.fwt_skill\",\"sessionIsEnd\":true,\"shouldEndSession\":true,\"sid\":\"xgo000ed56f@dx19bdfacefe10001822\",\"state\":null,\"test\":\"\",\"text\":\"闭嘴\",\"uuid\":\"xgo000ed56f@dx19bdfacefe10001822\",\"vendor\":\"OS16590245279\",\"version\":\"11.0\",\"voice_answer\":[{\"content\":\"好的，我闭嘴了\",\"type\":\"TTS\"}]}"}}
+2026-01-21 16:30:12.487 [INFO ] [thread:546467467280] [aiui_handle.cpp:555] 接收到AIUI返回的【传统语义技能cbm_semantic】
+2026-01-21 16:30:12.488 [INFO ] [thread:546467467280] [aiui_handle.cpp:589] 技能结果：命中技能
+2026-01-21 16:30:12.488 [INFO ] [thread:546467467280] [aiui_handle.cpp:594] 技能返回内容: 闭嘴
+2026-01-21 16:30:12.488 [INFO ] [thread:546467467280] [aiui_handle.cpp:599] 技能版本: 11.0
+2026-01-21 16:30:12.488 [INFO ] [thread:546467467280] [aiui_handle.cpp:604] 技能名称: OS16590245279.fwt_skill
+2026-01-21 16:30:12.489 [INFO ] [thread:546467467280] [skill_handle.cpp:199] 技能返回TTS内容文本: 好的，我闭嘴了
+2026-01-21 16:30:12.489 [INFO ] [thread:546467467280] [aiui_wapper.cpp:336] 发送开始TTS命令给AIUI
+2026-01-21 16:30:12.490 [INFO ] [thread:546467467280] [skill_handle.cpp:223] 捕获到技能type!!!
+2026-01-21 16:30:12.490 [INFO ] [thread:546467467280] [skill_handle.cpp:329] 执行停止语音交互意图!!!
+2026-01-21 16:30:12.490 [INFO ] [thread:546467467280] [aiui_wapper.cpp:197] 发送开始Reset唤醒命令给AIUI
+2026-01-21 16:30:12.491 [INFO ] [thread:546467467280] [aiui_handle.cpp:53] 接收到AIUI休眠事件EVENT_SLEEP: arg1 = 1
+2026-01-21 16:30:12.492 [INFO ] [thread:546467467280] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息
+2026-01-21 16:30:12.492 [INFO ] [thread:546467467280] [aiui_handle.cpp:25] AIUI当前状态: READY
+2026-01-21 16:31:13.375 [INFO ] [thread:546467467280] [aiui_handle.cpp:278] 与AIUI服务器断开
+2026-01-21 16:31:13.376 [INFO ] [thread:546467467280] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息
+2026-01-21 16:31:13.376 [INFO ] [thread:546467467280] [aiui_handle.cpp:25] AIUI当前状态: READY
+2026-01-21 16:31:23.397 [INFO ] [thread:547822211088] [ros_manager.cpp:30] ROS2回调线程结束
+2026-01-21 16:31:23.455 [INFO ] [thread:547918098448] [audio_capture.cpp:195] AudioCapture stopped
+2026-01-21 16:31:23.904 [INFO ] [thread:547918098448] [ros_manager.cpp:81] ROS管理器已关闭
+2026-01-21 16:31:23.904 [INFO ] [thread:547918098448] [main.cpp:105] 结束程序
+2026-01-21 16:32:36.370 [INFO ] [thread:547623505936] [main.cpp:62] 日志系统初始化成功
+2026-01-21 16:32:36.451 [INFO ] [thread:547623505936] [ros_manager.cpp:23] ROS管理器初始化成功
+2026-01-21 16:32:36.451 [INFO ] [thread:547527618576] [ros_manager.cpp:28] ROS2回调线程启动
+2026-01-21 16:32:36.452 [INFO ] [thread:547623505936] [ros_manager.cpp:69] 已订阅话题: {}
+2026-01-21 16:32:36.453 [INFO ] [thread:547623505936] [avvtn_capture.cpp:9] 初始化多模态降噪引擎AVVTN
+2026-01-21 16:32:36.453 [INFO ] [thread:547527618576] [main.cpp:82] 收到ROS2消息: {}
+2026-01-21 16:32:37.607 [INFO ] [thread:547623505936] [avvtn_capture.cpp:18] 读取AVVTN配置文件: /home/cat/robot_avvtn/avvtn.cfg
+2026-01-21 16:32:37.607 [INFO ] [thread:547623505936] [avvtn_capture.cpp:25] 初始化多模态降噪引擎AVVTN成功
+2026-01-21 16:32:37.607 [INFO ] [thread:547623505936] [avvtn_capture.cpp:28] 初始化AIUI
+2026-01-21 16:32:37.607 [INFO ] [thread:547623505936] [aiui_wapper.cpp:719] 设备序列号SN = 3e:c1:78:ef:1d:f8
+2026-01-21 16:32:37.607 [INFO ] [thread:547623505936] [aiui_wapper.cpp:119] 创建AIUI监听器Listener
+2026-01-21 16:32:37.607 [INFO ] [thread:547623505936] [aiui_wapper.cpp:47] 初始化AIUIListener
+2026-01-21 16:32:37.607 [INFO ] [thread:547623505936] [aiui_wapper.cpp:52] 创建内置的pcm播放器, 并初始化，设置回调，启动起来
+2026-01-21 16:32:37.697 [INFO ] [thread:547623505936] [aiui_wapper.cpp:62] 获取音频输出设备数量
+2026-01-21 16:32:37.697 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 0, device name: rockchip-dp0: spdif-hifi-0 (hw:0,0)
+2026-01-21 16:32:37.697 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 1, device name: rockchip-hdmi0: i2s-hifi-0 (hw:1,0)
+2026-01-21 16:32:37.697 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 2, device name: rockchip-es8388: dailink-multicodecs ES8323.7-0011-0 (hw:2,0)
+2026-01-21 16:32:37.698 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 3, device name: AIUI-USB-MC: USB Audio (hw:3,0)
+2026-01-21 16:32:37.698 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 4, device name: USB Audio Device: - (hw:4,0)
+2026-01-21 16:32:37.698 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 5, device name: sysdefault
+2026-01-21 16:32:37.698 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 6, device name: samplerate
+2026-01-21 16:32:37.698 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 7, device name: speexrate
+2026-01-21 16:32:37.698 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 8, device name: pulse
+2026-01-21 16:32:37.698 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 9, device name: upmix
+2026-01-21 16:32:37.699 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 10, device name: vdownmix
+2026-01-21 16:32:37.699 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 11, device name: dmix
+2026-01-21 16:32:37.699 [INFO ] [thread:547623505936] [aiui_wapper.cpp:69] pcm player index: 12, device name: default
+2026-01-21 16:32:37.699 [INFO ] [thread:547623505936] [aiui_wapper.cpp:72] 选择默认播放设备进行初始化
+2026-01-21 16:32:37.723 [INFO ] [thread:547623505936] [aiui_wapper.cpp:87] 初始化AIUIListener成功
+2026-01-21 16:32:37.724 [INFO ] [thread:547623505936] [aiui_wapper.cpp:134] 读取AIUI配置文件: /home/cat/robot_avvtn/resource/aiui/aiui.cfg
+2026-01-21 16:32:37.725 [INFO ] [thread:547623505936] [aiui_wapper.cpp:156] 创建AIUI代理Agent
+2026-01-21 16:32:37.739 [INFO ] [thread:546299678736] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息
+2026-01-21 16:32:37.740 [INFO ] [thread:546299678736] [aiui_handle.cpp:25] AIUI当前状态: READY
+2026-01-21 16:32:37.739 [INFO ] [thread:547623505936] [avvtn_capture.cpp:43] 初始化AIUI成功
+2026-01-21 16:32:37.740 [INFO ] [thread:547623505936] [avvtn_capture.cpp:50] 初始化音频采集
+2026-01-21 16:32:37.740 [INFO ] [thread:547623505936] [audio_capture.cpp:99] 初始化 PortAudio
+2026-01-21 16:32:37.833 [INFO ] [thread:547623505936] [audio_capture.cpp:109] 查找MIC设备
+2026-01-21 16:32:37.835 [INFO ] [thread:547623505936] [audio_capture.cpp:120] Found USB mic at index = 3
+2026-01-21 16:32:37.836 [INFO ] [thread:547623505936] [audio_capture.cpp:132] 配置音频输入参数
+2026-01-21 16:32:37.837 [INFO ] [thread:547623505936] [audio_capture.cpp:141] 打开音频流
+2026-01-21 16:32:37.840 [INFO ] [thread:547623505936] [audio_capture.cpp:151] 启动音频流
+2026-01-21 16:32:37.842 [INFO ] [thread:547623505936] [avvtn_capture.cpp:60] 初始化音频采集成功
+2026-01-21 16:32:37.843 [INFO ] [thread:547623505936] [avvtn_capture.cpp:61] 开始音频采集...
+2026-01-21 16:32:51.011 [INFO ] [thread:547513004048] [avvtn_handle.cpp:342] AVVTN接收到唤醒语音:  { "msg_type":"wakeup",  "params":{"keyword":"ling2 xi1 ling2 xi1","keyword_type":"main", "start_ms":11990,"end_ms":12890,"endpoint_ms":0, "score":1729,"threshold":900,"boundary":"0x00000000", "beam":1,"physical":1,"angle":0,"power":0.00, "snr":0.00,"power_td":0.00   } } 
+2026-01-21 16:32:51.013 [INFO ] [thread:547513004048] [aiui_wapper.cpp:189] 发送唤醒命令给AIUI, 默认清除唤醒之前的数据
+2026-01-21 16:32:51.013 [INFO ] [thread:546299678736] [aiui_handle.cpp:39] 接收到AIUI唤醒事件EVENT_WAKEUP: clear_data=true
+2026-01-21 16:32:51.013 [INFO ] [thread:546299678736] [aiui_handle.cpp:40] pcm播放器停止播放
+2026-01-21 16:32:51.014 [INFO ] [thread:546299678736] [aiui_wapper.cpp:336] 发送开始TTS命令给AIUI
+2026-01-21 16:32:51.014 [INFO ] [thread:546299678736] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息
+2026-01-21 16:32:51.014 [INFO ] [thread:546299678736] [aiui_handle.cpp:29] AIUI当前状态: WORKING
+2026-01-21 16:32:51.018 [INFO ] [thread:547513004048] [avvtn_handle.cpp:342] AVVTN接收到唤醒语音:  { "msg_type":"wakeup_detail",  "params":{"keyword":"ling2 xi1 ling2 xi1","keyword_type":"main", "start_ms":11990,"end_ms":12890,"endpoint_ms":0, "score":1729,"threshold":900,"boundary":"0x00000000", "beam":1,"physical":0,"angle":330,"power":24294300.00, "snr":0.00,"power_td":0.00   } } 
+2026-01-21 16:32:51.018 [INFO ] [thread:547513004048] [avvtn_handle.cpp:358] 带角度的语音唤醒不发送wakeup给AIUI
+2026-01-21 16:32:52.150 [INFO ] [thread:546299678736] [aiui_handle.cpp:271] 已连接到服务器, uid = 3e:c1:78:ef:1d:f8
+2026-01-21 16:32:56.738 [INFO ] [thread:546299678736] [aiui_handle.cpp:330] IAT语音识别结果: 今天天气怎么样
+2026-01-21 16:32:56.963 [INFO ] [thread:546299678736] [aiui_handle.cpp:500] 接收到AIUI返回的【语义规整cbm_tidy】
+2026-01-21 16:32:56.964 [INFO ] [thread:546299678736] [aiui_handle.cpp:528] 语义规整结果0: 今天天气怎么样
+2026-01-21 16:32:56.988 [INFO ] [thread:546299678736] [aiui_handle.cpp:553] JSON原始数据: {"cbm_semantic":{"compress":"raw","encoding":"utf8","format":"json","parameter":{"loc":{"ability":"workflow_sos_interaction_lite","intent":0,"unique_id":"workflow_sos_interaction_lite"},"unique_id":"cbm_semantic"},"seq":0,"status":3,"text":"{\"rc\":4,\"sid\":\"xgo000ec39b@dx19bdfaf6b870001822\",\"text\":\"今天天气怎么样\",\"uuid\":\"xgo000ec39b@dx19bdfaf6b870001822\"}"}}
+2026-01-21 16:32:56.989 [INFO ] [thread:546299678736] [aiui_handle.cpp:555] 接收到AIUI返回的【传统语义技能cbm_semantic】
+2026-01-21 16:32:56.990 [INFO ] [thread:546299678736] [aiui_handle.cpp:586] 技能结果：未命中技能
+2026-01-21 16:32:57.317 [INFO ] [thread:546299678736] [aiui_handle.cpp:709] 接收到AIUI返回的【知识分类cbm_retrieval_classify】
+2026-01-21 16:32:57.318 [INFO ] [thread:546299678736] [aiui_handle.cpp:740] 不走知识查询或联网搜索
+2026-01-21 16:32:57.319 [INFO ] [thread:546299678736] [aiui_handle.cpp:636] 接收到AIUI返回的【意图落域cbm_tool_pk】
+2026-01-21 16:32:57.319 [INFO ] [thread:546299678736] [aiui_handle.cpp:665] 落域结果判定来源模块: cbm_reply_knowledge
+2026-01-21 16:32:57.319 [WARN ] [thread:546299678736] [aiui_handle.cpp:689] text字段中缺少pk_source字段或pk_source不是字符串类型
+2026-01-21 16:32:57.320 [INFO ] [thread:546299678736] [aiui_handle.cpp:763] JSON原始数据: {"cbm_knowledge":{"compress":"raw","encoding":"utf8","format":"json","parameter":{"loc":{"ability":"workflow_sos_interaction_lite","intent":0,"unique_id":"workflow_sos_interaction_lite"},"unique_id":"cbm_knowledge"},"seq":0,"status":3,"text":"null"}}
+2026-01-21 16:32:57.320 [INFO ] [thread:546299678736] [aiui_handle.cpp:764] 接收到AIUI返回的【知识溯源cbm_knowledge】
+2026-01-21 16:32:57.320 [WARN ] [thread:546299678736] [aiui_handle.cpp:794] text字段不是有效的JSON数组
+2026-01-21 16:32:57.320 [INFO ] [thread:546299678736] [aiui_handle.cpp:795] 未命中知识库
+2026-01-21 16:32:57.321 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 0, status = 0, answer（应答语）: 今天
+2026-01-21 16:32:57.325 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 1, status = 1, answer（应答语）: 天气不错
+2026-01-21 16:32:57.327 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 2, status = 1, answer（应答语）: ，阳光
+2026-01-21 16:32:57.329 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 3, status = 1, answer（应答语）: 明媚，
+2026-01-21 16:32:57.330 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 4, status = 1, answer（应答语）: 温度适宜
+2026-01-21 16:32:57.331 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 5, status = 1, answer（应答语）: 。你
+2026-01-21 16:32:57.332 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 6, status = 1, answer（应答语）: 有什么计划
+2026-01-21 16:32:57.333 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 7, status = 1, answer（应答语）: 吗？
+2026-01-21 16:32:57.334 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 8, status = 2, answer（应答语）: 
+2026-01-21 16:32:57.334 [INFO ] [thread:546299678736] [aiui_handle.cpp:477] 大模型nlp流式返回fullText = 今天天气不错，阳光明媚，温度适宜。你有什么计划吗？
+2026-01-21 16:33:02.547 [INFO ] [thread:546299678736] [aiui_handle.cpp:330] IAT语音识别结果: 闭嘴
+2026-01-21 16:33:02.547 [INFO ] [thread:546299678736] [aiui_handle.cpp:500] 接收到AIUI返回的【语义规整cbm_tidy】
+2026-01-21 16:33:02.548 [INFO ] [thread:546299678736] [aiui_handle.cpp:528] 语义规整结果0: 闭嘴
+2026-01-21 16:33:02.787 [INFO ] [thread:546299678736] [aiui_handle.cpp:553] JSON原始数据: {"cbm_semantic":{"compress":"raw","encoding":"utf8","format":"json","parameter":{"loc":{"ability":"workflow_sos_interaction_lite","intent":0,"unique_id":"workflow_sos_interaction_lite"},"unique_id":"cbm_semantic"},"seq":0,"status":3,"text":"{\"answer\":{\"text\":\"好的，我闭嘴了\",\"type\":\"T\"},\"category\":\"OS16590245279.fwt_skill\",\"data\":{\"result\":[{\"intentName\":\"shut_up\",\"type\":\"shut_up\"}]},\"intentType\":\"custom\",\"rc\":0,\"semantic\":[{\"entrypoint\":\"ent\",\"hazard\":false,\"intent\":\"shut_up\",\"score\":1,\"slots\":[],\"template\":\"闭嘴\"}],\"semanticType\":0,\"service\":\"OS16590245279.fwt_skill\",\"sessionIsEnd\":true,\"shouldEndSession\":true,\"sid\":\"xgo000ec57e@dx19bdfaf7ee50001822\",\"state\":null,\"test\":\"\",\"text\":\"闭嘴\",\"uuid\":\"xgo000ec57e@dx19bdfaf7ee50001822\",\"vendor\":\"OS16590245279\",\"version\":\"11.0\",\"voice_answer\":[{\"content\":\"好的，我闭嘴了\",\"type\":\"TTS\"}]}"}}
+2026-01-21 16:33:02.788 [INFO ] [thread:546299678736] [aiui_handle.cpp:555] 接收到AIUI返回的【传统语义技能cbm_semantic】
+2026-01-21 16:33:02.790 [INFO ] [thread:546299678736] [aiui_handle.cpp:589] 技能结果：命中技能
+2026-01-21 16:33:02.791 [INFO ] [thread:546299678736] [aiui_handle.cpp:594] 技能返回内容: 闭嘴
+2026-01-21 16:33:02.791 [INFO ] [thread:546299678736] [aiui_handle.cpp:599] 技能版本: 11.0
+2026-01-21 16:33:02.792 [INFO ] [thread:546299678736] [aiui_handle.cpp:604] 技能名称: OS16590245279.fwt_skill
+2026-01-21 16:33:02.793 [INFO ] [thread:546299678736] [skill_handle.cpp:199] 技能返回TTS内容文本: 好的，我闭嘴了
+2026-01-21 16:33:02.793 [INFO ] [thread:546299678736] [aiui_wapper.cpp:336] 发送开始TTS命令给AIUI
+2026-01-21 16:33:02.794 [INFO ] [thread:546299678736] [skill_handle.cpp:223] 捕获到技能type!!!
+2026-01-21 16:33:02.795 [INFO ] [thread:546299678736] [skill_handle.cpp:329] 执行停止语音交互意图!!!
+2026-01-21 16:33:02.795 [INFO ] [thread:546299678736] [aiui_wapper.cpp:197] 发送开始Reset唤醒命令给AIUI
+2026-01-21 16:33:02.796 [INFO ] [thread:546299678736] [aiui_handle.cpp:709] 接收到AIUI返回的【知识分类cbm_retrieval_classify】
+2026-01-21 16:33:02.797 [INFO ] [thread:546299678736] [aiui_handle.cpp:740] 不走知识查询或联网搜索
+2026-01-21 16:33:02.798 [INFO ] [thread:546299678736] [aiui_handle.cpp:636] 接收到AIUI返回的【意图落域cbm_tool_pk】
+2026-01-21 16:33:02.799 [INFO ] [thread:546299678736] [aiui_handle.cpp:665] 落域结果判定来源模块: cbm_semantic
+2026-01-21 16:33:02.800 [WARN ] [thread:546299678736] [aiui_handle.cpp:689] text字段中缺少pk_source字段或pk_source不是字符串类型
+2026-01-21 16:33:02.800 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 0, status = 0, answer（应答语）: 那
+2026-01-21 16:33:02.801 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 1, status = 1, answer（应答语）: 好吧，
+2026-01-21 16:33:02.803 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 2, status = 1, answer（应答语）: 那我就不
+2026-01-21 16:33:02.804 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 3, status = 1, answer（应答语）: 打扰你了
+2026-01-21 16:33:02.805 [INFO ] [thread:546299678736] [aiui_handle.cpp:460] 大模型返回nlp语义结果: seq = 4, status = 2, answer（应答语）: 。
+2026-01-21 16:33:02.805 [INFO ] [thread:546299678736] [aiui_handle.cpp:477] 大模型nlp流式返回fullText = 那好吧，那我就不打扰你了。
+2026-01-21 16:33:02.807 [INFO ] [thread:546299678736] [aiui_handle.cpp:53] 接收到AIUI休眠事件EVENT_SLEEP: arg1 = 1
+2026-01-21 16:33:02.808 [INFO ] [thread:546299678736] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息
+2026-01-21 16:33:02.808 [INFO ] [thread:546299678736] [aiui_handle.cpp:25] AIUI当前状态: READY
+2026-01-21 18:09:31.664 [INFO ] [thread:547974385680] [main.cpp:62] 日志系统初始化成功
+2026-01-21 18:09:31.799 [INFO ] [thread:547974385680] [ros_manager.cpp:24] ROS管理器初始化成功
+2026-01-21 18:09:31.800 [INFO ] [thread:547675426832] [ros_manager.cpp:29] ROS2回调线程启动
+2026-01-21 18:09:31.801 [INFO ] [thread:547974385680] [ros_manager.cpp:78] 已订阅话题: {}
+2026-01-21 18:09:31.802 [INFO ] [thread:547974385680] [avvtn_capture.cpp:9] 初始化多模态降噪引擎AVVTN
+2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [avvtn_capture.cpp:18] 读取AVVTN配置文件: /home/cat/robot_avvtn/avvtn.cfg
+2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [avvtn_capture.cpp:25] 初始化多模态降噪引擎AVVTN成功
+2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [avvtn_capture.cpp:28] 初始化AIUI
+2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [aiui_wapper.cpp:719] 设备序列号SN = 3e:c1:78:ef:1d:f8
+2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [aiui_wapper.cpp:119] 创建AIUI监听器Listener
+2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [aiui_wapper.cpp:47] 初始化AIUIListener
+2026-01-21 18:09:33.359 [INFO ] [thread:547974385680] [aiui_wapper.cpp:52] 创建内置的pcm播放器, 并初始化，设置回调，启动起来
+2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:62] 获取音频输出设备数量
+2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 0, device name: rockchip-dp0: spdif-hifi-0 (hw:0,0)
+2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 1, device name: rockchip-hdmi0: i2s-hifi-0 (hw:1,0)
+2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 2, device name: rockchip-es8388: dailink-multicodecs ES8323.7-0011-0 (hw:2,0)
+2026-01-21 18:09:33.460 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 3, device name: AIUI-USB-MC: USB Audio (hw:3,0)
+2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 4, device name: USB Audio Device: - (hw:4,0)
+2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 5, device name: sysdefault
+2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 6, device name: samplerate
+2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 7, device name: speexrate
+2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 8, device name: pulse
+2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 9, device name: upmix
+2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 10, device name: vdownmix
+2026-01-21 18:09:33.461 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 11, device name: dmix
+2026-01-21 18:09:33.462 [INFO ] [thread:547974385680] [aiui_wapper.cpp:69] pcm player index: 12, device name: default
+2026-01-21 18:09:33.462 [INFO ] [thread:547974385680] [aiui_wapper.cpp:72] 选择默认播放设备进行初始化
+2026-01-21 18:09:33.481 [INFO ] [thread:547974385680] [aiui_wapper.cpp:87] 初始化AIUIListener成功
+2026-01-21 18:09:33.481 [INFO ] [thread:547974385680] [aiui_wapper.cpp:134] 读取AIUI配置文件: /home/cat/robot_avvtn/resource/aiui/aiui.cfg
+2026-01-21 18:09:33.482 [INFO ] [thread:547974385680] [aiui_wapper.cpp:156] 创建AIUI代理Agent
+2026-01-21 18:09:33.556 [INFO ] [thread:546232569872] [aiui_handle.cpp:16] 接收到AIUI SDK状态信息
+2026-01-21 18:09:33.557 [INFO ] [thread:547974385680] [avvtn_capture.cpp:43] 初始化AIUI成功
+2026-01-21 18:09:33.557 [INFO ] [thread:546232569872] [aiui_handle.cpp:25] AIUI当前状态: READY
+2026-01-21 18:09:33.558 [INFO ] [thread:547974385680] [avvtn_capture.cpp:50] 初始化音频采集
+2026-01-21 18:09:33.559 [INFO ] [thread:547974385680] [audio_capture.cpp:99] 初始化 PortAudio
+2026-01-21 18:09:33.700 [INFO ] [thread:547974385680] [audio_capture.cpp:109] 查找MIC设备
+2026-01-21 18:09:33.700 [INFO ] [thread:547974385680] [audio_capture.cpp:120] Found USB mic at index = 3
+2026-01-21 18:09:33.701 [INFO ] [thread:547974385680] [audio_capture.cpp:132] 配置音频输入参数
+2026-01-21 18:09:33.701 [INFO ] [thread:547974385680] [audio_capture.cpp:141] 打开音频流
+2026-01-21 18:09:33.704 [INFO ] [thread:547974385680] [audio_capture.cpp:151] 启动音频流
+2026-01-21 18:09:33.704 [INFO ] [thread:547974385680] [avvtn_capture.cpp:60] 初始化音频采集成功
+2026-01-21 18:09:33.705 [INFO ] [thread:547974385680] [avvtn_capture.cpp:61] 开始音频采集...

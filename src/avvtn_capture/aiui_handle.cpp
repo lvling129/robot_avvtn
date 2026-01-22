@@ -321,6 +321,11 @@ void AvvtnCapture::handleAiuiIat(Json::Reader &reader, const char *buffer, int l
         if (isLast)
         {
             /*发送ROS2话题robot_avvtn_chat_history  问*/
+            std::ostringstream oss;
+            oss << "Question: " << iat_text_buffer_; 
+            std::string ask_msg = oss.str();
+            ROSManager::getInstance().publishChatHistoryNoStream(ask_msg);
+
             nlohmann::json ask = {
                     {"speaker", "person"},
                     {"text", iat_text_buffer_}
@@ -479,6 +484,7 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
                 std::ostringstream oss;
                 oss << "Answer: " << stream_nlp_answer_buffer_; 
                 std::string answer_msg = oss.str();
+                ROSManager::getInstance().publishChatHistoryNoStream(answer_msg);
                 stream_nlp_answer_buffer_.clear();
             }
         }

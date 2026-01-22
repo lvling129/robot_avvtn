@@ -369,6 +369,9 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
         };
         ROSManager::getInstance().publishChatHistory(wake_up.dump());
 
+        /*发送ROS2话题robot_avvtn_chat_history  问*/
+        ROSManager::getInstance().publishChatHistoryNoStream("Question: 灵犀灵犀");
+
         aiui_wrapper_.Wakeup();
     }
     std::cout << "接收到唤醒事件: " << wake_str << std::endl;
