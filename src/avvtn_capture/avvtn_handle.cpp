@@ -340,6 +340,8 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
 {
     std::string wake_str = std::string((char *)data_p->data, data_p->data_size);
     LOG_INFO("AVVTN接收到唤醒语音: %s", wake_str.c_str());
+    // 通过ROS2发布带角度的唤醒信息给转向动作使用
+    ROSManager::getInstance().publishWakeupDetail(wake_str);
     /* 两次唤醒只发送一次wakeup给AIUI */
     std::string msg_type;
     try {
@@ -355,9 +357,6 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
     }
     if(msg_type == "wakeup_detail")
     {
-        // 通过ROS2发布带角度的唤醒信息给转向动作使用
-        ROSManager::getInstance().publishWakeupDetail(wake_str);
-
         LOG_INFO("带角度的语音唤醒不发送wakeup给AIUI");
         return;
     }
