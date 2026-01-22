@@ -7,6 +7,29 @@
 #include <iostream>
 #include <memory>
 
+std::string newyearArray[20] = {
+"祝您2026年万事兴龙,马到成功。",
+"祝您龙腾新岁，万事顺遂，阖家欢乐。",
+"祝您2026年烟火向星辰,所愿皆成真！",
+"祝您过往为序，未来可期。新年快乐！",
+"祝您家兴万和，平安喜乐，健康富裕。",
+"祝您新年大吉，福气满满，好运连连。",
+"祝您平安喜乐，万事胜意，岁岁欢愉。",
+"祝您新年新气象，梦想都点亮。",
+"祝您愿新年，胜旧年，常安长安。",
+"祝您万事顺遂，毫无蹉跎，新年好。",
+"祝您岁岁常欢愉，年年皆胜意。",
+"祝您良辰吉日时时有，锦瑟年华岁岁拥。",
+"祝您2026年愿你乘风,万事可期。",
+"祝您春去秋往万事胜意，山高水长终有回甘。",
+"祝您四季欢喜，好事正酿，新年快乐。",
+"祝您新年日子如熹光，温柔又安详。",
+"祝您烟火起，照人间，喜悦无边，举杯敬此年。",
+"祝您所行皆坦途，所遇皆温暖。",
+"恭喜发财、万事如意、新年行大运！",
+"祝您在新的一年身体健康、事业有成、家庭幸福、阖家欢乐！"
+};
+
 // 回调函数，用于接收响应数据
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
     size_t totalSize = size * nmemb;
@@ -354,10 +377,30 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
                 // 提取动作参数
                 auto& result = text_root["data"]["result"][0];
                 std::string intent_name = result["intentName"].get<std::string>();
-                //int id = result["id"].get<std::int32_t>();
+                
+                std::string newyear = newyearArray[rand()%20];
+                // 设置ignore本次大模型返回的NLP TTS语音
+                ignore_tts_sid_ = current_iat_sid_;
+                // 调用语音合成TTS，播放技能返回的语音文本
+                aiui_wrapper_.StartTTS(newyear);
+                // 技能答复的文本发送ROS话题
+                nlohmann::json nlp_answer = {
+                        {"seq", std::to_string(0)},
+                        {"status", std::to_string(2)},
+                        {"speaker", "robot"},
+                        {"text", newyear}
+                };
+                ROSManager::getInstance().publishChatHistory(nlp_answer.dump());
+
+                /*发送ROS2话题robot_avvtn_chat_history  答*/
+                std::ostringstream oss;
+                oss << "Answer: " << newyear; 
+                std::string answer_msg = oss.str();
+                ROSManager::getInstance().publishChatHistoryNoStream(answer_msg);
+                LOG_INFO("%s", newyear.c_str());
+
                 int ids[6] = {2003, 2014, 2016, 3052, 3053, 3012};
                 int id = ids[rand() % 6];
-
                 LOG_INFO("动作参数: intent_name=%s, id=%d", intent_name.c_str(), id);
 
                 // 发送动作请求
