@@ -52,7 +52,12 @@ void ROSManager::publishChatHistory(const std::string& chat_msg) {
     message.data = chat_msg;
     chat_history_publisher_->publish(message);
 }
-
+/*
+    STATUS_WAITING_CONNECTION
+    STATUS_WAITING_WAKEUP
+    STATUS_IN_CONVERSATION
+    STATUS_WAITING_CONVERSATION
+*/
 void ROSManager::publishStatus(const std::string& status_msg) {
     if (!initialized_) return;
 

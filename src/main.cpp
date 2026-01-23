@@ -82,6 +82,8 @@ int main(int argc, char const *argv[])
             LOG_INFO("收到ROS2消息: {}", msg->data);
         });
 
+    ROSManager::getInstance().publishStatus("STATUS_WAITING_CONNECTION");
+
     // 5. 初始化AvvtnCapture
     AvvtnCapture capture;
     //std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -101,6 +103,7 @@ int main(int argc, char const *argv[])
 
     // 7. 清理
     capture.Destory();
+    ROSManager::getInstance().publishStatus("STATUS_WAITING_CONNECTION");
     ROSManager::getInstance().shutdown();
     LOG_INFO("结束程序");
     return 0;

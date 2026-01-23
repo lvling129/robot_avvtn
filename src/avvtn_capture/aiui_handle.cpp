@@ -35,7 +35,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 唤醒事件
             case AIUIConstant::EVENT_WAKEUP:
             {
-                ROSManager::getInstance().publishStatus("wait_talk");
+                ROSManager::getInstance().publishStatus("STATUS_WAITING_CONVERSATION");
                 LOG_INFO("接收到AIUI唤醒事件EVENT_WAKEUP: %s", event.getInfo());
                 LOG_INFO("pcm播放器停止播放");
                 std::cout << "EVENT_WAKEUP: " << event.getInfo() << std::endl;
@@ -49,7 +49,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 休眠事件
             case AIUIConstant::EVENT_SLEEP:
             {
-                ROSManager::getInstance().publishStatus("wait_wakeup");
+                ROSManager::getInstance().publishStatus("STATUS_WAITING_WAKEUP");
                 LOG_INFO("接收到AIUI休眠事件EVENT_SLEEP: arg1 = %d", event.getArg1());
                 std::cout << "EVENT_SLEEP: arg1=" << event.getArg1() << std::endl;
             }
@@ -156,6 +156,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                         LOG_INFO("ignore current tts");
                         break;
                     }
+                    ROSManager::getInstance().publishStatus("STATUS_IN_CONVERSATION");
                     self->handleAiuiTts(reader, content, event, bizParamJson, buffer, dataLen);
                 }
                 else if (sub == "nlp")
@@ -352,6 +353,7 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
     }
     else
     {
+        LOG_INFO("handleAiuiTts content: %s", content.asString());
         // 云端返回的是pcm音频，分成一块块流式返回
         LOG_DEBUG("云端返回的是pcm音频, 分成一块块流式返回");
         int progress    = 0;
@@ -365,7 +367,7 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
         }
         else
         {
-            LOG_INFO("FEI流式语义应答的合成 dts = %d, tts_len_ = %d", dts, tts_len_);
+            LOG_INFO("FEI流式语义应答的合成 dts = %d, tts_len_ = %d, progress = %d", dts, tts_len_, progress);
             // 只有碰到开始块和(特殊情况:合成字符比较少时只有一包tts，dts = 2)，开启播放器
             if (dts == AIUIConstant::DTS_BLOCK_FIRST || dts == AIUIConstant::DTS_ONE_BLOCK || (dts == AIUIConstant::DTS_BLOCK_LAST && 0 == tts_len_))
             {
@@ -378,13 +380,12 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
             }
 
             tts_len_ += len;
-            //LOG_INFO("播放TTS音频");
-            //LOG_INFO("tag: %s, len: %d, dts: %d, progress: %d", tag.c_str(), len, dts, progress);
             aiui_pcm_player_write(0, buffer, len, dts, progress);
 
             if (dts == 2)
             {
                 //发送ROS状态等待对话
+                ROSManager::getInstance().publishStatus("STATUS_WAITING_CONVERSATION");
             }
         }
         // 若要保存合成音频，请打开以下开关
