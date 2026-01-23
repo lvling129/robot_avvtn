@@ -2,6 +2,8 @@
 #include "utils/Logger.hpp"
 #include "ros2/ros_manager.hpp"
 
+
+/*PCM Player 回调函数*/
 // 开始播放回调
 void on_started() {
     LOG_INFO("PCM播放器已开启\n");
@@ -43,6 +45,7 @@ void on_play_progress(int streamId, int progress,
 void on_error(int error, const char* des) {
     LOG_ERROR("播放器错误: code=%d, desc=%s\n", error, des);
 }
+
 
 // TtsHelperListener
 void TtsHelperListener::onText(const StreamNlpTtsHelper::OutTextSeg &textSeg)
@@ -111,6 +114,7 @@ int AIUIListener::Init(const aiui_callback_pack_t &aiui_callback_pack)
         LOG_INFO("pcm player index: %d, device name: %s", i, aiui_pcm_player_get_device_name(i));
     }
 
+    // 设置PCM Player回调函数
     aiui_pcm_player_set_callbacks(
         on_started,      // 开始回调
         on_paused,       // 暂停回调
