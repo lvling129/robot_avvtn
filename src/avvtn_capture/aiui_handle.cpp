@@ -353,7 +353,6 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
     }
     else
     {
-        LOG_INFO("handleAiuiTts content: %s", content.asString());
         // 云端返回的是pcm音频，分成一块块流式返回
         LOG_DEBUG("云端返回的是pcm音频, 分成一块块流式返回");
         int progress    = 0;
@@ -367,7 +366,7 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
         }
         else
         {
-            LOG_INFO("FEI流式语义应答的合成 dts = %d, tts_len_ = %d, progress = %d", dts, tts_len_, progress);
+            //LOG_INFO("FEI流式语义应答的合成 dts = %d, tts_len_ = %d, progress = %d", dts, tts_len_, progress);
             // 只有碰到开始块和(特殊情况:合成字符比较少时只有一包tts，dts = 2)，开启播放器
             if (dts == AIUIConstant::DTS_BLOCK_FIRST || dts == AIUIConstant::DTS_ONE_BLOCK || (dts == AIUIConstant::DTS_BLOCK_LAST && 0 == tts_len_))
             {
@@ -384,7 +383,7 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
 
             if (dts == 2)
             {
-                //发送ROS状态等待对话
+                //发送ROS状态等待对话 
                 ROSManager::getInstance().publishStatus("STATUS_WAITING_CONVERSATION");
             }
         }

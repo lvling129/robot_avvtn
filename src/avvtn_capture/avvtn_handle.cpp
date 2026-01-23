@@ -156,7 +156,7 @@ void AvvtnCapture::handleAudioCAE(avvtn_callback_data_t *data_p)
     }
 
 // 保存音频文件
-#if 0
+#if 1
     // 通道在-2到3之间，则认为是有效数据，否则认为不是有效数据
     if (channel > -2 && channel < 3)
     {
@@ -239,7 +239,7 @@ void AvvtnCapture::handleAudioRec(avvtn_callback_data_t *data_p)
     }
 
 // 保存音频文件
-#if 0
+#if 1
     static FILE *rec_audio_file;
     if (rec_audio_file == NULL)
     {
