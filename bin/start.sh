@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 替换为你的C++可执行文件名称
+# 可执行文件名称
 PROGRAM_NAME="robot_avvtn"
 # 存放PID的文件，用于停止脚本识别进程
 PID_FILE="${PROGRAM_NAME}.pid"
