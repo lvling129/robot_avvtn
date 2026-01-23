@@ -365,7 +365,7 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
         }
         else
         {
-            LOG_INFO("FEI流式语义应答的合成");
+            LOG_INFO("FEI流式语义应答的合成 dts = %d, tts_len_ = %d", dts, tts_len_);
             // 只有碰到开始块和(特殊情况:合成字符比较少时只有一包tts，dts = 2)，开启播放器
             if (dts == AIUIConstant::DTS_BLOCK_FIRST || dts == AIUIConstant::DTS_ONE_BLOCK || (dts == AIUIConstant::DTS_BLOCK_LAST && 0 == tts_len_))
             {
@@ -381,6 +381,11 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
             //LOG_INFO("播放TTS音频");
             //LOG_INFO("tag: %s, len: %d, dts: %d, progress: %d", tag.c_str(), len, dts, progress);
             aiui_pcm_player_write(0, buffer, len, dts, progress);
+
+            if (dts == 2)
+            {
+                //发送ROS状态等待对话
+            }
         }
         // 若要保存合成音频，请打开以下开关
 #if 1
