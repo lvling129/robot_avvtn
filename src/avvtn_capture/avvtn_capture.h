@@ -252,6 +252,9 @@ private:
     int stream_nlp_index_ = 0;                // 流式nlp的索引
 
     std::string ignore_tts_sid_;              // 当前tts不播放，播放技能返回tts
+
+    bool is_skill = false;      //是否命中技能
+    bool is_knowledge = false;  //是否命中知识库
 };
 
 #endif

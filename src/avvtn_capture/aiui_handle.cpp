@@ -322,16 +322,12 @@ void AvvtnCapture::handleAiuiIat(Json::Reader &reader, const char *buffer, int l
         if (isLast)
         {
             /*发送ROS2话题robot_avvtn_chat_history  问*/
-            std::ostringstream oss;
-            oss << "Question: " << iat_text_buffer_; 
-            std::string ask_msg = oss.str();
-            ROSManager::getInstance().publishChatHistoryNoStream(ask_msg);
-
             nlohmann::json ask = {
                     {"speaker", "person"},
                     {"text", iat_text_buffer_}
             };
             ROSManager::getInstance().publishChatHistory(ask.dump());
+            ROSManager::getInstance().publishChatHistoryNoStream(ask.dump());
 
             LOG_INFO("IAT语音识别结果: %s", iat_text_buffer_.c_str());
             std::cout << "iat: " << iat_text_buffer_ << std::endl;
@@ -486,11 +482,20 @@ void AvvtnCapture::handleAiuiStreamNlp(Json::Reader &reader, const char *buffer,
             {
                 stream_nlp_answer_buffer_ += text;
                 LOG_INFO("大模型nlp流式返回fullText = %s", stream_nlp_answer_buffer_.c_str());
-                /*发送ROS2话题robot_avvtn_chat_history  答*/
-                std::ostringstream oss;
-                oss << "Answer: " << stream_nlp_answer_buffer_; 
-                std::string answer_msg = oss.str();
-                ROSManager::getInstance().publishChatHistoryNoStream(answer_msg);
+
+                // 技能返回语音文本时不显示大模型回复的文本
+                if (ignore_tts_sid_ != current_iat_sid_)
+                {
+                    /*发送ROS2话题robot_avvtn_chat_history  答*/
+                    nlohmann::json answer = {
+                            {"speaker", "robot"},
+                            {"text", stream_nlp_answer_buffer_},
+                            {"is_skill", std::to_string(is_skill)},
+                            {"is_knowledge", std::to_string(is_knowledge)}
+                    };
+                    ROSManager::getInstance().publishChatHistoryNoStream(answer.dump());
+                }
+
                 stream_nlp_answer_buffer_.clear();
             }
         }
@@ -596,9 +601,11 @@ bool AvvtnCapture::handleCbmSemantic(const std::string& resultStr)
                 
                 if (rc != 0) {
                     LOG_INFO("技能结果：未命中技能");
+                    is_skill = false;
                     return false;
                 } else {
                     LOG_INFO("技能结果：命中技能");
+                    is_skill = true;
                     
                     // 打印其他字段信息
                     if (text_root.contains("text") && text_root["text"].is_string()) {
@@ -785,7 +792,7 @@ void AvvtnCapture::handleCbmKnowledge(const std::string& resultStr)
             LOG_INFO("未命中知识库");
             return;
         }
-        
+
         auto& cbm_knowledge = root["cbm_knowledge"];
         
         // 检查text字段是否存在且为字符串

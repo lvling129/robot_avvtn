@@ -370,9 +370,7 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
                 {"text", "灵犀灵犀"}
         };
         ROSManager::getInstance().publishChatHistory(wake_up.dump());
-
-        /*发送ROS2话题robot_avvtn_chat_history  问*/
-        ROSManager::getInstance().publishChatHistoryNoStream("Question: 灵犀灵犀");
+        ROSManager::getInstance().publishChatHistoryNoStream(wake_up.dump());
 
         aiui_wrapper_.Wakeup();
     }

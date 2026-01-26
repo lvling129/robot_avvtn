@@ -233,11 +233,13 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
             };
             ROSManager::getInstance().publishChatHistory(nlp_answer.dump());
 
-            /*发送ROS2话题robot_avvtn_chat_history  答*/
-            std::ostringstream oss;
-            oss << "Answer: " << voice_answer_content; 
-            std::string answer_msg = oss.str();
-            ROSManager::getInstance().publishChatHistoryNoStream(answer_msg);
+            nlohmann::json nlp_answer_nostream = {
+                    {"speaker", "robot"},
+                    {"text", voice_answer_content},
+                    {"is_skill", std::to_string(is_skill)},
+                    {"is_knowledge", std::to_string(is_knowledge)}
+            };
+            ROSManager::getInstance().publishChatHistoryNoStream(nlp_answer_nostream.dump());
         }
 
         // 检查type字段是否存在
@@ -392,11 +394,14 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
                 };
                 ROSManager::getInstance().publishChatHistory(nlp_answer.dump());
 
-                /*发送ROS2话题robot_avvtn_chat_history  答*/
-                std::ostringstream oss;
-                oss << "Answer: " << newyear; 
-                std::string answer_msg = oss.str();
-                ROSManager::getInstance().publishChatHistoryNoStream(answer_msg);
+                nlohmann::json nlp_answer_nostream = {
+                        {"speaker", "robot"},
+                        {"text", newyear},
+                        {"is_skill", std::to_string(is_skill)},
+                        {"is_knowledge", std::to_string(is_knowledge)}
+                };
+                ROSManager::getInstance().publishChatHistoryNoStream(nlp_answer_nostream.dump());
+
                 LOG_INFO("%s", newyear.c_str());
 
                 int ids[6] = {2003, 2014, 2016, 3052, 3053, 3012};
