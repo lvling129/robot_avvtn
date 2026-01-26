@@ -147,6 +147,8 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                     LOG_DEBUG("%s: ", event.getInfo());
 
                     self->handleAiuiIat(reader, buffer, dataLen);
+                    self->is_skill = false;
+                    self->is_knowledge = false;
                 }
                 else if (sub == "tts")
                 {
@@ -601,7 +603,6 @@ bool AvvtnCapture::handleCbmSemantic(const std::string& resultStr)
                 
                 if (rc != 0) {
                     LOG_INFO("技能结果：未命中技能");
-                    is_skill = false;
                     return false;
                 } else {
                     LOG_INFO("技能结果：命中技能");
@@ -873,6 +874,10 @@ void AvvtnCapture::handleCbmKnowledge(const std::string& resultStr)
             }
             
             LOG_INFO("总共找到 %zu 个知识条目", text_array.size());
+            if (text_array.size() > 0)
+            {
+                is_knowledge = true;
+            }
             
         } catch (const nlohmann::json::parse_error& e) {
             LOG_ERROR("解析text字段失败: %s, text_str: %s", e.what(), text_str.c_str());
