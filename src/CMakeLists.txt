@@ -36,3 +36,10 @@ target_link_libraries(${PROJECT_NAME}
   aiui
   pthread
 )
+
+# 添加：在构建完成后复制可执行文件到根目录的 bin 目录
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/bin
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> ${CMAKE_SOURCE_DIR}/bin/
+    COMMENT "Copying executable to ${CMAKE_SOURCE_DIR}/bin"
+)
