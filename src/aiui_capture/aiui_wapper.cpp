@@ -399,7 +399,7 @@ void AiuiWrapper::StartTTS(const std::string &text, const std::string &tag)
         params.append("tag=").append(tag);
     }
 #else
-    std::string params = "voice_name=x6_dongmanshaonv_pro";
+    std::string params = "voice_name=x5_lingxiaoyue_flow";
     if (!tag.empty())
     {
         params.append(",tag=").append(tag);
