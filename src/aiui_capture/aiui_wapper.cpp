@@ -391,21 +391,14 @@ void AiuiWrapper::StartTTS(const std::string &text, const std::string &tag)
     LOG_INFO("发送开始TTS命令给AIUI");
     AIUIBuffer textData = aiui_create_buffer_from_data(text.c_str(), text.length());
 
-// 当然可以不设置发言人 默认发言人为aiui.cfg中配置的
-#if 0
+    //不设置发言人 默认发言人为aiui.cfg中配置的
     std::string params;
-    if (!tag.empty())
-    {
-        params.append("tag=").append(tag);
-    }
-#else
-    std::string params = "voice_name=x5_lingxiaoyue_flow";
     if (!tag.empty())
     {
         params.append(",tag=").append(tag);
     }
-#endif
-    // 使用发音人x5_lingxiaoyue_flow合成，也可以使用其他发音人
+
+    // 使用aiui.cfg中配置的发音人合成
     sendAIUIMessage(AIUIConstant::CMD_TTS, AIUIConstant::START, 0, params.c_str(), textData);
     return;
 }
