@@ -43,6 +43,15 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
 
                 /*播放相应唤醒词*/
                 self->aiui_wrapper_.StartTTS("你好");
+
+                /*发送ROS2话题robot_avvtn_chat_history  答*/
+                nlohmann::json answer = {
+                        {"speaker", "robot"},
+                        {"text", "你好"},
+                        {"is_skill", "0"},
+                        {"is_knowledge", "0"}
+                };
+                ROSManager::getInstance().publishChatHistoryNoStream(answer.dump());
             }
             break;
 
