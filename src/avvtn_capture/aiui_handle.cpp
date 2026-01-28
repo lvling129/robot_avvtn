@@ -35,6 +35,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 唤醒事件
             case AIUIConstant::EVENT_WAKEUP:
             {
+                self->is_sleeping = false;
                 ROSManager::getInstance().publishStatus("STATUS_WAITING_CONVERSATION");
                 LOG_INFO("接收到AIUI唤醒事件EVENT_WAKEUP: %s", event.getInfo());
                 LOG_INFO("pcm播放器停止播放");
@@ -58,7 +59,11 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 休眠事件
             case AIUIConstant::EVENT_SLEEP:
             {
-                ROSManager::getInstance().publishStatus("STATUS_WAITING_WAKEUP");
+                self->is_sleeping = true;
+                if (self->is_playing == false)
+                {
+                    ROSManager::getInstance().publishStatus("STATUS_WAITING_WAKEUP");
+                }
                 LOG_INFO("接收到AIUI休眠事件EVENT_SLEEP: arg1 = %d", event.getArg1());
                 std::cout << "EVENT_SLEEP: arg1=" << event.getArg1() << std::endl;
             }
@@ -387,12 +392,6 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
 
             tts_len_ += len;
             aiui_pcm_player_write(0, buffer, len, dts, progress);
-
-            if (dts == 2)
-            {
-                //发送ROS状态等待对话 
-                ROSManager::getInstance().publishStatus("STATUS_WAITING_CONVERSATION");
-            }
         }
         // 若要保存合成音频，请打开以下开关
 #if 1

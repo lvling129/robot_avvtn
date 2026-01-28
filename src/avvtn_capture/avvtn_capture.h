@@ -52,6 +52,27 @@ public:
      */
     int Destory();
 
+    static void onStarted();
+    static void onPaused();
+    static void onResumed();
+    static void onStopped();
+    static void onError(int error, const char *des);
+    static void onProgress(int streamId, int progress, const char *audio, int len, bool isCompleted);
+
+private:
+    // 定时器私有静态成员（仅类内部访问，线程安全）
+    static std::atomic<bool> g_timer_running;
+    static std::atomic<long long> g_last_active_time;
+    static std::thread g_timer_thread;
+
+    // 定时器核心循环（私有静态函数）
+    static void timerLoop();
+    // 获取当前毫秒时间戳（私有内联函数）
+    static inline long long getCurrentTimeMs();
+
+    static void onPlayerTimeout();  // 定时器超时目标函数
+    static void stopPlayerTimer();  // 统一停止定时器函数
+
 private:
     /**
      * @brief 视频采集回调函数（静态函数）
@@ -255,6 +276,8 @@ private:
 
     bool is_skill = false;      //是否命中技能
     bool is_knowledge = false;  //是否命中知识库
+    bool is_playing;            //播放器是否正在播放
+    bool is_sleeping;           //是否已经休眠，等待唤醒
 };
 
 #endif

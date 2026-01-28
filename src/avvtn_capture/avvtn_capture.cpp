@@ -2,11 +2,114 @@
 #include "utils/Logger.hpp"
 #include "ros2/ros_manager.hpp"
 
+static AvvtnCapture* g_avvtn_capture_instance = nullptr;
+
+// 初始化类静态成员（必须在类外初始化）
+std::atomic<bool> AvvtnCapture::g_timer_running(false);
+std::atomic<long long> AvvtnCapture::g_last_active_time(0LL); // 0LL表示long long类型的0
+std::thread AvvtnCapture::g_timer_thread;
+
+// 实现时间戳函数
+inline long long AvvtnCapture::getCurrentTimeMs() {
+    auto now = std::chrono::system_clock::now();
+    auto duration = now.time_since_epoch();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+}
+
+// 实现超时目标函数
+void AvvtnCapture::onPlayerTimeout() {
+    LOG_DEBUG("播放器1秒无进度更新，触发超时回调！");
+
+    if (g_avvtn_capture_instance->is_sleeping == true)
+    {
+        ROSManager::getInstance().publishStatus("STATUS_WAITING_WAKEUP");
+    }
+    else
+    {
+        ROSManager::getInstance().publishStatus("STATUS_WAITING_CONVERSATION");
+    }
+
+    g_avvtn_capture_instance->is_playing = false;
+
+    stopPlayerTimer();
+}
+
+// 实现定时器循环
+void AvvtnCapture::timerLoop() {
+    const int TIMEOUT_MS = 1000;
+    while (g_timer_running) {
+        long long current = getCurrentTimeMs();
+        long long last = g_last_active_time.load();
+        if (last != 0 && (current - last) >= TIMEOUT_MS) {
+            onPlayerTimeout();
+            g_last_active_time = 0;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
+
+/*********************播放回调函数************************/
+void AvvtnCapture::onStarted()
+{
+    std::cout << "PcmPlayer, onStarted" << std::endl;
+}
+
+void AvvtnCapture::onPaused()
+{
+    std::cout << "PcmPlayer, onPaused" << std::endl;
+}
+
+void AvvtnCapture::onResumed()
+{
+    std::cout << "PcmPlayer, onResumed" << std::endl;
+}
+
+void AvvtnCapture::onStopped()
+{
+    std::cout << "PcmPlayer, onStopped" << std::endl;
+}
+
+void AvvtnCapture::onError(int error, const char *des)
+{
+    std::cout << "PcmPlayer, onError, error=" << error << ", des=" << des << std::endl;
+}
+
+void AvvtnCapture::onProgress(int streamId, int progress, const char *audio, int len, bool isCompleted)
+{
+    //std::cout << "PcmPlayer, onProgress, streamId=" << streamId << ", progress=" << progress << ", len=" << len << ", isCompleted=" << isCompleted << std::endl;
+    g_avvtn_capture_instance->is_playing = true;
+
+    // 重置定时器：更新最后活动时间戳
+    g_last_active_time = getCurrentTimeMs();
+    // 首次触发时启动定时器线程
+    if (!g_timer_running) {
+        g_timer_running = true;
+        g_timer_thread = std::thread(timerLoop);
+        g_timer_thread.detach();
+    }
+
+    // 原有业务逻辑
+    if (isCompleted) {
+        LOG_DEBUG("音频播放完成！streamId=%d\n", streamId);
+    }
+
+    if (progress == 100) {
+        LOG_DEBUG("播放进度已达到100%%\n");
+    }
+}
+
+// 实现停止定时器函数
+void AvvtnCapture::stopPlayerTimer() {
+    g_timer_running = false;
+    g_last_active_time = 0;
+}
+
 // 初始化
 int AvvtnCapture::Init(std::string avvtn_cfg_path, std::string aiui_cfg_path)
 {
     int ret = 0;
     LOG_INFO("初始化多模态降噪引擎AVVTN");
+    g_avvtn_capture_instance = this;
     // 1、初始化多模态降噪引擎
     std::string avvtn_input_str    = "{ \"params\":{ \"cfg_path\":\"" + avvtn_cfg_path + "\" } }";
     init_param_.callback.handler   = avvtnCallback;
@@ -43,6 +146,9 @@ int AvvtnCapture::Init(std::string avvtn_cfg_path, std::string aiui_cfg_path)
         LOG_INFO("初始化AIUI成功");
     }
 
+    // 初始化pcm播放器回调
+    aiui_pcm_player_set_callbacks(onStarted, onPaused, onResumed, onStopped, onProgress, onError);
+
     // 3、初始化视频采集
     // ret = video_cap_.Start(this, videoCaptureCallback);
     // CHECK_RET(ret);
@@ -73,6 +179,8 @@ int AvvtnCapture::Destory()
     // 1、停止视频采集
     // ret = video_cap_.Stop();
     // CHECK_RET(ret);
+
+    g_avvtn_capture_instance = nullptr;
 
     // 2、停止音频采集
     ret = audio_cap_.Stop();

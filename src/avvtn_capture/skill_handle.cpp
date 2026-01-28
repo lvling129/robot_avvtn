@@ -336,6 +336,8 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
             {
                 LOG_INFO("执行停止语音交互意图!!!");
 
+                // 播放shut_up回应语音
+                is_playing = true;
                 // 发送SLEEP给AIUI，重置状态到等待唤醒
                 aiui_wrapper_.ResetWakeup();
 

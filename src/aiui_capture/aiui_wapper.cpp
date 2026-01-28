@@ -2,51 +2,6 @@
 #include "utils/Logger.hpp"
 #include "ros2/ros_manager.hpp"
 
-
-/*PCM Player 回调函数*/
-// 开始播放回调
-void on_started() {
-    LOG_INFO("PCM播放器已开启\n");
-}
-
-// 暂停回调
-void on_paused() {
-    LOG_INFO("PCM播放器已暂停\n");
-}
-
-// 恢复播放回调
-void on_resumed() {
-    LOG_INFO("PCM播放器已恢复\n");
-}
-
-// 停止回调
-void on_stopped() {
-    LOG_INFO("PCM播放器已停止\n");
-}
-
-// 播放进度回调 - 这是判断播放结束的关键回调
-void on_play_progress(int streamId, int progress, 
-                      const char* audio, int len, 
-                      bool isCompleted) {
-    LOG_DEBUG("播放进度: streamId=%d, progress=%d%%, len=%d, isCompleted=%s\n",
-           streamId, progress, len, isCompleted ? "true" : "false");
-
-    // 判断播放是否结束
-    if (isCompleted) {
-        LOG_DEBUG("音频播放完成！streamId=%d\n", streamId);
-    }
-
-    if (progress == 100) {
-        LOG_DEBUG("播放进度已达到100%%\n");
-    }
-}
-
-// 错误回调
-void on_error(int error, const char* des) {
-    LOG_ERROR("播放器错误: code=%d, desc=%s\n", error, des);
-}
-
-
 // TtsHelperListener
 void TtsHelperListener::onText(const StreamNlpTtsHelper::OutTextSeg &textSeg)
 {
@@ -113,16 +68,6 @@ int AIUIListener::Init(const aiui_callback_pack_t &aiui_callback_pack)
         std::cout << "pcm player index: " << i << " device name: " << aiui_pcm_player_get_device_name(i) << std::endl;
         LOG_INFO("pcm player index: %d, device name: %s", i, aiui_pcm_player_get_device_name(i));
     }
-
-    // 设置PCM Player回调函数
-    aiui_pcm_player_set_callbacks(
-        on_started,      // 开始回调
-        on_paused,       // 暂停回调
-        on_resumed,      // 恢复回调
-        on_stopped,      // 停止回调
-        on_play_progress, // 进度回调
-        on_error         // 错误回调
-    );
 
     LOG_INFO("选择默认播放设备进行初始化");
     // 初始化播放器，你应该根据上面打印的设备信息，选择一个设备，然后初始化，当前默认-1代表了默认的播放设备索引
