@@ -4,6 +4,7 @@
 #include <mutex>
 #include "utils/Logger.hpp"
 #include "ros2/ros_manager.hpp"
+#include "ros2/ros2_subscriber_callbacks.hpp"
 #include "avvtn_capture/avvtn_capture.h"
 
 static std::mutex mutex_;
@@ -75,18 +76,14 @@ int main(int argc, char const *argv[])
     // 2. 初始化ROS管理器
     ROSManager::getInstance().init(argc, argv);
 
-    // 3. 可以在这里订阅话题
-    ROSManager::getInstance().subscribeTopic("robot_avvtn_log", 
-        [](const std_msgs::msg::String::SharedPtr msg) {
-            std::cout << "收到消息: " << msg->data << std::endl;
-            LOG_INFO("收到ROS2消息: {}", msg->data);
-        });
+    // 3. 在这里订阅ROS2话题
+    ROSManager::getInstance().subscribeTopic("wake_up_result", WakeUpResultCallback);
 
+    // 4. 设置等待接入状态
     ROSManager::getInstance().publishStatus("STATUS_WAITING_CONNECTION");
 
     // 5. 初始化AvvtnCapture
     AvvtnCapture capture;
-    //std::this_thread::sleep_for(std::chrono::seconds(2));
 
     int ret = capture.Init("/home/cat/robot_avvtn/avvtn.cfg", "/home/cat/robot_avvtn/resource/aiui/aiui.cfg");
     if (ret != 0)

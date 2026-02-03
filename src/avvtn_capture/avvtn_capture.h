@@ -59,7 +59,21 @@ public:
     static void onError(int error, const char *des);
     static void onProgress(int streamId, int progress, const char *audio, int len, bool isCompleted);
 
+    // 在类中添加静态获取函数
+    static AvvtnCapture* getInstance() {
+        return g_avvtn_capture_instance;
+    }
+
+    /**
+     * @brief 测试设置beam
+     * @param beam_id beamID
+     * @return 0表示成功，非0表示失败
+     */
+    int test_set_beam(const char *beam_id);
+
 private:
+    static AvvtnCapture* g_avvtn_capture_instance;
+
     // 定时器私有静态成员（仅类内部访问，线程安全）
     static std::atomic<bool> g_timer_running;
     static std::atomic<long long> g_last_active_time;
@@ -221,13 +235,6 @@ private:
      * @return 0表示成功，非0表示失败
      */
     int test_remove_keyword(const char *keywords_id);
-
-    /**
-     * @brief 测试设置beam
-     * @param beam_id beamID
-     * @return 0表示成功，非0表示失败
-     */
-    int test_set_beam(const char *beam_id);
 
     /**
      * @brief 测试设置参数

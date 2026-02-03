@@ -53,7 +53,10 @@ private:
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr status_publisher_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr chat_history_nostream_publisher_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr wakeup_detail_publisher_;
-    
+
+    // 保存订阅者
+    std::unordered_map<std::string, rclcpp::Subscription<std_msgs::msg::String>::SharedPtr> subscribers_;
+
     bool initialized_ = false;
     std::thread ros_spin_thread_;
 };

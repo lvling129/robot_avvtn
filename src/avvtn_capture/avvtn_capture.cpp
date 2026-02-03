@@ -2,7 +2,7 @@
 #include "utils/Logger.hpp"
 #include "ros2/ros_manager.hpp"
 
-static AvvtnCapture* g_avvtn_capture_instance = nullptr;
+AvvtnCapture* AvvtnCapture::g_avvtn_capture_instance = nullptr;
 
 // 初始化类静态成员（必须在类外初始化）
 std::atomic<bool> AvvtnCapture::g_timer_running(false);

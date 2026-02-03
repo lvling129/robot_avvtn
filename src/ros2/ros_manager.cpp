@@ -86,14 +86,29 @@ void ROSManager::subscribeTopic(const std::string& topic_name,
                                std::function<void(const std_msgs::msg::String::SharedPtr)> callback) {
     if (!initialized_) return;
     
+
+    // 检查是否已经订阅了该话题
+    if (subscribers_.find(topic_name) != subscribers_.end()) {
+        LOG_WARN("已经订阅了话题: {}", topic_name);
+        return;
+    }
+
+    // 创建订阅者并保存
     auto subscriber = node_->create_subscription<std_msgs::msg::String>(
         topic_name, 10, callback);
     
-    LOG_INFO("已订阅话题: {}", topic_name);
+    // 保存到map中，确保订阅者不被销毁
+    subscribers_[topic_name] = subscriber;
+    
+    LOG_INFO("已订阅话题: {%s}", topic_name.c_str());
+    LOG_INFO("当前订阅话题数量: {%d}", subscribers_.size());
 }
 
 void ROSManager::shutdown() {
     if (!initialized_) return;
+
+    // 清理订阅者
+    subscribers_.clear();
 
     rclcpp::shutdown();
     if (ros_spin_thread_.joinable()) {
