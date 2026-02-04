@@ -1,0 +1,7 @@
+2026-02-04 10:49:32,409 - DownloadService - INFO - ============================================================
+2026-02-04 10:49:32,409 - DownloadService - INFO - ROS2 文件下载服务启动
+2026-02-04 10:49:32,409 - DownloadService - INFO - ============================================================
+2026-02-04 10:49:32,471 - DownloadService - INFO - 下载服务节点已启动
+2026-02-04 10:49:32,471 - DownloadService - INFO - 订阅话题: download_wake_up
+2026-02-04 10:49:32,471 - DownloadService - INFO - 下载目录: /home/cat/robot_avvtn/downloads
+2026-02-04 10:49:32,472 - DownloadService - INFO - 下载服务正在运行，等待下载请求...
