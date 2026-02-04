@@ -77,7 +77,7 @@ int main(int argc, char const *argv[])
     ROSManager::getInstance().init(argc, argv);
 
     // 3. 在这里订阅ROS2话题
-    ROSManager::getInstance().subscribeTopic("wake_up_result", WakeUpResultCallback);
+    ROSManager::getInstance().subscribeTopic("wake_up_turn_result", WakeUpResultCallback);
 
     // 4. 设置等待接入状态
     ROSManager::getInstance().publishStatus("STATUS_WAITING_CONNECTION");
