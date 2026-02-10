@@ -20,7 +20,14 @@ inline long long AvvtnCapture::getCurrentTimeMs() {
 void AvvtnCapture::onPlayerTimeout() {
     LOG_DEBUG("播放器1秒无进度更新，触发超时回调！");
 
-    if (g_avvtn_capture_instance->is_sleeping == true)
+    AvvtnCapture* instance = g_avvtn_capture_instance;
+    if (instance == nullptr) {
+        LOG_WARN("onPlayerTimeout: 实例已销毁，跳过处理");
+        stopPlayerTimer();
+        return;
+    }
+
+    if (instance->is_sleeping == true)
     {
         ROSManager::getInstance().publishStatus("STATUS_WAITING_WAKEUP");
     }
@@ -29,7 +36,7 @@ void AvvtnCapture::onPlayerTimeout() {
         ROSManager::getInstance().publishStatus("STATUS_WAITING_CONVERSATION");
     }
 
-    g_avvtn_capture_instance->is_playing = false;
+    instance->is_playing = false;
 
     stopPlayerTimer();
 }
@@ -77,7 +84,13 @@ void AvvtnCapture::onError(int error, const char *des)
 void AvvtnCapture::onProgress(int streamId, int progress, const char *audio, int len, bool isCompleted)
 {
     //std::cout << "PcmPlayer, onProgress, streamId=" << streamId << ", progress=" << progress << ", len=" << len << ", isCompleted=" << isCompleted << std::endl;
-    g_avvtn_capture_instance->is_playing = true;
+    AvvtnCapture* instance = g_avvtn_capture_instance;
+    if (instance == nullptr) {
+        LOG_WARN("onProgress: 实例已销毁，跳过处理");
+        return;
+    }
+
+    instance->is_playing = true;
 
     // 重置定时器：更新最后活动时间戳
     g_last_active_time = getCurrentTimeMs();
@@ -180,6 +193,10 @@ int AvvtnCapture::Destory()
     // ret = video_cap_.Stop();
     // CHECK_RET(ret);
 
+    // 先停止定时器，确保回调不再访问成员变量
+    stopPlayerTimer();
+
+    // 再清空全局实例指针，后续回调会因空指针检查而跳过
     g_avvtn_capture_instance = nullptr;
 
     // 2、停止音频采集
