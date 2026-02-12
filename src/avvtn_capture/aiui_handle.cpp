@@ -35,7 +35,6 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
             // 唤醒事件
             case AIUIConstant::EVENT_WAKEUP:
             {
-                self->is_sleeping = false;
                 ROSManager::getInstance().publishStatus("STATUS_WAITING_CONVERSATION");
                 LOG_INFO("接收到AIUI唤醒事件EVENT_WAKEUP: %s", event.getInfo());
                 LOG_INFO("pcm播放器停止播放");
@@ -53,6 +52,9 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                         {"is_knowledge", "0"}
                 };
                 ROSManager::getInstance().publishChatHistoryNoStream(answer.dump());
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                self->is_sleeping = false;
             }
             break;
 

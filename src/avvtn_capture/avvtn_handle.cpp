@@ -229,13 +229,16 @@ void AvvtnCapture::handleAudioRec(avvtn_callback_data_t *data_p)
     }
     cJSON_Delete(json);
 
-    if (vad_status == 3)
-    {
-        aiui_wrapper_.WriteAudio(nullptr, 0, true);
-    }
-    else
-    {
-        aiui_wrapper_.WriteAudio((const char *)data_p->data, data_p->data_size, false);
+    if (!is_sleeping) {
+        LOG_DEBUG("发送识别音频数据给AIUI");
+        if (vad_status == 3)
+        {
+            aiui_wrapper_.WriteAudio(nullptr, 0, true);
+        }
+        else
+        {
+            aiui_wrapper_.WriteAudio((const char *)data_p->data, data_p->data_size, false);
+        }
     }
 
 // 保存音频文件
@@ -340,6 +343,9 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
 {
     std::string wake_str = std::string((char *)data_p->data, data_p->data_size);
     LOG_INFO("AVVTN接收到唤醒语音: %s", wake_str.c_str());
+
+    //aiui_wrapper_.ResetWakeup();
+    is_sleeping = true;
 
     /* 两次唤醒只发送一次wakeup给AIUI */
     std::string msg_type;

@@ -284,7 +284,7 @@ private:
     bool is_skill = false;      //是否命中技能
     bool is_knowledge = false;  //是否命中知识库
     bool is_playing;            //播放器是否正在播放
-    bool is_sleeping;           //是否已经休眠，等待唤醒
+    bool is_sleeping = true;           //是否已经休眠，等待唤醒
 };
 
 #endif
