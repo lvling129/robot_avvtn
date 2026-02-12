@@ -94,13 +94,16 @@ bool postRequest(const std::string& endpoint, const nlohmann::json& body,
 // 使用示例
 void sendMoveRequest(const std::string& intent_name, const std::string& id,
                      const std::string& distance, const std::string& move_unit) {
+    // 判断 distance 或 move_unit 是否为空，若为空则赋默认值
+    std::string distance_fixed = distance.empty() ? "1" : distance;
+    std::string move_unit_fixed = move_unit.empty() ? "step" : move_unit;
     // 构建请求体
     nlohmann::json request_body = {
         {"data", {
             {"intent_name", intent_name},
             {"id", id},
-            {"distance", distance},
-            {"move_unit", move_unit}
+            {"distance", distance_fixed},
+            {"move_unit", move_unit_fixed}
         }}
     };
 
@@ -115,13 +118,16 @@ void sendMoveRequest(const std::string& intent_name, const std::string& id,
 // 发送转向请求
 void sendTurnRequest(const std::string& intent_name, const std::string& id,
                      const std::string& distance, const std::string& turn_unit) {
+    // 判断 distance 或 move_unit 是否为空，若为空则赋默认值
+    std::string distance_fixed = distance.empty() ? "90" : distance;
+    std::string turn_unit_fixed = turn_unit.empty() ? "degree" : turn_unit;
     // 构建请求体
     nlohmann::json request_body = {
         {"data", {
             {"intent_name", intent_name},
             {"id", id},
-            {"distance", distance},
-            {"turn_unit", turn_unit}
+            {"distance", distance_fixed},
+            {"turn_unit", turn_unit_fixed}
         }}
     };
 
