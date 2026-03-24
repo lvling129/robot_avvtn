@@ -41,8 +41,10 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                 std::cout << "EVENT_WAKEUP: " << event.getInfo() << std::endl;
                 aiui_pcm_player_stop();
 
-                /*播放相应唤醒词*/
-                self->aiui_wrapper_.StartTTS("你好");
+                /*播放相应唤醒词（静音意图下不播放）*/
+                if (!self->playback_muted_) {
+                    self->aiui_wrapper_.StartTTS("你好");
+                }
 
                 /*发送ROS2话题robot_avvtn_chat_history  答*/
                 nlohmann::json answer = {
@@ -382,18 +384,22 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
         {
             //LOG_INFO("FEI流式语义应答的合成 dts = %d, tts_len_ = %d, progress = %d", dts, tts_len_, progress);
             // 只有碰到开始块和(特殊情况:合成字符比较少时只有一包tts，dts = 2)，开启播放器
-            if (dts == AIUIConstant::DTS_BLOCK_FIRST || dts == AIUIConstant::DTS_ONE_BLOCK || (dts == AIUIConstant::DTS_BLOCK_LAST && 0 == tts_len_))
-            {
-
-                if (aiui_pcm_player_get_state() != PCM_PLAYER_STATE_STARTED)
+            if (!playback_muted_) {
+                if (dts == AIUIConstant::DTS_BLOCK_FIRST || dts == AIUIConstant::DTS_ONE_BLOCK || (dts == AIUIConstant::DTS_BLOCK_LAST && 0 == tts_len_))
                 {
                     LOG_DEBUG("开启PCM播放器");
                     int ret = aiui_pcm_player_start();
+
+                    if (aiui_pcm_player_get_state() != PCM_PLAYER_STATE_STARTED)
+                    {
+                        LOG_DEBUG("开启PCM播放器");
+                        int ret = aiui_pcm_player_start();
+                    }
                 }
+                aiui_pcm_player_write(0, buffer, len, dts, progress);
             }
 
             tts_len_ += len;
-            aiui_pcm_player_write(0, buffer, len, dts, progress);
         }
         // 若要保存合成音频，请打开以下开关
 #if 1

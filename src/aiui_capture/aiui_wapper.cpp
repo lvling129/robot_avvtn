@@ -1,19 +1,25 @@
 #include "aiui_wapper.h"
+#include "avvtn_capture/avvtn_capture.h"
 #include "utils/Logger.hpp"
 #include "ros2/ros_manager.hpp"
 
 // TtsHelperListener
 void TtsHelperListener::onText(const StreamNlpTtsHelper::OutTextSeg &textSeg)
 {
+    AvvtnCapture *cap = AvvtnCapture::getInstance();
+    const bool muted  = (cap != nullptr && cap->isPlaybackMuted());
+
     if (textSeg.isBegin() || textSeg.isEnd())
     {
-        if (aiui_pcm_player_get_state() != PCM_PLAYER_STATE_STARTED)
-        {
-            aiui_pcm_player_start();
-        }
-        if (textSeg.isBegin())
-        {
-            aiui_pcm_player_clear();
+        if (!muted) {
+            if (aiui_pcm_player_get_state() != PCM_PLAYER_STATE_STARTED)
+            {
+                aiui_pcm_player_start();
+            }
+            if (textSeg.isBegin())
+            {
+                aiui_pcm_player_clear();
+            }
         }
     }
     // 调用合成 - 参考demo中TtsHelperListener::onText的实现
@@ -30,6 +36,11 @@ void TtsHelperListener::onFinish(const std::string &fullText)
 
 void TtsHelperListener::onTtsData(const Json::Value &bizParamJson, const char *audio, int len)
 {
+    AvvtnCapture *cap = AvvtnCapture::getInstance();
+    if (cap != nullptr && cap->isPlaybackMuted()) {
+        return;
+    }
+
     const Json::Value &data    = (bizParamJson["data"])[0];
     const Json::Value &content = (data["content"])[0];
     int dts                    = content["dts"].asInt();

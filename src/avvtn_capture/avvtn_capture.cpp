@@ -360,3 +360,12 @@ int AvvtnCapture::avvtnCallback(avvtn_callback_data_t *data_p, void *user_data)
     }
     return 0;
 }
+
+void AvvtnCapture::setPlaybackMuted(bool muted)
+{
+    playback_muted_ = muted;
+    if (muted) {
+        aiui_pcm_player_stop();
+        aiui_pcm_player_clear();
+    }
+}

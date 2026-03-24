@@ -205,8 +205,10 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
             LOG_INFO("技能返回TTS内容文本: %s", voice_answer_content.c_str());
             // 设置ignore本次大模型返回的NLP TTS语音
             ignore_tts_sid_ = current_iat_sid_;
-            // 调用语音合成TTS，播放技能返回的语音文本
-            aiui_wrapper_.StartTTS(voice_answer_content);
+            // 调用语音合成TTS，播放技能返回的语音文本（静音意图下不播放）
+            if (!playback_muted_) {
+                aiui_wrapper_.StartTTS(voice_answer_content);
+            }
             // 技能答复的文本发送ROS话题
             nlohmann::json nlp_answer = {
                     {"seq", std::to_string(0)},
@@ -355,8 +357,16 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
                 // 提取vip参数
                 auto& result = text_root["data"]["result"][0];
                 std::string intent_name = result["intentName"].get<std::string>();
-
-
+            }
+            else if (type == "silent_on")
+            {
+                LOG_INFO("执行切换演示模式: 关闭音频播放");
+                setPlaybackMuted(true);
+            }
+            else if (type == "silent_off")
+            {
+                LOG_INFO("执行关闭演示模式: 恢复音频播放");
+                setPlaybackMuted(false);
             }
             else if (type == "new_year")
             {

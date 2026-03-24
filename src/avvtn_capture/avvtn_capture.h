@@ -65,6 +65,12 @@ public:
     }
 
     /**
+     * @brief VIP 静音意图：关闭/恢复向 PCM 扬声器输出（不影响识别与其它语义流程）
+     */
+    void setPlaybackMuted(bool muted);
+    bool isPlaybackMuted() const { return playback_muted_; }
+
+    /**
      * @brief 测试设置beam
      * @param beam_id beamID
      * @return 0表示成功，非0表示失败
@@ -285,6 +291,7 @@ private:
     bool is_knowledge = false;  //是否命中知识库
     bool is_playing;            //播放器是否正在播放
     bool is_sleeping = true;           //是否已经休眠，等待唤醒
+    bool playback_muted_ = false;   //true：静音意图(silent_on)，不向扬声器播放 TTS/PCM
 };
 
 #endif
