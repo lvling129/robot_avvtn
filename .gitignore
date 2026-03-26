@@ -32,3 +32,7 @@
 /.idea
 /build
 
+# Log file
+*.log
+*.pcm
+
