@@ -2,6 +2,7 @@
 #include "utils/Logger.hpp"
 #include "utils/json.hpp"
 #include "ros2/ros_manager.hpp"
+#include <cstdlib>
 
 int AvvtnCapture::test_evaluate_keyword(const char *keyword)
 {
@@ -156,7 +157,7 @@ void AvvtnCapture::handleAudioCAE(avvtn_callback_data_t *data_p)
     }
 
 // 保存音频文件
-#if 1
+#if 0
     // 通道在-2到3之间，则认为是有效数据，否则认为不是有效数据
     if (channel > -2 && channel < 3)
     {
@@ -242,7 +243,7 @@ void AvvtnCapture::handleAudioRec(avvtn_callback_data_t *data_p)
     }
 
 // 保存音频文件
-#if 1
+#if 0
     static FILE *rec_audio_file;
     if (rec_audio_file == NULL)
     {
@@ -378,6 +379,18 @@ void AvvtnCapture::handleAudioWake(avvtn_callback_data_t *data_p)
         };
         ROSManager::getInstance().publishChatHistory(wake_up.dump());
         ROSManager::getInstance().publishChatHistoryNoStream(wake_up.dump());
+
+        // 唤醒直接播放唤醒音频，优化用户体验
+        system("aplay -r 16000 -f S16_LE -c 1 /home/cat/robot_avvtn/bin/wake_up_x5_lingxiaoyue_flow.pcm > /dev/null 2>&1 &");
+
+        /*发送ROS2话题robot_avvtn_chat_history  答*/
+        nlohmann::json answer = {
+            {"speaker", "robot"},
+            {"text", "你好"},
+            {"is_skill", "0"},
+            {"is_knowledge", "0"}
+        };
+        ROSManager::getInstance().publishChatHistoryNoStream(answer.dump());
 
         aiui_wrapper_.Wakeup();
     }

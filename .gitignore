@@ -35,6 +35,4 @@
 
 # Log file
 *.log
-*.pcm
 **/*.log
-**/*.pcm

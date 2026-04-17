@@ -41,18 +41,7 @@ void AvvtnCapture::aiuiCallback(void *user_data, const IAIUIEvent &event)
                 std::cout << "EVENT_WAKEUP: " << event.getInfo() << std::endl;
                 aiui_pcm_player_stop();
 
-                /*播放相应唤醒词*/
-                self->aiui_wrapper_.StartTTS("你好");
-
-                /*发送ROS2话题robot_avvtn_chat_history  答*/
-                nlohmann::json answer = {
-                        {"speaker", "robot"},
-                        {"text", "你好"},
-                        {"is_skill", "0"},
-                        {"is_knowledge", "0"}
-                };
-                ROSManager::getInstance().publishChatHistoryNoStream(answer.dump());
-
+                //等待1S，优化用户体验
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 self->is_sleeping = false;
             }
@@ -396,7 +385,7 @@ void AvvtnCapture::handleAiuiTts(const Json::Reader &reader, const Json::Value c
             aiui_pcm_player_write(0, buffer, len, dts, progress);
         }
         // 若要保存合成音频，请打开以下开关
-#if 1
+#if 0
         LOG_DEBUG("保存TTS音频到本地./tts.pcm");
         static FILE *tts_file = nullptr;
         if (tts_file == nullptr)
