@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <memory>
+#include <thread>
 
 // 回调函数，用于接收响应数据
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
@@ -371,6 +372,46 @@ void AvvtnCapture::handleSkill(const std::string& text_str)
 
                 // 发送动作请求
                 sendActionRequest(intent_name, std::to_string(id));
+            }
+            else if (type == "phone_number_inquiry")
+            {
+                LOG_INFO("根据名字查询电话号码");
+                // 提取动作参数
+                auto& result = text_root["data"]["result"][0];
+                std::string intent_name = result["intentName"].get<std::string>();
+                std::string customer_name = result["customerName"].get<std::string>();
+
+                LOG_INFO("查询电话号码: customer_name=%s", customer_name.c_str());
+
+                // 异步发送HTTP GET请求查询电话号码
+                std::thread([customer_name]() {
+                    CURL* curl = curl_easy_init();
+                    if (!curl) {
+                        LOG_ERROR("初始化CURL失败");
+                        return;
+                    }
+                    std::string url;
+                    char* encoded_name = curl_easy_escape(curl, customer_name.c_str(), customer_name.size());
+                    if (encoded_name) {
+                        url = std::string("http://192.168.16.26:8086/rpa?name=") + encoded_name;
+                        curl_free(encoded_name);
+                    } else {
+                        url = "http://192.168.16.26:8086/rpa?name=" + customer_name;
+                    }
+                    std::string response;
+                    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+                    curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
+                    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+                    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+                    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L);
+                    CURLcode res = curl_easy_perform(curl);
+                    if (res != CURLE_OK) {
+                        LOG_ERROR("HTTP GET请求失败: %s, url: %s", curl_easy_strerror(res), url.c_str());
+                    } else {
+                        LOG_INFO("HTTP GET响应: %s", response.c_str());
+                    }
+                    curl_easy_cleanup(curl);
+                }).detach();
             }
             else
             {
